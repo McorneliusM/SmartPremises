@@ -1,0 +1,47 @@
+ECLIPSE ANDROID PROJECT IMPORT SUMMARY
+======================================
+
+Ignored Files:
+--------------
+The following files were *not* copied into the new Gradle project; you
+should evaluate whether these are still needed in your project and if
+so manually move them:
+
+* default.properties
+* gpl.txt
+* javadoc.xml
+* lgpl.txt
+* lib\
+* lib\gson-1.3.jar
+
+Moved Files:
+------------
+Android Gradle projects use a different directory structure than ADT
+Eclipse projects. Here's how the projects were restructured:
+
+* C:\Users\tqjg84\Desktop\redpin-master\RedpinCore\ => RedpinAndroid\src\main\java\
+* C:\Users\tqjg84\Desktop\redpin-master\RedpinCore\.mtj => RedpinAndroid\src\main\resources\.mtj
+* C:\Users\tqjg84\Desktop\redpin-master\RedpinCore\Application Descriptor => RedpinAndroid\src\main\resources\Application Descriptor
+* C:\Users\tqjg84\Desktop\redpin-master\RedpinCore\build.gradle => RedpinAndroid\src\main\resources\build.gradle
+* C:\Users\tqjg84\Desktop\redpin-master\RedpinCore\gpl.txt => RedpinAndroid\src\main\resources\gpl.txt
+* C:\Users\tqjg84\Desktop\redpin-master\RedpinCore\lgpl.txt => RedpinAndroid\src\main\resources\lgpl.txt
+* C:\Users\tqjg84\Desktop\redpin-master\RedpinCore\RedpinCore.iml => RedpinAndroid\src\main\resources\RedpinCore.iml
+* AndroidManifest.xml => RedpinAndroid\src\main\AndroidManifest.xml
+* assets\ => RedpinAndroid\src\main\assets\
+* res\ => RedpinAndroid\src\main\res\
+* src\ => RedpinAndroid\src\main\java\
+
+Next Steps:
+-----------
+You can now build the project. The Gradle project needs network
+connectivity to download dependencies.
+
+Bugs:
+-----
+If for some reason your project does not build, and you determine that
+it is due to a bug or limitation of the Eclipse to Gradle importer,
+please file a bug at http://b.android.com with category
+Component-Tools.
+
+(This import summary is for your information only, and can be deleted
+after import once you are satisfied with the results.)
