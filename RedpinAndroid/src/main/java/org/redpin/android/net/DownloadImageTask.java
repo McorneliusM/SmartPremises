@@ -31,6 +31,7 @@ import java.net.URLConnection;
 import java.security.MessageDigest;
 
 import org.redpin.android.ApplicationContext;
+import org.redpin.android.R;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -111,6 +112,13 @@ public class DownloadImageTask extends AsyncTask<String, Void, String> {
 			is = conn.getInputStream();
 			bm = BitmapFactory.decodeStream(is);
 
+//			String fname = this.getFilesDir().getAbsolutePath()+"/test.png";
+//			bm = BitmapFactory.decodeFile(fname);
+			BitmapFactory.Options options = new BitmapFactory.Options();
+			options.inJustDecodeBounds = true;
+			bm = BitmapFactory.decodeResource(context.getResources(), R.id.logo, options);
+
+
 
 		} catch (IOException e) {
 			Log.i(TAG, "Download of image failed: " + e.getMessage());
@@ -165,23 +173,24 @@ public class DownloadImageTask extends AsyncTask<String, Void, String> {
 	 */
 	@Override
 	protected void onPostExecute(String result) {
-
-		if (callback != null) {
-			try {
-				if (result != null) {
-					callback.onImageDownloaded(url, result);
-				} else {
-					callback.onImageDownloadFailure(url);
-				}
-			} catch (BadTokenException e) {
-				Log.w(TAG, "Callback failed, caught BadTookenException: " + e.getMessage(), e);
-			} catch (Exception e) {
-				Log.w(TAG, "Callback failed, caught Exception: " + e.getMessage(), e);
-			}
-			callback = null;
-			url = null;
-			context = null;
-		}
+		callback.onImageDownloaded("nothing", "nothing");
+//
+//		if (callback != null) {
+//			try {
+//				if (result != null) {
+//					callback.onImageDownloaded(url, result);
+//				} else {
+//					callback.onImageDownloadFailure(url);
+//				}
+//			} catch (BadTokenException e) {
+//				Log.w(TAG, "Callback failed, caught BadTookenException: " + e.getMessage(), e);
+//			} catch (Exception e) {
+//				Log.w(TAG, "Callback failed, caught Exception: " + e.getMessage(), e);
+//			}
+//			callback = null;
+//			url = null;
+//			context = null;
+//		}
 
 	}
 

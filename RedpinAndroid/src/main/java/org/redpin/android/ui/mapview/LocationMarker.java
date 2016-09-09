@@ -77,6 +77,7 @@ public class LocationMarker extends Button implements OnClickListener {
 	 *            {@link Location} that the marker respresent
 	 * @param container
 	 *            The {@link ViewGroup} the marker will be added to
+	 ***important code***
 	 */
 	public LocationMarker(Context context, Location l, ViewGroup container) {
 		super(context);

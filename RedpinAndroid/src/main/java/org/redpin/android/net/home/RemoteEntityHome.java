@@ -23,7 +23,7 @@ package org.redpin.android.net.home;
 
 import java.util.HashMap;
 
-import org.redpin.android.net.PerformRequestTask;
+//import org.redpin.android.net.PerformRequestTask;
 import org.redpin.android.net.PerformRequestTaskCallback;
 import org.redpin.android.net.Request;
 import org.redpin.android.net.Response;
@@ -45,7 +45,6 @@ public class RemoteEntityHome implements PerformRequestTaskCallback {
 
 	protected static RemoteEntityHome instance = new RemoteEntityHome();
 
-	protected HashMap<PerformRequestTask, Request<?>> pending = new HashMap<PerformRequestTask, Request<?>>();
 	protected HashMap<Request<?>, Integer> retryCount = new HashMap<Request<?>, Integer>();
 	protected HashMap<Request<?>, RemoteEntityHomeCallback> callbacks = new HashMap<Request<?>, RemoteEntityHomeCallback>();
 
@@ -108,69 +107,34 @@ public class RemoteEntityHome implements PerformRequestTaskCallback {
 	public static <D> void performRequest(RequestType action, D data,
 			RemoteEntityHomeCallback callback) {
 
-		PerformRequestTask task;
 		Request<D> request = new Request<D>(action, data);
-		task = new PerformRequestTask(instance);
 
-		startTask(task, request, callback);
+		//startTask(request, callback);
 
 	}
 
 	/**
 	 * Starts an asynchronous server request and adds it to the pending list.
 	 *
-	 * @param task
-	 *            {@link PerformRequestTask} to be started
-	 * @param request
-	 *            {@link Request} to be performed
-	 * @param callback
-	 *            {@link RemoteEntityHomeCallback}
 	 */
-	protected static void startTask(PerformRequestTask task,
-			Request<?> request, RemoteEntityHomeCallback callback) {
-		instance.pending.put(task, request);
-		if (callback != null) {
-			instance.callbacks.put(request, callback);
-		}
-		task.execute(request);
+	protected static void startTask() {
+
 	}
 
 	/**
 	 * Removes a task form the pending list
 	 *
-	 * @param task
-	 *            {@link PerformRequestTask} to be removed
 	 */
-	protected static void removeTask(PerformRequestTask task) {
-		Request<?> r = instance.pending.remove(task);
-		if (r == null) {
-			Log.e(TAG, "removeTask tried to remove task which was not present");
-			return;
-		}
-
-		instance.callbacks.remove(r);
-
+	protected static void removeTask() {
 	}
 
 	/**
 	 * Restarts a failed server request.
 	 *
-	 * @param task
-	 *            {@link PerformRequestTask} to be restarted
+
 	 */
-	protected static void restartTask(PerformRequestTask task) {
-		Request<?> r = instance.pending.remove(task);
-		if (r == null) {
-			Log
-					.e(TAG,
-							"restartTask tried to remove task which was not present");
-			return;
-		}
-
-		PerformRequestTask newTask = new PerformRequestTask(task);
-		instance.pending.put(newTask, r);
-		newTask.execute(r);
-
+	protected static void restartTask() {
+		return;
 	}
 
 	private static MapRemoteHome mapHome;
@@ -244,11 +208,8 @@ public class RemoteEntityHome implements PerformRequestTaskCallback {
 	/**
 	 * Hands over the response to the responsible Entity RemoteEntityHome.
 	 *
-	 * @see PerformRequestTaskCallback#onPerformedBackground(Request, Response,
-	 *      PerformRequestTask)
 	 */
-	public void onPerformedBackground(Request<?> request, Response<?> response,
-			PerformRequestTask task) {
+	public void onPerformedBackground(Request<?> request, Response<?> response) {
 		if (isSuccess(response)) {
 			getRemoteEntityHome(request.getAction()).onRequestPerformed(
 					request, response, this);
@@ -259,11 +220,8 @@ public class RemoteEntityHome implements PerformRequestTaskCallback {
 	 * Calls the {@link RemoteEntityHomeCallback} if request was successful,
 	 * otherwise retries to perform the request.
 	 *
-	 * @see PerformRequestTaskCallback#onPerformedForeground(Request, Response,
-	 *      PerformRequestTask)
 	 */
-	public void onPerformedForeground(Request<?> request, Response<?> response,
-			PerformRequestTask task) {
+	public void onPerformedForeground(Request<?> request, Response<?> response) {
 		RemoteEntityHomeCallback cb = callbacks.get(request);
 
 		if (isSuccess(response)) {
@@ -281,7 +239,6 @@ public class RemoteEntityHome implements PerformRequestTaskCallback {
 
 			if (i < MAX_TRIES) {
 				retryCount.put(request, i);
-				restartTask(task);
 				return;
 
 			} else {
@@ -292,29 +249,18 @@ public class RemoteEntityHome implements PerformRequestTaskCallback {
 			}
 
 		}
-
-		removeTask(task);
-
 	}
 
 	/**
 	 * Retries to perform the canceled request
 	 *
-	 * @see PerformRequestTaskCallback#onCanceledForeground(Request,
-	 *      PerformRequestTask)
 	 */
-	public void onCanceledForeground(Request<?> request, PerformRequestTask task) {
-		restartTask(task);
+	public void onCanceledForeground(Request<?> request) {
 	}
 
 	/*
 	 * For testing only TODO: remove
 	 */
-
-	// TODO: remove
-	public static HashMap<PerformRequestTask, Request<?>> getPending() {
-		return instance.pending;
-	}
 
 	// TODO: remove
 	public static HashMap<Request<?>, RemoteEntityHomeCallback> getCallbacks() {
@@ -328,7 +274,6 @@ public class RemoteEntityHome implements PerformRequestTaskCallback {
 
 	// TODO: remove
 	public static void clear() {
-		instance.pending.clear();
 		instance.retryCount.clear();
 		instance.callbacks.clear();
 	}

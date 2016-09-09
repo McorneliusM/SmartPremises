@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="C:\Users\tqjg84\Desktop\RedpinAndroid1\RedpinAndroid\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="f88681a51cf2bc5dfe225f63a1d9f54f565cb668">
+        <dex dex="C:\Users\tqjg84\Desktop\RedpinAndroid1\RedpinAndroid\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_c536b15afa2ae930316d995d4ecea491ebe1f0a0\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\tqjg84\Desktop\RedpinAndroid1\RedpinAndroid\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="579e44e0baff8be68322b9da1f2ef0bd1afc4bbc">
+        <dex dex="C:\Users\tqjg84\Desktop\RedpinAndroid1\RedpinAndroid\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_4fa71d01645bc893974a6478740111221cb87605\classes.dex" />
+    </item>
+
+</items>

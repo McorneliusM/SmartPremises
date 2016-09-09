@@ -29,9 +29,9 @@ import org.redpin.android.core.Map;
 import org.redpin.android.core.Measurement;
 import org.redpin.android.core.Vector;
 import org.redpin.android.core.measure.WiFiReading;
-import org.redpin.android.net.InternetConnectionManager;
+//import org.redpin.android.net.InternetConnectionManager;
 import org.redpin.android.net.Response;
-import org.redpin.android.net.SynchronizationManager;
+//import org.redpin.android.net.SynchronizationManager;
 import org.redpin.android.net.home.FingerprintRemoteHome;
 import org.redpin.android.net.home.LocationRemoteHome;
 import org.redpin.android.net.home.RemoteEntityHomeCallback;
@@ -73,8 +73,8 @@ import android.widget.TextView;
 public class MapViewActivity extends Activity {
 	private static final String TAG = MapViewActivity.class.getSimpleName();
 	MapView mapView;
-	ImageButton locateButton;
-	ImageButton addLocationButton;
+	//ImageButton locateButton;
+	//ImageButton addLocationButton;
 	TextView mapName;
 	ProgressDialog progressDialog;
 
@@ -92,14 +92,14 @@ public class MapViewActivity extends Activity {
 		ApplicationContext.init(getApplicationContext());
 		ExceptionReporter.register(this);
 
-		registerReceiver(connectionChangeReceiver, new IntentFilter(
-				InternetConnectionManager.CONNECTIVITY_ACTION));
-		startService(new Intent(MapViewActivity.this,
-				SynchronizationManager.class));
-		bindService(new Intent(this, InternetConnectionManager.class),
-				mICMConnection, Context.BIND_AUTO_CREATE);
-
-		 startService(new Intent(MapViewActivity.this,InternetConnectionManager.class));
+//		registerReceiver(connectionChangeReceiver, new IntentFilter(
+//				InternetConnectionManager.CONNECTIVITY_ACTION));
+//		startService(new Intent(MapViewActivity.this,
+//				SynchronizationManager.class));
+//		bindService(new Intent(this, InternetConnectionManager.class),
+//				mICMConnection, Context.BIND_AUTO_CREATE);
+//
+//		 startService(new Intent(MapViewActivity.this,InternetConnectionManager.class));
 
 
 		startWifiSniffer();
@@ -118,27 +118,29 @@ public class MapViewActivity extends Activity {
 			mapTopBar.setVisibility(View.GONE);
 		}
 
-		addLocationButton = (ImageButton) findViewById(R.id.add_location_button);
-		addLocationButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				addNewLocation();
-			}
-		});
+		mapView.showMap(null, getApplicationContext());
 
-		locateButton = (ImageButton) findViewById(R.id.locate_button);
-		locateButton.setOnClickListener(new View.OnClickListener() {
+//		addLocationButton = (ImageButton) findViewById(R.id.add_location_button);
+//		addLocationButton.setOnClickListener(new View.OnClickListener() {
+//			@Override
+//			public void onClick(View v) {
+//				addNewLocation();
+//			}
+//		});
 
-			@Override
-			public void onClick(View v) {
-				locate();
-			}
-		});
-		progressDialog = new ProgressDialog(this);
-		//progressDialog.setCancelable(false);
-		progressDialog.setCancelable(true);
-		progressDialog.setIndeterminate(true);
-		progressDialog.setMessage(getText(R.string.taking_measurement));
+//		locateButton = (ImageButton) findViewById(R.id.locate_button);
+//		locateButton.setOnClickListener(new View.OnClickListener() {
+//
+//			@Override
+//			public void onClick(View v) {
+//				locate();
+//			}
+//		});
+//		progressDialog = new ProgressDialog(this);
+//		//progressDialog.setCancelable(false);
+//		progressDialog.setCancelable(true);
+//		progressDialog.setIndeterminate(true);
+//		progressDialog.setMessage(getText(R.string.taking_measurement));
 
 		setOnlineMode(false);
 
@@ -181,12 +183,12 @@ public class MapViewActivity extends Activity {
 	 */
 	private void restoreState() {
 		SharedPreferences preferences = getPreferences(MODE_PRIVATE);
-		String mapUrl = preferences.getString(pref_url, null);
+		//String mapUrl = preferences.getString(pref_url, null);
 		int scrollX = preferences.getInt(pref_scrollX, 0);
 		int scrollY = preferences.getInt(pref_scrollY, 0);
 
-		if (getIntent().getData() == null && mapUrl != null) {
-			getIntent().setData(Uri.parse(mapUrl));
+		if (getIntent().getData() == null /*&& mapUrl != null*/) {
+			//getIntent().setData(Uri.parse(mapUrl));
 			preferences.edit().clear().commit();
 			mapView.requestScroll(scrollX, scrollY, true);
 		}
@@ -202,16 +204,16 @@ public class MapViewActivity extends Activity {
 	protected void onDestroy() {
 		saveState();
 
-		unregisterReceiver(connectionChangeReceiver);
+		//unregisterReceiver(connectionChangeReceiver);
 
 		stopWifiSniffer();
 
-		stopService(new Intent(MapViewActivity.this,
-				SynchronizationManager.class));
+		//stopService(new Intent(MapViewActivity.this,
+		//		SynchronizationManager.class));
 
-		 stopService(new Intent(MapViewActivity.this,InternetConnectionManager.class));
+		//stopService(new Intent(MapViewActivity.this,InternetConnectionManager.class));
 
-		unbindService(mICMConnection);
+		//unbindService(mICMConnection);
 
 		super.onDestroy();
 	}
@@ -283,6 +285,12 @@ public class MapViewActivity extends Activity {
 
 	}
 
+	private void hijackAddNewLocation() {
+
+
+	}
+
+
 	/**
 	 * Locates the client
 	 */
@@ -300,9 +308,9 @@ public class MapViewActivity extends Activity {
 	 * @param isOnline <code>True</code> if the client can connect to the server, <code>false</code> otherwise
 	 */
 	private void setOnlineMode(boolean isOnline) {
-		mapView.setModifiable(isOnline);
-		locateButton.setEnabled(isOnline);
-		addLocationButton.setEnabled(isOnline);
+		mapView.setModifiable(true);
+		//locateButton.setEnabled(true);
+		//addLocationButton.setEnabled(true);
 
 	}
 
@@ -333,20 +341,20 @@ public class MapViewActivity extends Activity {
 	 * {@link InternetConnectionManager} {@link ServiceConnection} to check
 	 * current online state
 	 */
-	private ServiceConnection mICMConnection = new ServiceConnection() {
-
-		@Override
-		public void onServiceConnected(ComponentName name, IBinder service) {
-			InternetConnectionManager mManager = ((InternetConnectionManager.LocalBinder) service)
-					.getService();
-			setOnlineMode(mManager.isOnline());
-		}
-
-		@Override
-		public void onServiceDisconnected(ComponentName name) {
-		}
-
-	};
+//	private ServiceConnection mICMConnection = new ServiceConnection() {
+//
+//		@Override
+//		public void onServiceConnected(ComponentName name, IBinder service) {
+////			InternetConnectionManager mManager = ((InternetConnectionManager.LocalBinder) service)
+////					.getService();
+////			setOnlineMode(mManager.isOnline());
+//		}
+//
+//		@Override
+//		public void onServiceDisconnected(ComponentName name) {
+//		}
+//
+//	};
 
 	/**
 	 * Receives notifications about connectivity changes
@@ -355,7 +363,7 @@ public class MapViewActivity extends Activity {
 
 		@Override
 		public void onReceive(Context context, Intent intent) {
-			setOnlineMode((intent.getFlags() & InternetConnectionManager.ONLINE_FLAG)== InternetConnectionManager.ONLINE_FLAG);
+			//setOnlineMode((intent.getFlags() & InternetConnectionManager.ONLINE_FLAG)== InternetConnectionManager.ONLINE_FLAG);
 		}
 
 	};

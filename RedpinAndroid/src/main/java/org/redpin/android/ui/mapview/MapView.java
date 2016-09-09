@@ -38,9 +38,12 @@ import android.content.ContentUris;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Typeface;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -64,6 +67,7 @@ public class MapView extends FrameLayout implements DownloadImageTaskCallback,
 		ZoomAndScrollViewListener {
 
 	private ZoomAndScrollImageView imageView;
+	private Context myAppContext;
 
 	private FrameLayout contentView;
 	private TextView loadingView;
@@ -141,21 +145,21 @@ public class MapView extends FrameLayout implements DownloadImageTaskCallback,
 				FrameLayout.LayoutParams.MATCH_PARENT));
 
 		addView(contentView);
-
-		loadingView = new TextView(getContext());
-
-		loadingView.setLayoutParams(new FrameLayout.LayoutParams(
-				FrameLayout.LayoutParams.MATCH_PARENT,
-				FrameLayout.LayoutParams.MATCH_PARENT));
-		loadingView.setGravity(Gravity.CENTER);
-		loadingView.setTextColor(R.color.light_grey);
-		loadingView.setTextSize(30);
-		loadingView.setTypeface(Typeface.DEFAULT_BOLD);
-		loadingView.setText(R.string.loading_text);
-		loadingView.setVisibility(INVISIBLE);
-		loadingView.setBackgroundColor(Color.WHITE);
-
-		addView(loadingView);
+//
+//		loadingView = new TextView(getContext());
+//
+//		loadingView.setLayoutParams(new FrameLayout.LayoutParams(
+//				FrameLayout.LayoutParams.MATCH_PARENT,
+//				FrameLayout.LayoutParams.MATCH_PARENT));
+//		loadingView.setGravity(Gravity.CENTER);
+//		loadingView.setTextColor(R.color.light_grey);
+//		loadingView.setTextSize(30);
+//		loadingView.setTypeface(Typeface.DEFAULT_BOLD);
+//		loadingView.setText(R.string.loading_text);
+//		loadingView.setVisibility(INVISIBLE);
+//		loadingView.setBackgroundColor(Color.WHITE);
+//
+//		addView(loadingView);
 	}
 
 	/**
@@ -248,23 +252,109 @@ public class MapView extends FrameLayout implements DownloadImageTaskCallback,
 	 */
 	protected void showImage(String url) {
 
-		loadPending = true;
-		loadingView.startAnimation(fadeIn());
-		loadingView.setVisibility(VISIBLE);
+//		loadPending = true;
+//		loadingView.startAnimation(fadeIn());
+//		loadingView.setVisibility(VISIBLE);
 
-		DownloadImageTask task = new DownloadImageTask(this);
-		task.execute(url);
+//		DownloadImageTask task = new DownloadImageTask(this);
+//		task.execute(url);
+		onImageDownloadedWjVer("nothing","nothing");
+	}
+
+	public void onImageDownloadedWjVer(String url, String path) {
+		loadPending = false;
+//		Bitmap bm =
+
+//				BitmapFactory.decodeFile(path);
+//		With an image saved at res/drawable/myimage.png,
+//				The following application code retrieves the image as a Drawable:
+
+//		Resources res = getResources();
+//		Drawable drawable = res.getDrawable(R.drawable.myimage);
+//		BitmapFactory.Options options = new BitmapFactory.Options();
+//		options.inJustDecodeBounds = true;
+//		Bitmap bm = BitmapFactory.decodeResource(myAppContext.getResources(), R.drawable.blackbar_glossy, options);
+		Bitmap bm = null;
+		Drawable d = getResources().getDrawable(R.drawable.map_ifw_a);
+
+		bm = drawableToBitmap(d);
+
+		Log.i("wj","bm = "+bm);
+
+		if(bm!=null) {
+			imageWidth = bm.getWidth();
+			imageHeight = bm.getHeight();
+
+
+			contentView.setLayoutParams(new LayoutParams(imageWidth, imageHeight));
+		/*
+		 * ViewGroup.LayoutParams params = contentView.getLayoutParams();
+		 * params.width = w; params.height = h;
+		 * contentView.setLayoutParams(params);
+		 */
+
+			Log.i("wj","bm = "+bm);
+			Log.i("wj","imageView = "+imageView);
+			imageView.setImageBitmap(bm);
+			// imageView.requestFocus();
+			showLocationMarkers();
+			processRequestMarkerOnCenter();
+			processRequestScroll();
+
+//			loadingView.startAnimation(fadeOut());
+//			loadingView.setVisibility(INVISIBLE);
+		}
+
+	}
+
+	public static Bitmap drawableToBitmap (Drawable drawable) {
+		Bitmap bitmap = null;
+
+		if (drawable instanceof BitmapDrawable) {
+			BitmapDrawable bitmapDrawable = (BitmapDrawable) drawable;
+			if(bitmapDrawable.getBitmap() != null) {
+				return bitmapDrawable.getBitmap();
+			}
+		}
+
+		if(drawable.getIntrinsicWidth() <= 0 || drawable.getIntrinsicHeight() <= 0) {
+			bitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888); // Single color bitmap will be created of 1x1 pixel
+		} else {
+			bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+		}
+
+		Canvas canvas = new Canvas(bitmap);
+		drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+		drawable.draw(canvas);
+		return bitmap;
 	}
 
 	/**
 	 * {@inheritDoc}
+	 *
+	 * *** important code
 	 */
 	@Override
 	public void onImageDownloaded(String url, String path) {
 		loadPending = false;
-		Bitmap bm = BitmapFactory.decodeFile(path);
-		imageWidth = bm.getWidth();
-		imageHeight = bm.getHeight();
+//		Bitmap bm =
+
+//				BitmapFactory.decodeFile(path);
+//		With an image saved at res/drawable/myimage.png,
+//				The following application code retrieves the image as a Drawable:
+
+//		Resources res = getResources();
+//		Drawable drawable = res.getDrawable(R.drawable.myimage);
+		BitmapFactory.Options options = new BitmapFactory.Options();
+		options.inJustDecodeBounds = true;
+		Bitmap bm = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.map_ifw_a, options);
+		Log.i("wj","bm = "+bm);
+
+		if(bm!=null)
+		{
+			imageWidth = bm.getWidth();
+			imageHeight = bm.getHeight();
+		}
 
 		contentView.setLayoutParams(new LayoutParams(imageWidth, imageHeight));
 		/*
@@ -337,7 +427,7 @@ public class MapView extends FrameLayout implements DownloadImageTaskCallback,
 			if (m == null) {
 				return;
 			}
-			showMap(m);
+			showMap(m,myAppContext);
 			return;
 		}
 
@@ -388,6 +478,7 @@ public class MapView extends FrameLayout implements DownloadImageTaskCallback,
 	 * @param l
 	 *            {@link Location}
 	 * @return The added {@link LocationMarkerAnnotation}
+	 ***important code***
 	 */
 	protected LocationMarker addMarkerForLocation(Location l) {
 		LocationMarker marker = locationMarker.get(l);
@@ -535,7 +626,8 @@ public class MapView extends FrameLayout implements DownloadImageTaskCallback,
 	 *            {@link Map} to be shown
 	 */
 	protected void setupMapViewImage(Map map) {
-		showImage(map.getMapURL());
+		showImage(null);
+		//showImage(map.getMapURL());
 	}
 
 	/**
@@ -543,38 +635,66 @@ public class MapView extends FrameLayout implements DownloadImageTaskCallback,
 	 *
 	 * @param map
 	 *            {@link Map} to be shown
+	 ***important code***
 	 */
-	public void showMap(Map map) {
-		if(map == null) {
-			Log.v(TAG, "tried to show null map");
-			return;
-		}
-		if (!map.equals(currentMap)) {
-			currentMap = map;
-			Log.v(TAG, "showMap: initializing new map view");
-			removeAllMarkers();
+	public void showMap(Map map, Context ctx) {
+		myAppContext = ctx;
 
-			setupMapViewImage(currentMap);
-			setupAllMarkers(currentMap);
+		Log.v("wj", "showMap: initializing new map view");
+		removeAllMarkers();
 
-			checkCurrentLocationMarker();
+		setupMapViewImage(currentMap);
+		Map myMap = new Map();
+		myMap.setLocalId(123);
+		myMap.setRemoteId(123);
+		myMap.setMapName("myMap");
+		myMap.setMapURL("...");
 
-		} else {
+		Location myStartingLoc = new Location();
+		myStartingLoc.setLocalId(1234);
+		myStartingLoc.setRemoteId(1234);
+		myStartingLoc.setMap(myMap);
+		myStartingLoc.setAccuracy(1);
+		myStartingLoc.setMapXcord(0);
+		myStartingLoc.setMapYcord(0);
+		myStartingLoc.setSymbolicID("mystartingLoc");
 
-			Log.v(TAG, "showMap: map already shown");
-			List<Location> list = EntityHomeFactory.getLocationHome()
-					.getListByMap(map);
+		LocationMarker myLocationMarker = new LocationMarker(getContext(), myStartingLoc, contentView);
+		addNewLocation(myStartingLoc);
+		//setupAllMarkers(currentMap);
 
-			if (list.size() != locationMarker.size()) {
-				Log
-						.v(TAG,
-								"showMap: map already shown, but location number changed");
-				removeAllMarkers();
-				setupMarkers(list);
-			}
+		//checkCurrentLocationMarker();
 
-		}
-		showLocationMarkers();
+//		if(map == null) {
+//			Log.v(TAG, "tried to show null map");
+//			return;
+//		}
+//		if (!map.equals(currentMap)) {
+//			currentMap = map;
+//			Log.v(TAG, "showMap: initializing new map view");
+//			removeAllMarkers();
+//
+//			setupMapViewImage(currentMap);
+//			setupAllMarkers(currentMap);
+//
+//			checkCurrentLocationMarker();
+//
+//		} else {
+//
+//			Log.v(TAG, "showMap: map already shown");
+//			List<Location> list = EntityHomeFactory.getLocationHome()
+//					.getListByMap(map);
+//
+//			if (list.size() != locationMarker.size()) {
+//				Log
+//						.v(TAG,
+//								"showMap: map already shown, but location number changed");
+//				removeAllMarkers();
+//				setupMarkers(list);
+//			}
+//
+//		}
+		//showLocationMarkers();
 	}
 
 	/**

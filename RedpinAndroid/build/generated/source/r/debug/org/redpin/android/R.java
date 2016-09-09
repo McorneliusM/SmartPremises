@@ -37,14 +37,16 @@ public final class R {
         public static final int menu_locate_me=0x7f020009;
         public static final int menu_locate_me_black=0x7f02000a;
         public static final int menu_search=0x7f02000b;
-        public static final int navigation_arrow=0x7f02000c;
-        public static final int pin=0x7f02000d;
-        public static final int purple_map_pin_big=0x7f02000e;
-        public static final int purple_map_pin_big_cur=0x7f02000f;
-        public static final int red_map_pin_big=0x7f020010;
-        public static final int red_map_pin_big_cur=0x7f020011;
-        public static final int redpin_logo=0x7f020012;
-        public static final int redpin_logo_glossless=0x7f020013;
+        public static final int mot_map=0x7f02000c;
+        public static final int motmap=0x7f02000d;
+        public static final int navigation_arrow=0x7f02000e;
+        public static final int pin=0x7f02000f;
+        public static final int purple_map_pin_big=0x7f020010;
+        public static final int purple_map_pin_big_cur=0x7f020011;
+        public static final int red_map_pin_big=0x7f020012;
+        public static final int red_map_pin_big_cur=0x7f020013;
+        public static final int redpin_logo=0x7f020014;
+        public static final int redpin_logo_glossless=0x7f020015;
     }
     public static final class id {
         public static final int TableLayout01=0x7f0a0019;

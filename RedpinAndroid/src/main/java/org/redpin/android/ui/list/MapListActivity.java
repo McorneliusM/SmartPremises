@@ -25,7 +25,7 @@ import org.redpin.android.R;
 import org.redpin.android.core.Map;
 import org.redpin.android.db.EntityHomeFactory;
 import org.redpin.android.db.MapHome;
-import org.redpin.android.net.InternetConnectionManager;
+//import org.redpin.android.net.InternetConnectionManager;
 import org.redpin.android.net.home.MapRemoteHome;
 import org.redpin.android.provider.RedpinContract;
 import org.redpin.android.ui.MapViewActivity;
@@ -79,10 +79,10 @@ public class MapListActivity extends ListActivity implements
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		bindService(new Intent(this, InternetConnectionManager.class), mConnection, Context.BIND_AUTO_CREATE);
+		//bindService(new Intent(this, InternetConnectionManager.class), mConnection, Context.BIND_AUTO_CREATE);
 
-		registerReceiver(connectionChangeReceiver, new IntentFilter(
-				InternetConnectionManager.CONNECTIVITY_ACTION));
+		//registerReceiver(connectionChangeReceiver, new IntentFilter(
+		//		InternetConnectionManager.CONNECTIVITY_ACTION));
 
 		setContentView(R.layout.list_view);
 
@@ -123,7 +123,7 @@ public class MapListActivity extends ListActivity implements
 	@Override
 	protected void onDestroy() {
 		unbindService(mConnection);
-		unregisterReceiver(connectionChangeReceiver);
+		//unregisterReceiver(connectionChangeReceiver);
 		super.onDestroy();
 	}
 
@@ -245,25 +245,25 @@ public class MapListActivity extends ListActivity implements
 	}
 
 	/**
-	 * {@link InternetConnectionManager} {@link BroadcastReceiver} for
+	 *  {@link BroadcastReceiver} for
 	 * retrieving Internet connection changes.
 	 */
-	private BroadcastReceiver connectionChangeReceiver = new BroadcastReceiver() {
-		@Override
-		public void onReceive(Context context, Intent intent) {
-			isOnline = (intent.getFlags() & InternetConnectionManager.ONLINE_FLAG)== InternetConnectionManager.ONLINE_FLAG;
-		}
-	};
+//	private BroadcastReceiver connectionChangeReceiver = new BroadcastReceiver() {
+//		@Override
+//		public void onReceive(Context context, Intent intent) {
+//			isOnline = (intent.getFlags() & InternetConnectionManager.ONLINE_FLAG)== InternetConnectionManager.ONLINE_FLAG;
+//		}
+//	};
 
 	/**
-	 * {@link InternetConnectionManager} {@link ServiceConnection} to check current online state
+	 *  {@link ServiceConnection} to check current online state
 	 */
 	private ServiceConnection mConnection = new ServiceConnection() {
 
 		@Override
 		public void onServiceConnected(ComponentName name, IBinder service) {
-			InternetConnectionManager mManager = ((InternetConnectionManager.LocalBinder)service).getService();
-			isOnline = mManager.isOnline();
+			//InternetConnectionManager mManager = ((InternetConnectionManager.LocalBinder)service).getService();
+			//isOnline = mManager.isOnline();
 		}
 
 		@Override

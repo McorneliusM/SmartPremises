@@ -35,11 +35,8 @@ public interface PerformRequestTaskCallback {
 	 *            {@link Request}
 	 * @param response
 	 *            {@link Response}
-	 * @param task
-	 *            The {@link PerformRequestTask} that is calling the callback
 	 */
-	public void onPerformedBackground(Request<?> request, Response<?> response,
-			PerformRequestTask task);
+	public void onPerformedBackground(Request<?> request, Response<?> response);
 
 	/**
 	 * Runs in UI thread
@@ -48,18 +45,14 @@ public interface PerformRequestTaskCallback {
 	 *            {@link Request}
 	 * @param response
 	 *            {@link Response}
-	 * @param task
-	 *            The {@link PerformRequestTask} that is calling the callback
 	 */
-	public void onPerformedForeground(Request<?> request, Response<?> response,
-			PerformRequestTask task);
+	public void onPerformedForeground(Request<?> request, Response<?> response);
 
 	/**
 	 * Runs in UI thread
 	 *
 	 * @param request
-	 * @param task
-	 *            The {@link PerformRequestTask} that is calling the callback
+
 	 */
-	public void onCanceledForeground(Request<?> request, PerformRequestTask task);
+	public void onCanceledForeground(Request<?> request);
 }

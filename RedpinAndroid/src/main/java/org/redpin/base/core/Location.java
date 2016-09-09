@@ -68,6 +68,7 @@ public class Location {
 		this("", new Map(), 0, 0, 0, -1);
 	}
 
+	//***important code***
 	public Location(String symbolicId, Map map, int mapXcord, int mapYcord,
 			int accuracy, int reflocationId) {
 		this.symbolicID = symbolicId;

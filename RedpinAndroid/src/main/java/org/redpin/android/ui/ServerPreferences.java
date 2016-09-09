@@ -23,7 +23,7 @@ package org.redpin.android.ui;
 
 import org.redpin.android.R;
 import org.redpin.android.net.ConnectionHandler;
-import org.redpin.android.net.InternetConnectionManager;
+//import org.redpin.android.net.InternetConnectionManager;
 
 import android.content.ComponentName;
 import android.content.Context;
@@ -92,8 +92,8 @@ public class ServerPreferences extends PreferenceActivity implements
 				Log.v(TAG, "Invalid value input '" + portStr + "'");
 			}
 		}
-		bindService(new Intent(this, InternetConnectionManager.class),
-				mConnection, Context.BIND_AUTO_CREATE);
+		//bindService(new Intent(this, InternetConnectionManager.class),
+		//		mConnection, Context.BIND_AUTO_CREATE);
 		unbindService(mConnection);
 
 	}
@@ -102,9 +102,9 @@ public class ServerPreferences extends PreferenceActivity implements
 
 		@Override
 		public void onServiceConnected(ComponentName name, IBinder service) {
-			InternetConnectionManager mManager = ((InternetConnectionManager.LocalBinder) service)
-					.getService();
-			mManager.checkConnectivity();
+//			InternetConnectionManager mManager = ((InternetConnectionManager.LocalBinder) service)
+//					.getService();
+//			mManager.checkConnectivity();
 			Log.i(TAG, "checking connectivity");
 		}
 

@@ -53,6 +53,7 @@ public class Map {
 		mapURL = "";
 	}
 
+	//***important code***
 	public Map(String mapName, String mapURL) {
 		super();
 		this.mapName = mapName;
