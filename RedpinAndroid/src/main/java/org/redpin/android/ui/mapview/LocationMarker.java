@@ -23,7 +23,7 @@ package org.redpin.android.ui.mapview;
 
 import org.redpin.android.R;
 import org.redpin.android.core.Location;
-import org.redpin.android.net.home.LocationRemoteHome;
+//import org.redpin.android.net.home.LocationRemoteHome;
 
 import android.content.Context;
 import android.util.Log;
@@ -147,7 +147,7 @@ public class LocationMarker extends Button implements OnClickListener {
 	 */
 	private void updateLocation() {
 		updateLocationCords();
-		LocationRemoteHome.updateLocation(location);
+		//LocationRemoteHome.updateLocation(location);
 	}
 
 	/**
@@ -234,9 +234,6 @@ public class LocationMarker extends Button implements OnClickListener {
 		} else {
 			setBackgroundResource(R.drawable.red_map_pin_big);
 		}
-
-		return;
-
 	}
 
 	/**

@@ -159,6 +159,7 @@ public class ZoomAndScrollImageView extends View implements OnZoomListener,
 	 *            {@link Bitmap}
 	 */
 	public void setImageBitmap(Bitmap bitmap) {
+		//Log.v("wj","setImageBitmap");
 		setZoom(1.0f, false);
 		setContentSize(bitmap.getWidth(), bitmap.getHeight());
 
@@ -254,6 +255,7 @@ public class ZoomAndScrollImageView extends View implements OnZoomListener,
 
 		currentX = Math.max(getWidth() - contentWidth, Math.min(0, currentX));
 		currentY = Math.max(getHeight() - contentHeight, Math.min(0, currentY));
+		//Log.v("wj","scrollTo currentY = "+currentY);
 
 		invalidate();
 	}
@@ -280,6 +282,7 @@ public class ZoomAndScrollImageView extends View implements OnZoomListener,
 		oldY = currentY;
 		currentX -= (e.getX() - getWidth() / 2) / scale;
 		currentY -= (e.getY() - getHeight() / 2) / scale;
+		//Log.v("wj","onDoubleTap currentY ="+currentY);
 
 		currentX = Math.max(getWidth() - contentWidth, Math.min(0, currentX));
 
@@ -315,13 +318,16 @@ public class ZoomAndScrollImageView extends View implements OnZoomListener,
 	@Override
 	public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
 			float velocityY) {
-
+        //Log.v("wj","---------------- onFling -----------------------");
 		final float velocityFactor = 1.5f;
 		int minX = (int) (getWidth() - contentWidth);
 		int minY = (int) (getHeight() - contentHeight);
+		//Log.v("wj","minX = "+minX+", minY = "+minY);
 		scroller.fling((int) currentX, (int) currentY,
 				(int) (velocityX / velocityFactor),
 				(int) (velocityY / velocityFactor), minX, 0, minY, 0);
+		//Log.v("wj","currentX = "+currentX+", currentY = "+currentY);
+		//Log.v("wj","----------------- End ------------------------");
 		return true;
 	}
 
@@ -337,8 +343,19 @@ public class ZoomAndScrollImageView extends View implements OnZoomListener,
 		currentX -= distanceX / scale;
 		currentY -= distanceY / scale;
 
+		//Log.v("wj","onScroll part 1 currentY = "+currentY);
+
 		currentX = Math.max(getWidth() - contentWidth, Math.min(0, currentX));
 		currentY = Math.max(getHeight() - contentHeight, Math.min(0, currentY));
+
+		//Log.v("wj","-----------------------------------------------------------");
+		//Log.v("wj","onScroll part 2 getWidth() = " + getWidth()
+		//		+ ", contentWidth = "+contentWidth
+		//		+ ", currentX = "+currentX);
+		//Log.v("wj","onScroll part 2 getHeight() = " + getHeight()
+		//		+ ", contentHeight = "+contentHeight
+		//		+ ", currentY = "+currentY);
+		//Log.v("wj","-----------------------------------------------------------");
 
 		// notifyOnScroll();
 
@@ -421,6 +438,7 @@ public class ZoomAndScrollImageView extends View implements OnZoomListener,
 		if (scroller.computeScrollOffset()) {
 			currentX = scroller.getCurrX();
 			currentY = scroller.getCurrY();
+			//Log.v("wj","onDraw currentY = "+currentY);
 			invalidate();
 		}
 
@@ -517,6 +535,8 @@ public class ZoomAndScrollImageView extends View implements OnZoomListener,
 			currentY = Math.max(getHeight() - contentHeight, Math.min(0,
 					currentY));
 
+			//Log.v("wj","case KeyEvent.KEYCODE_DPAD_UP: currentY=currentY");
+
 			invalidate();
 			handeled = true;
 			break;
@@ -525,6 +545,8 @@ public class ZoomAndScrollImageView extends View implements OnZoomListener,
 			currentY -= DPAD_MOVEMENT_STEP / scale;
 			currentY = Math.max(getHeight() - contentHeight, Math.min(0,
 					currentY));
+
+			//Log.v("wj","case KeyEvent.KEYCODE_DPAD_DOWN: currentY=currentY");
 
 			invalidate();
 			handeled = true;
@@ -564,6 +586,8 @@ public class ZoomAndScrollImageView extends View implements OnZoomListener,
 					.min(0, currentX));
 			currentY = Math.max(getHeight() - contentHeight, Math.min(0,
 					currentY));
+
+			//Log.v("wj","case MotionEvent.ACTION_MOVE: currentY = "+currentY);
 
 			handeled = true;
 			invalidate();
@@ -675,6 +699,7 @@ public class ZoomAndScrollImageView extends View implements OnZoomListener,
 			float zInterpolatedTime = zoomInterpolator.getInterpolation(time);
 			currentX = fromX + (toX - fromX) * tInterpolatedTime;
 			currentY = fromY + (toY - fromY) * tInterpolatedTime;
+			//Log.v("wj","applyTransformation currentY = "+currentY);
 			setZoom(mFrom + (mTo - mFrom) * zInterpolatedTime, false);
 
 		}

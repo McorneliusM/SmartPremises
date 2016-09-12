@@ -28,8 +28,8 @@ import org.redpin.android.R;
 import org.redpin.android.core.Location;
 import org.redpin.android.core.Map;
 import org.redpin.android.db.EntityHomeFactory;
-import org.redpin.android.net.DownloadImageTask;
-import org.redpin.android.net.DownloadImageTask.DownloadImageTaskCallback;
+//import org.redpin.android.net.DownloadImageTask;
+//import org.redpin.android.net.DownloadImageTask.DownloadImageTaskCallback;
 import org.redpin.android.provider.RedpinContract;
 import org.redpin.android.ui.mapview.ZoomAndScrollImageView.ZoomAndScrollViewListener;
 
@@ -63,8 +63,7 @@ import android.widget.TextView;
  * @author Pascal Brogle (broglep@student.ethz.ch)
  *
  */
-public class MapView extends FrameLayout implements DownloadImageTaskCallback,
-		ZoomAndScrollViewListener {
+public class MapView extends FrameLayout implements ZoomAndScrollViewListener {
 
 	private ZoomAndScrollImageView imageView;
 	private Context myAppContext;
@@ -296,7 +295,7 @@ public class MapView extends FrameLayout implements DownloadImageTaskCallback,
 			Log.i("wj","bm = "+bm);
 			Log.i("wj","imageView = "+imageView);
 			imageView.setImageBitmap(bm);
-			// imageView.requestFocus();
+			imageView.requestFocus();
 			showLocationMarkers();
 			processRequestMarkerOnCenter();
 			processRequestScroll();
@@ -334,7 +333,7 @@ public class MapView extends FrameLayout implements DownloadImageTaskCallback,
 	 *
 	 * *** important code
 	 */
-	@Override
+	//@Override
 	public void onImageDownloaded(String url, String path) {
 		loadPending = false;
 //		Bitmap bm =
@@ -376,7 +375,7 @@ public class MapView extends FrameLayout implements DownloadImageTaskCallback,
 	/**
 	 * {@inheritDoc}
 	 */
-	@Override
+	//@Override
 	public void onImageDownloadFailure(String url) {
 		loadPending = false;
 		new AlertDialog.Builder(getContext()).setMessage(
@@ -437,7 +436,6 @@ public class MapView extends FrameLayout implements DownloadImageTaskCallback,
 				return;
 			}
 			showLocation(l, false);
-			return;
 		}
 
 	}

@@ -65,8 +65,8 @@ public class SettingsActivity extends Activity {
 	 * @param target {@link View} that called this method
 	 */
 	public void button_ServerPreferences(View target) {
-		Intent intent = new Intent(this, ServerPreferences.class);
-		startActivity(intent);
+		//Intent intent = new Intent(this, ServerPreferences.class);
+		//startActivity(intent);
 	}
 
 }

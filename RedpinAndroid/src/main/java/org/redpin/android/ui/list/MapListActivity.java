@@ -26,7 +26,7 @@ import org.redpin.android.core.Map;
 import org.redpin.android.db.EntityHomeFactory;
 import org.redpin.android.db.MapHome;
 //import org.redpin.android.net.InternetConnectionManager;
-import org.redpin.android.net.home.MapRemoteHome;
+//import org.redpin.android.net.home.MapRemoteHome;
 import org.redpin.android.provider.RedpinContract;
 import org.redpin.android.ui.MapViewActivity;
 
@@ -225,8 +225,8 @@ public class MapListActivity extends ListActivity implements
 			}
 			Map m = mapHome.fromCursorRow(cursor);
 			// mapHome.remove(m);
-			Log.i(TAG, "deleting map: " + m);
-			MapRemoteHome.removeMap(m);
+			//Log.i(TAG, "deleting map: " + m);
+			//MapRemoteHome.removeMap(m);
 
 			return true;
 		}

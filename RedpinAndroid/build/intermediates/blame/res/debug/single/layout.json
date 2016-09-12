@@ -1,30 +1,30 @@
 [
     {
-        "merged": "C:\\Users\\tqjg84\\Desktop\\RedpinAndroid1\\RedpinAndroid\\build\\intermediates\\res\\merged\\debug\\layout\\map_view.xml",
-        "source": "C:\\Users\\tqjg84\\Desktop\\RedpinAndroid1\\RedpinAndroid\\src\\main\\res\\layout\\map_view.xml"
+        "merged": "C:\\Users\\Admin\\AndroidStudioProjects\\wip_wj2\\RedpinAndroid\\build\\intermediates\\res\\merged\\debug\\layout\\list_row.xml",
+        "source": "C:\\Users\\Admin\\AndroidStudioProjects\\wip_wj2\\RedpinAndroid\\src\\main\\res\\layout\\list_row.xml"
     },
     {
-        "merged": "C:\\Users\\tqjg84\\Desktop\\RedpinAndroid1\\RedpinAndroid\\build\\intermediates\\res\\merged\\debug\\layout\\newmap_view.xml",
-        "source": "C:\\Users\\tqjg84\\Desktop\\RedpinAndroid1\\RedpinAndroid\\src\\main\\res\\layout\\newmap_view.xml"
+        "merged": "C:\\Users\\Admin\\AndroidStudioProjects\\wip_wj2\\RedpinAndroid\\build\\intermediates\\res\\merged\\debug\\layout\\list_row_header.xml",
+        "source": "C:\\Users\\Admin\\AndroidStudioProjects\\wip_wj2\\RedpinAndroid\\src\\main\\res\\layout\\list_row_header.xml"
     },
     {
-        "merged": "C:\\Users\\tqjg84\\Desktop\\RedpinAndroid1\\RedpinAndroid\\build\\intermediates\\res\\merged\\debug\\layout\\settings_view.xml",
-        "source": "C:\\Users\\tqjg84\\Desktop\\RedpinAndroid1\\RedpinAndroid\\src\\main\\res\\layout\\settings_view.xml"
+        "merged": "C:\\Users\\Admin\\AndroidStudioProjects\\wip_wj2\\RedpinAndroid\\build\\intermediates\\res\\merged\\debug\\layout\\list_row_image.xml",
+        "source": "C:\\Users\\Admin\\AndroidStudioProjects\\wip_wj2\\RedpinAndroid\\src\\main\\res\\layout\\list_row_image.xml"
     },
     {
-        "merged": "C:\\Users\\tqjg84\\Desktop\\RedpinAndroid1\\RedpinAndroid\\build\\intermediates\\res\\merged\\debug\\layout\\list_row_image.xml",
-        "source": "C:\\Users\\tqjg84\\Desktop\\RedpinAndroid1\\RedpinAndroid\\src\\main\\res\\layout\\list_row_image.xml"
+        "merged": "C:\\Users\\Admin\\AndroidStudioProjects\\wip_wj2\\RedpinAndroid\\build\\intermediates\\res\\merged\\debug\\layout\\list_view.xml",
+        "source": "C:\\Users\\Admin\\AndroidStudioProjects\\wip_wj2\\RedpinAndroid\\src\\main\\res\\layout\\list_view.xml"
     },
     {
-        "merged": "C:\\Users\\tqjg84\\Desktop\\RedpinAndroid1\\RedpinAndroid\\build\\intermediates\\res\\merged\\debug\\layout\\list_view.xml",
-        "source": "C:\\Users\\tqjg84\\Desktop\\RedpinAndroid1\\RedpinAndroid\\src\\main\\res\\layout\\list_view.xml"
+        "merged": "C:\\Users\\Admin\\AndroidStudioProjects\\wip_wj2\\RedpinAndroid\\build\\intermediates\\res\\merged\\debug\\layout\\settings_view.xml",
+        "source": "C:\\Users\\Admin\\AndroidStudioProjects\\wip_wj2\\RedpinAndroid\\src\\main\\res\\layout\\settings_view.xml"
     },
     {
-        "merged": "C:\\Users\\tqjg84\\Desktop\\RedpinAndroid1\\RedpinAndroid\\build\\intermediates\\res\\merged\\debug\\layout\\list_row.xml",
-        "source": "C:\\Users\\tqjg84\\Desktop\\RedpinAndroid1\\RedpinAndroid\\src\\main\\res\\layout\\list_row.xml"
+        "merged": "C:\\Users\\Admin\\AndroidStudioProjects\\wip_wj2\\RedpinAndroid\\build\\intermediates\\res\\merged\\debug\\layout\\newmap_view.xml",
+        "source": "C:\\Users\\Admin\\AndroidStudioProjects\\wip_wj2\\RedpinAndroid\\src\\main\\res\\layout\\newmap_view.xml"
     },
     {
-        "merged": "C:\\Users\\tqjg84\\Desktop\\RedpinAndroid1\\RedpinAndroid\\build\\intermediates\\res\\merged\\debug\\layout\\list_row_header.xml",
-        "source": "C:\\Users\\tqjg84\\Desktop\\RedpinAndroid1\\RedpinAndroid\\src\\main\\res\\layout\\list_row_header.xml"
+        "merged": "C:\\Users\\Admin\\AndroidStudioProjects\\wip_wj2\\RedpinAndroid\\build\\intermediates\\res\\merged\\debug\\layout\\map_view.xml",
+        "source": "C:\\Users\\Admin\\AndroidStudioProjects\\wip_wj2\\RedpinAndroid\\src\\main\\res\\layout\\map_view.xml"
     }
 ]

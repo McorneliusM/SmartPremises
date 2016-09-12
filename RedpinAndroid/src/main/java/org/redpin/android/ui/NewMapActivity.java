@@ -23,11 +23,11 @@ package org.redpin.android.ui;
 
 import org.redpin.android.R;
 import org.redpin.android.core.Map;
-import org.redpin.android.net.DownloadImageTask;
-import org.redpin.android.net.UploadImageTask;
-import org.redpin.android.net.DownloadImageTask.DownloadImageTaskCallback;
-import org.redpin.android.net.UploadImageTask.UploadImageTaskCallback;
-import org.redpin.android.net.home.MapRemoteHome;
+//import org.redpin.android.net.DownloadImageTask;
+//import org.redpin.android.net.UploadImageTask;
+//import org.redpin.android.net.DownloadImageTask.DownloadImageTaskCallback;
+//import org.redpin.android.net.UploadImageTask.UploadImageTaskCallback;
+//import org.redpin.android.net.home.MapRemoteHome;
 import org.redpin.android.ui.list.MapListActivity;
 
 import android.app.Activity;
@@ -60,7 +60,7 @@ import android.widget.TextView.OnEditorActionListener;
  * @author Pascal Brogle (broglep@student.ethz.ch)
  * 
  */
-public class NewMapActivity extends Activity implements UploadImageTaskCallback, DownloadImageTaskCallback {
+public class NewMapActivity extends Activity {
 
 	@SuppressWarnings("unused")
 	private final static String TAG = NewMapActivity.class.getSimpleName();
@@ -114,8 +114,8 @@ public class NewMapActivity extends Activity implements UploadImageTaskCallback,
 					
 
 					showDialog(ID_DIALOG_LOADING);
-					DownloadImageTask task = new DownloadImageTask(NewMapActivity.this);
-					task.execute(urlString);		
+					//DownloadImageTask task = new DownloadImageTask(NewMapActivity.this);
+					//task.execute(urlString);
 
 				}
 
@@ -179,8 +179,8 @@ public class NewMapActivity extends Activity implements UploadImageTaskCallback,
 				Drawable image = Drawable.createFromPath(selectedImagePath);
 				imgView.setImageDrawable(image);
 				
-				UploadImageTask task = new UploadImageTask(this);
-				task.execute(selectedImagePath);
+				//UploadImageTask task = new UploadImageTask(this);
+				//task.execute(selectedImagePath);
 				showDialog(ID_DIALOG_UPLOADING);
 
 			}
@@ -204,7 +204,7 @@ public class NewMapActivity extends Activity implements UploadImageTaskCallback,
 			Map map = new Map();
 			map.setMapName(mapName);
 			map.setMapURL(mapPath);
-			MapRemoteHome.setMap(map);
+			//MapRemoteHome.setMap(map);
 
 			
 			Intent i = new Intent(NewMapActivity.this, MapListActivity.class);
@@ -263,13 +263,13 @@ public class NewMapActivity extends Activity implements UploadImageTaskCallback,
 				alertMsg).setPositiveButton(android.R.string.ok, null).show();
 	}
 
-	@Override
+	//@Override
 	public void onImageUploadFailure() {
 		dismissDialog(ID_DIALOG_UPLOADING);
 		showAlert(UPLOAD_PROBLEM);	
 	}
 
-	@Override
+	//@Override
 	public void onImageUploaded(String path) {
 		dismissDialog(ID_DIALOG_UPLOADING);	
 		
@@ -288,7 +288,7 @@ public class NewMapActivity extends Activity implements UploadImageTaskCallback,
 		
 	}
 
-	@Override
+	//@Override
 	public void onImageDownloadFailure(String url) {
 		
 		dismissDialog(ID_DIALOG_LOADING);
@@ -296,7 +296,7 @@ public class NewMapActivity extends Activity implements UploadImageTaskCallback,
 		
 	}
 
-	@Override
+	//@Override
 	public void onImageDownloaded(String url, String path) {
 		dismissDialog(ID_DIALOG_LOADING);
 		mapPath = url;

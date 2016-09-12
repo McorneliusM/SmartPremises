@@ -23,7 +23,7 @@ package org.redpin.android.ui.mapview;
 
 import org.redpin.android.R;
 import org.redpin.android.core.Location;
-import org.redpin.android.net.home.LocationRemoteHome;
+//import org.redpin.android.net.home.LocationRemoteHome;
 
 import android.graphics.Color;
 import android.view.Gravity;
@@ -111,8 +111,8 @@ public class LocationMarkerAnnotation extends EditText implements
 
 			}
 
-			System.out.println("w, mw, mh: " + w + ", " + getMeasuredWidth()
-					+ ", " + getMeasuredHeight());
+			//System.out.println("w, mw, mh: " + w + ", " + getMeasuredWidth()
+			//		+ ", " + getMeasuredHeight());
 			if(marker != null) {
 				layout.setMargins(marker.markerX - w / 2 + LocationMarker.size / 2,
 					marker.markerY - (h + (int) (3 * density)), 0, 0);
@@ -141,7 +141,7 @@ public class LocationMarkerAnnotation extends EditText implements
 			String newSId = getText().toString();
 			if (!location.getSymbolicID().equals(newSId)) {
 				location.setSymbolicID(getText().toString());
-				LocationRemoteHome.updateLocation(location);
+				//LocationRemoteHome.updateLocation(location);
 			}
 		}
 

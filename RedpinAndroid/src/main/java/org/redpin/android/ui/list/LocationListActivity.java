@@ -26,7 +26,7 @@ import org.redpin.android.core.Location;
 import org.redpin.android.db.EntityHomeFactory;
 import org.redpin.android.db.LocationHome;
 //import org.redpin.android.net.InternetConnectionManager;
-import org.redpin.android.net.home.LocationRemoteHome;
+//import org.redpin.android.net.home.LocationRemoteHome;
 import org.redpin.android.provider.RedpinContract;
 import org.redpin.android.ui.MapViewActivity;
 
@@ -238,8 +238,8 @@ public class LocationListActivity extends ListActivity implements
 			}
 			Location l = locHome.fromCursorRow(cursor);
 			// mapHome.remove(m);
-			Log.i(TAG, "deleting location: " + l);
-			LocationRemoteHome.removeLocation(l);
+			//Log.i(TAG, "deleting location: " + l);
+			//LocationRemoteHome.removeLocation(l);
 
 			return true;
 

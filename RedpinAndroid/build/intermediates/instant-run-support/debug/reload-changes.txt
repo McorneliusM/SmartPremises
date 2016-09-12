@@ -1,0 +1,2 @@
+CHANGED,C:\Users\Admin\AndroidStudioProjects\wip_wj2\RedpinAndroid\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\org\redpin\android\ui\mapview\ZoomAndScrollImageView$override.class
+CHANGED,C:\Users\Admin\AndroidStudioProjects\wip_wj2\RedpinAndroid\build\intermediates\transforms\instantRun\debug\folders\4000\5\enhanced\com\android\tools\fd\runtime\AppPatchesLoaderImpl.class
