@@ -12,7 +12,6 @@ import org.redpin.android.core.Map;
 import org.redpin.android.ui.list.MainListActivity;
 import org.redpin.android.ui.list.SearchListActivity;
 import org.redpin.android.ui.mapview.MapView;
-import org.redpin.android.util.ExceptionReporter;
 
 import org.redpin.android.wifi.*;
 
@@ -59,7 +58,6 @@ public class MapViewActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		ApplicationContext.init(getApplicationContext());
-		ExceptionReporter.register(this);
 
 		//startWifiSniffer();
 
@@ -120,7 +118,7 @@ public class MapViewActivity extends Activity {
 		}
 		timer = new Timer();
 		myScanRepeater = new ScanRepeater(mainWifiObj);
-		timer.schedule(myScanRepeater, 100, 100);
+		timer.schedule(myScanRepeater, 1, 10);
 
 		super.onResume();
 	}

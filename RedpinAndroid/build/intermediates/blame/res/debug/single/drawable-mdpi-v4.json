@@ -8,12 +8,12 @@
         "source": "C:\\Users\\Admin\\AndroidStudioProjects\\wip_wj2\\RedpinAndroid\\src\\main\\res\\drawable-mdpi\\menu_locate_me_black.png"
     },
     {
-        "merged": "C:\\Users\\Admin\\AndroidStudioProjects\\wip_wj2\\RedpinAndroid\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\menu_list.png",
-        "source": "C:\\Users\\Admin\\AndroidStudioProjects\\wip_wj2\\RedpinAndroid\\src\\main\\res\\drawable-mdpi\\menu_list.png"
-    },
-    {
         "merged": "C:\\Users\\Admin\\AndroidStudioProjects\\wip_wj2\\RedpinAndroid\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\menu_addmap_black.png",
         "source": "C:\\Users\\Admin\\AndroidStudioProjects\\wip_wj2\\RedpinAndroid\\src\\main\\res\\drawable-mdpi\\menu_addmap_black.png"
+    },
+    {
+        "merged": "C:\\Users\\Admin\\AndroidStudioProjects\\wip_wj2\\RedpinAndroid\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\menu_list.png",
+        "source": "C:\\Users\\Admin\\AndroidStudioProjects\\wip_wj2\\RedpinAndroid\\src\\main\\res\\drawable-mdpi\\menu_list.png"
     },
     {
         "merged": "C:\\Users\\Admin\\AndroidStudioProjects\\wip_wj2\\RedpinAndroid\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\redpin_logo.png",

@@ -4,8 +4,6 @@ import java.util.List;
 import android.net.wifi.ScanResult;
 import android.util.Log;
 
-import org.redpin.android.accesspoint.*;
-
 public class WifiInformation {
 	int NUM_OF_AP;
 	AverageFilter[] signalLevelFilter;
@@ -23,7 +21,7 @@ public class WifiInformation {
 		currentScanList=null;
 		for(int i=0;i<NUM_OF_AP;i++)
 		{
-			signalLevelFilter[i]=new AverageFilter();
+			signalLevelFilter[i]=new AverageFilter("To be implemented");
 		}
 	}
 	
@@ -48,7 +46,15 @@ public class WifiInformation {
    		level[1]=-100f;
    		level[2]=-100f;
    		level[3]=-100f;
-   		
+
+		//----------------------------------------------------------
+
+		  // Do some processing here
+
+		//----------------------------------------------------------
+
+
+
 		for(int i = 0; i < wifiScanList.size(); i++)
    	    {
    			if(BSSIDcode(currentScanList.get(i).BSSID)!=(NUM_OF_AP+1))//Is a designated AP

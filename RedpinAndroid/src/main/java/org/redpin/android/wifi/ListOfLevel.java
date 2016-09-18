@@ -1,4 +1,4 @@
-package org.redpin.android.accesspoint;
+package org.redpin.android.wifi;
 
 import java.util.List;
 
@@ -42,11 +42,6 @@ public class ListOfLevel
    	    }
 	}
 	
-	public float[] getLevelArray()
-	{
-		return level;
-	}
-	
 	public int BSSIDcode(String s)
    	{
    		String theBSSID[]=new String[NUM_OF_AP];
@@ -54,9 +49,9 @@ public class ListOfLevel
    		theBSSID[1]="00:1f:41:6e:b7:f8";
    		theBSSID[2]="00:1f:41:2e:b7:f8";
    		theBSSID[3]="00:12:a9:53:63:82";
-   		
+
    		int i;
-   		
+
    		for(i=0;i<NUM_OF_AP;i++)
    		{
    			if(s.compareTo(theBSSID[i])==0)
@@ -64,8 +59,9 @@ public class ListOfLevel
    				return i;
    			}
    		}
-   		
+
    		return (NUM_OF_AP+1);
+
    	}
 	
 	public boolean isLocation1()

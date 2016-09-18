@@ -1,12 +1,14 @@
-package org.redpin.android.accesspoint;
+package org.redpin.android.wifi;
 
 public class AverageFilter 
 {
+	public String BSSID;
 	public static final int numOfSamples=5;
 	private float[] sample;
 	
-	public AverageFilter()
+	public AverageFilter(String id)
 	{
+		BSSID = id;
 		sample=new float[numOfSamples];
 		int i;
 		for(i=0;i<numOfSamples;i++)
