@@ -35,7 +35,7 @@ public class WifiInformation {
 		
 		for(int i = 0; i < wifiScanList.size(); i++)
    	    {
-			Log.v("wj","numOfScans: " + numOfScans
+			Log.i("wj","numOfScans: " + numOfScans
 					+ ", BSSID: "+currentScanList.get(i).BSSID
 					+ ", SSID: "+currentScanList.get(i).SSID
 					+ ", level: "+currentScanList.get(i).level);

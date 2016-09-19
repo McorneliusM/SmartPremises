@@ -78,7 +78,7 @@ public class MapViewActivity extends Activity {
 		}
 		timer = new Timer();
 		myScanRepeater = new ScanRepeater(mainWifiObj);
-		timer.schedule(myScanRepeater, 1, 10);//Starts after 1 ms , then repeat every 10ms
+		timer.schedule(myScanRepeater, 0, 1200);//Starts after 0 ms , then repeat every 1200ms
 
 
 		//********************************************************************************
@@ -118,7 +118,7 @@ public class MapViewActivity extends Activity {
 		}
 		timer = new Timer();
 		myScanRepeater = new ScanRepeater(mainWifiObj);
-		timer.schedule(myScanRepeater, 1, 10);
+		timer.schedule(myScanRepeater, 0, 1200);
 
 		super.onResume();
 	}
