@@ -399,6 +399,17 @@ public class LocationMarker extends Button implements OnClickListener {
 		System.out.println("Unscaled Marker: " + unscaledX + "," + unscaledY);
 	}
 
+	public void moveMarkerTo(int x, int y) {
+
+		setMarkerXY(x, y);
+
+		unscaledX = (int) (markerX / scale);
+		unscaledY = (int) (markerY / scale);
+
+		System.out.println("Marker: " + markerX + "," + markerY);
+		System.out.println("Unscaled Marker: " + unscaledX + "," + unscaledY);
+	}
+
 	public float[] getPosition() {
 		return new float[] { markerX, markerY };
 	}
