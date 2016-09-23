@@ -662,7 +662,7 @@ public class MapView extends FrameLayout implements ZoomAndScrollViewListener {
 
 
 
-		myLocationMarker.moveMarkerTo(100,100);
+		//myLocationMarker.moveMarkerTo(100,100);
 
 
 		//setupAllMarkers(currentMap);
