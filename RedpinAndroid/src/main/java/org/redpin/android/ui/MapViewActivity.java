@@ -26,9 +26,12 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import java.util.Dictionary;
+import java.util.Random;
 import java.util.Timer;
 import android.content.Context;
 import android.content.IntentFilter;
@@ -40,10 +43,11 @@ import android.net.wifi.WifiManager;
  ********************************************************************************/
 public class MapViewActivity extends Activity {
 	private static final String TAG = MapViewActivity.class.getSimpleName();
-	MapView mapView;
+	private static MapView mapView = null;
 	TextView mapName;
 	ProgressDialog progressDialog;
 	Location mLocation;
+	ImageButton locateButton;
 
 	private RelativeLayout mapTopBar;
 
@@ -94,6 +98,18 @@ public class MapViewActivity extends Activity {
 
 		mapView.showMap(null, getApplicationContext());
 		mapView.setModifiable(true);
+
+		locateButton = (ImageButton) findViewById(R.id.locate_button);
+		locateButton.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Random rand = new Random();
+				int x = rand.nextInt(1000);
+				int y = rand.nextInt(1000);
+				MapViewActivity.setMarkerLocation(x, y);
+			}
+		});
 
 		restoreState();
 		show();
@@ -207,7 +223,7 @@ public class MapViewActivity extends Activity {
 			new AlertDialog.Builder(this).setPositiveButton(
 					android.R.string.ok, null)
 					.setTitle(R.string.map_view_title).setMessage(
-							R.string.map_view_no_map_selected).create().show();
+					R.string.map_view_no_map_selected).create().show();
 			Log.w(TAG, "addNewLocation: no current map shown");
 			return;
 		}
@@ -239,20 +255,33 @@ public class MapViewActivity extends Activity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-		case R.id.options_menu_add_map:
-			Intent newmap = new Intent(this, NewMapActivity.class);
-			startActivity(newmap);
-			return true;
-		case R.id.options_menu_listview:
-			Intent mainlist = new Intent(this, MainListActivity.class);
-			startActivity(mainlist);
-			return true;
-		case R.id.options_menu_search:
-			Intent search = new Intent(this, SearchListActivity.class);
-			startActivity(search);
-			return true;
+			case R.id.options_menu_add_map:
+				Intent newmap = new Intent(this, NewMapActivity.class);
+				startActivity(newmap);
+				return true;
+			case R.id.options_menu_listview:
+				Intent mainlist = new Intent(this, MainListActivity.class);
+				startActivity(mainlist);
+				return true;
+			case R.id.options_menu_search:
+				Intent search = new Intent(this, SearchListActivity.class);
+				startActivity(search);
+				return true;
 		}
 		return false;
 	}
+
+	public static void setMarkerLocation(int x, int y)
+	{
+		setMarkerLocation("Me", x, y);
+	}
+
+	public static void setMarkerLocation(String id , int x, int y)
+	{
+		mapView.getCurrentActiveMarker().setMapXcord(x);
+		mapView.getCurrentActiveMarker().setMapYcord(y);
+		mapView.showLocation(mapView.getCurrentActiveMarker(), true);
+	}
+
 
 }

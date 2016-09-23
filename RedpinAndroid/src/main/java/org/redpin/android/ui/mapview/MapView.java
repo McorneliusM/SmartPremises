@@ -21,7 +21,9 @@
  */
 package org.redpin.android.ui.mapview;
 
+import java.util.Dictionary;
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.List;
 
 import org.redpin.android.R;
@@ -39,15 +41,12 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Matrix;
-import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.ViewGroup;
@@ -86,6 +85,9 @@ public class MapView extends FrameLayout implements ZoomAndScrollViewListener {
 
 	private final static long FADE_DURATION = 500;
 	private static final String TAG = MapView.class.getSimpleName();
+
+	private Map currentActiveMap = null;
+	Dictionary Markers = new Hashtable();
 
 	/**
 	 * Construct a new MapView with a Context object.
@@ -257,7 +259,7 @@ public class MapView extends FrameLayout implements ZoomAndScrollViewListener {
 
 //		DownloadImageTask task = new DownloadImageTask(this);
 //		task.execute(url);
-		onImageDownloadedWjVer("nothing","nothing");
+		onImageDownloadedWjVer("nothing", "nothing");
 	}
 
 	public void onImageDownloadedWjVer(String url, String path) {
@@ -278,7 +280,7 @@ public class MapView extends FrameLayout implements ZoomAndScrollViewListener {
 
 		bm = drawableToBitmap(d);
 
-		Log.i("wj","bm = "+bm);
+		Log.i("wj", "bm = " + bm);
 
 		if(bm!=null) {
 			imageWidth = bm.getWidth();
@@ -628,6 +630,28 @@ public class MapView extends FrameLayout implements ZoomAndScrollViewListener {
 		//showImage(map.getMapURL());
 	}
 
+	public void setupInitialLocation()
+	{
+		currentActiveMap = new Map();
+		currentActiveMap.setLocalId(123);
+		currentActiveMap.setRemoteId(123);
+		currentActiveMap.setMapName("myMap");
+		currentActiveMap.setMapURL("...");
+
+
+		Location currentActiveMarker = new Location();
+		currentActiveMarker.setLocalId(1234);
+		currentActiveMarker.setRemoteId(1234);
+		currentActiveMarker.setMap(currentActiveMap);
+		currentActiveMarker.setAccuracy(1);
+		currentActiveMarker.setMapXcord(0);
+		currentActiveMarker.setMapYcord(0);
+		currentActiveMarker.setSymbolicID("Me");
+		LocationMarker myLocationMarker = new LocationMarker(getContext(), currentActiveMarker, contentView);
+		addNewLocation(currentActiveMarker);
+		Markers.put("Me", currentActiveMarker);
+	}
+
 	/**
 	 * Shows a {@link Map}
 	 *
@@ -642,28 +666,7 @@ public class MapView extends FrameLayout implements ZoomAndScrollViewListener {
 		removeAllMarkers();
 
 		setupMapViewImage(currentMap);
-		Map myMap = new Map();
-		myMap.setLocalId(123);
-		myMap.setRemoteId(123);
-		myMap.setMapName("myMap");
-		myMap.setMapURL("...");
-
-		Location myStartingLoc = new Location();
-		myStartingLoc.setLocalId(1234);
-		myStartingLoc.setRemoteId(1234);
-		myStartingLoc.setMap(myMap);
-		myStartingLoc.setAccuracy(1);
-		myStartingLoc.setMapXcord(0);
-		myStartingLoc.setMapYcord(0);
-		myStartingLoc.setSymbolicID("mystartingLoc");
-
-		LocationMarker myLocationMarker = new LocationMarker(getContext(), myStartingLoc, contentView);
-		addNewLocation(myStartingLoc);
-
-
-
-		//myLocationMarker.moveMarkerTo(100,100);
-
+		setupInitialLocation();
 
 		//setupAllMarkers(currentMap);
 
@@ -872,6 +875,15 @@ public class MapView extends FrameLayout implements ZoomAndScrollViewListener {
 		return true;
 	}
 
+	public Location getCurrentActiveMarker()
+	{
+		return (Location)Markers.get("Me");
+	}
+
+	public Location getCurrentActiveMarker(String id)
+	{
+		return (Location)Markers.get(id);
+	}
 	/*
 	 * @Override protected void onRestoreInstanceState(Parcelable state) { if
 	 * (!(state instanceof SavedState)) { super.onRestoreInstanceState(state);
