@@ -42,9 +42,7 @@
         <activity
             android:name="org.redpin.android.ui.SettingsActivity"
             android:launchMode="singleTask" />
-        <activity
-            android:name="org.redpin.android.ui.ServerPreferences"
-            android:launchMode="singleTask" />
+        <!-- <activity android:name=".ui.ServerPreferences" android:launchMode="singleTask" /> -->
         <activity android:name="org.redpin.android.ui.list.SearchListActivity" />
         <activity
             android:name="org.redpin.android.ui.MapViewActivity"
@@ -57,13 +55,15 @@
             </intent-filter>
         </activity>
 
-        <service android:name="org.redpin.android.net.InternetConnectionManager" />
-        <service android:name="org.redpin.android.net.wifi.WifiSniffer" >
-            <intent-filter>
-                <action android:name="com.org.redpin.android.core.WIFI_SERVICE" />
-            </intent-filter>
-        </service>
-        <service android:name="org.redpin.android.net.SynchronizationManager" />
+        <!-- <service android:name=".net.InternetConnectionManager" /> -->
+
+
+        <!-- <service android:name=".net.wifi.WifiSniffer"> -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="com.org.redpin.android.core.WIFI_SERVICE" /> -->
+        <!-- </intent-filter> -->
+        <!-- </service><service android:name=".net.SynchronizationManager"></service> -->
+
     </application>
 
 </manifest>
