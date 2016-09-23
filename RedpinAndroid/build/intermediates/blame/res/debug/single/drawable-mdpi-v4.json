@@ -64,6 +64,10 @@
         "source": "C:\\Users\\tqjg84\\Desktop\\wip_wj2\\RedpinAndroid\\src\\main\\res\\drawable-mdpi\\annotation.9.png"
     },
     {
+        "merged": "C:\\Users\\tqjg84\\Desktop\\wip_wj2\\RedpinAndroid\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\purple_map_pin_big_cur.png",
+        "source": "C:\\Users\\tqjg84\\Desktop\\wip_wj2\\RedpinAndroid\\src\\main\\res\\drawable-mdpi\\purple_map_pin_big_cur.png"
+    },
+    {
         "merged": "C:\\Users\\tqjg84\\Desktop\\wip_wj2\\RedpinAndroid\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\menu_addmap_black.png",
         "source": "C:\\Users\\tqjg84\\Desktop\\wip_wj2\\RedpinAndroid\\src\\main\\res\\drawable-mdpi\\menu_addmap_black.png"
     },
@@ -74,10 +78,6 @@
     {
         "merged": "C:\\Users\\tqjg84\\Desktop\\wip_wj2\\RedpinAndroid\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\current_location.png",
         "source": "C:\\Users\\tqjg84\\Desktop\\wip_wj2\\RedpinAndroid\\src\\main\\res\\drawable-mdpi\\current_location.png"
-    },
-    {
-        "merged": "C:\\Users\\tqjg84\\Desktop\\wip_wj2\\RedpinAndroid\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\purple_map_pin_big_cur.png",
-        "source": "C:\\Users\\tqjg84\\Desktop\\wip_wj2\\RedpinAndroid\\src\\main\\res\\drawable-mdpi\\purple_map_pin_big_cur.png"
     },
     {
         "merged": "C:\\Users\\tqjg84\\Desktop\\wip_wj2\\RedpinAndroid\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\map_ifw_a.gif",

@@ -59,12 +59,6 @@ ADDED from C:\Users\tqjg84\Desktop\wip_wj2\RedpinAndroid\src\main\AndroidManifes
 		ADDED from C:\Users\tqjg84\Desktop\wip_wj2\RedpinAndroid\src\main\AndroidManifest.xml:14:13-44
 	android:name
 		ADDED from C:\Users\tqjg84\Desktop\wip_wj2\RedpinAndroid\src\main\AndroidManifest.xml:14:45-80
-activity#org.redpin.android.ui.ServerPreferences
-ADDED from C:\Users\tqjg84\Desktop\wip_wj2\RedpinAndroid\src\main\AndroidManifest.xml:15:3-84
-	android:launchMode
-		ADDED from C:\Users\tqjg84\Desktop\wip_wj2\RedpinAndroid\src\main\AndroidManifest.xml:15:50-81
-	android:name
-		ADDED from C:\Users\tqjg84\Desktop\wip_wj2\RedpinAndroid\src\main\AndroidManifest.xml:15:13-49
 activity#org.redpin.android.ui.list.SearchListActivity
 ADDED from C:\Users\tqjg84\Desktop\wip_wj2\RedpinAndroid\src\main\AndroidManifest.xml:16:3-67
 	android:name
@@ -87,24 +81,6 @@ category#android.intent.category.LAUNCHER
 ADDED from C:\Users\tqjg84\Desktop\wip_wj2\RedpinAndroid\src\main\AndroidManifest.xml:20:17-77
 	android:name
 		ADDED from C:\Users\tqjg84\Desktop\wip_wj2\RedpinAndroid\src\main\AndroidManifest.xml:20:27-74
-service#org.redpin.android.net.InternetConnectionManager
-ADDED from C:\Users\tqjg84\Desktop\wip_wj2\RedpinAndroid\src\main\AndroidManifest.xml:24:2-59
-	android:name
-		ADDED from C:\Users\tqjg84\Desktop\wip_wj2\RedpinAndroid\src\main\AndroidManifest.xml:24:11-56
-service#org.redpin.android.net.wifi.WifiSniffer
-ADDED from C:\Users\tqjg84\Desktop\wip_wj2\RedpinAndroid\src\main\AndroidManifest.xml:26:2-30:12
-	android:name
-		ADDED from C:\Users\tqjg84\Desktop\wip_wj2\RedpinAndroid\src\main\AndroidManifest.xml:26:11-47
-intent-filter#com.org.redpin.android.core.WIFI_SERVICE
-ADDED from C:\Users\tqjg84\Desktop\wip_wj2\RedpinAndroid\src\main\AndroidManifest.xml:27:3-29:19
-action#com.org.redpin.android.core.WIFI_SERVICE
-ADDED from C:\Users\tqjg84\Desktop\wip_wj2\RedpinAndroid\src\main\AndroidManifest.xml:28:4-70
-	android:name
-		ADDED from C:\Users\tqjg84\Desktop\wip_wj2\RedpinAndroid\src\main\AndroidManifest.xml:28:12-67
-service#org.redpin.android.net.SynchronizationManager
-ADDED from C:\Users\tqjg84\Desktop\wip_wj2\RedpinAndroid\src\main\AndroidManifest.xml:30:12-74
-	android:name
-		ADDED from C:\Users\tqjg84\Desktop\wip_wj2\RedpinAndroid\src\main\AndroidManifest.xml:30:21-63
 uses-permission#android.permission.CHANGE_WIFI_STATE
 ADDED from C:\Users\tqjg84\Desktop\wip_wj2\RedpinAndroid\src\main\AndroidManifest.xml:37:1-72
 	android:name
