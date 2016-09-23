@@ -27,7 +27,7 @@ import android.content.Context;
  *  ApplicationContext is used to get a static reference to the android application {@link Context}
  *
  *  @author Pascal Brogle (broglep@student.ethz.ch)
- *
+ *  test
  */
 public class ApplicationContext {
 	private static Context applicationContext;
