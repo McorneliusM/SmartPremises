@@ -11,14 +11,14 @@ public class WifiInformation {
 	
 	public WifiInformation()
 	{
-		currentScanList=null;
+		currentScanList = null;
 	}
 	
 	public void updateInformation(List<ScanResult> wifiScanList)
 	{
 		
-		currentScanList=wifiScanList;
-		int j=0;
+		currentScanList = wifiScanList;
+		int j = 0;
 
 		numOfScans++;
 
