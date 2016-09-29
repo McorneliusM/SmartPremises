@@ -34,21 +34,21 @@ public class WifiInformation {
 
 			// Problem: locationString need to be array because every numofscan it will return the latest BSSID.
 			String locationString = testDB.getLocationByBSSID(currentScanList.get(i).BSSID);
-			if (locationString == "6-004") {
+			if (locationString.equals("6-004")) {
 				MapViewActivity.setMarkerLocation(306, 536);
 			}
-			else if (locationString == "6-005")
+			else if (locationString.equals("6-005"))
 			{
 				MapViewActivity.setMarkerLocation(410, 346);
 			}
-			else if (locationString == "6-010")
+			else if (locationString.equals("6-010"))
 			{
 				MapViewActivity.setMarkerLocation(880, 510);
 			}
 			else
 			{
 				//to prove that it not work
-				MapViewActivity.setMarkerLocation(555, 222);
+				//MapViewActivity.setMarkerLocation(555, 222);
 			}
 
 

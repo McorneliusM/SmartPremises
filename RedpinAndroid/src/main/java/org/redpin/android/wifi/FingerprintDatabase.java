@@ -24,7 +24,7 @@ public class FingerprintDatabase {
         String retVal = "";
         for (int i=0; i<3; i++)
         {
-            if (BSSID == wifiData3points[i][0])
+            if (BSSID.equals(wifiData3points[i][0]))
             {
                 found = true;
                 retVal = wifiData3points[i][1];

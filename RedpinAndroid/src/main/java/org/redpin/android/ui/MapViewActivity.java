@@ -58,6 +58,9 @@ public class MapViewActivity extends Activity {
 	Context myContext;
 	WifiInformation myWifiInfo;
 
+	private static int currentMarkerX = 0;
+	private static int currentMarkerY = 0;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -278,9 +281,14 @@ public class MapViewActivity extends Activity {
 
 	public static void setMarkerLocation(String id , int x, int y)
 	{
-		mapView.getCurrentActiveMarker().setMapXcord(x);
-		mapView.getCurrentActiveMarker().setMapYcord(y);
-		mapView.showLocation(mapView.getCurrentActiveMarker(), true);
+		if( (currentMarkerX != x) || (currentMarkerY != y) )
+		{
+			currentMarkerX = x;
+			currentMarkerY = y;
+			mapView.getCurrentActiveMarker().setMapXcord(currentMarkerX);
+			mapView.getCurrentActiveMarker().setMapYcord(currentMarkerY);
+			mapView.showLocation(mapView.getCurrentActiveMarker(), true);
+		}
 	}
 
 
