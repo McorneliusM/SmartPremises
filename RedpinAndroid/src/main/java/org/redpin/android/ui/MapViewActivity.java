@@ -48,6 +48,7 @@ public class MapViewActivity extends Activity {
 	ProgressDialog progressDialog;
 	Location mLocation;
 	ImageButton locateButton;
+	ImageButton scanButton;
 
 	private RelativeLayout mapTopBar;
 
@@ -104,6 +105,18 @@ public class MapViewActivity extends Activity {
 
 		locateButton = (ImageButton) findViewById(R.id.locate_button);
 		locateButton.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Random rand = new Random();
+				int x = rand.nextInt(1000);
+				int y = rand.nextInt(1000);
+				MapViewActivity.setMarkerLocation(x, y);
+			}
+		});
+
+		scanButton = (ImageButton) findViewById(R.id.scan_button);
+		scanButton.setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
