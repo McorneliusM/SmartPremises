@@ -3,7 +3,7 @@
     <string name="menu_locations">Locations</string>
     <string name="menu_delete">Delete</string>
     
-    <string name="app_name">Redpin</string>
+    <string name="app_name">iLocate</string>
     
     <string name="redpin_authority">org.redpin.android.provider</string>
     
