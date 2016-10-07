@@ -5,22 +5,15 @@
 
 package org.redpin.android.ui;
 
-import org.redpin.android.ApplicationContext;
-import org.redpin.android.R;
-import org.redpin.android.core.Location;
-import org.redpin.android.core.Map;
-import org.redpin.android.ui.list.MainListActivity;
-import org.redpin.android.ui.list.SearchListActivity;
-import org.redpin.android.ui.mapview.MapView;
-
-import org.redpin.android.wifi.*;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -29,13 +22,21 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import java.util.Dictionary;
+import org.redpin.android.ApplicationContext;
+import org.redpin.android.R;
+import org.redpin.android.core.Location;
+import org.redpin.android.core.Map;
+import org.redpin.android.ui.list.MainListActivity;
+import org.redpin.android.ui.list.SearchListActivity;
+import org.redpin.android.ui.mapview.MapView;
+import org.redpin.android.wifi.ScanRepeater;
+import org.redpin.android.wifi.WifiInformation;
+import org.redpin.android.wifi.WifiScanReceiver;
+
 import java.util.Random;
 import java.util.Timer;
-import android.content.Context;
-import android.content.IntentFilter;
-import android.net.wifi.WifiManager;
 
 /********************************************************************************
  * Main activity of the client that displays maps and locations
@@ -70,6 +71,13 @@ public class MapViewActivity extends Activity {
 		//startWifiSniffer();
 
 		mainWifiObj = (WifiManager) getSystemService(Context.WIFI_SERVICE);
+		boolean WifiOn = mainWifiObj.isWifiEnabled();
+		if (WifiOn){
+			Toast.makeText(MapViewActivity.this, "Wifi is On", Toast.LENGTH_SHORT).show();
+		} else {
+			Toast.makeText(MapViewActivity.this, "Wifi turned On", Toast.LENGTH_SHORT).show();
+			mainWifiObj.setWifiEnabled(true);
+		}
 		myContext=getApplicationContext();
 		myWifiInfo=new WifiInformation();
 

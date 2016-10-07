@@ -85,20 +85,22 @@ public class SettingsActivity extends Activity {
    }
 
    public void button_DataCollection(View target) {
-      Toast.makeText(SettingsActivity.this, "You have selected Data Collection", Toast.LENGTH_SHORT).show();
+
+      //Toast.makeText(SettingsActivity.this, "You have selected Data Collection", Toast.LENGTH_SHORT).show();
       TextView tv = (TextView)findViewById(R.id.textViewDataCollection);
       //tv.setText("Data Collection");
 
       myWifiInfo.updateInformation(mainWifiObj.getScanResults());
 
-
-      StringBuilder builder = new StringBuilder();
-
-      for (String s : myWifiInfo.getStringArray()) {
-         builder.append(s).append(" ");
-         tv.setText(builder.toString());
-      }
-
+   if (myWifiInfo.getStringArray() != null) {
+         StringBuilder builder = new StringBuilder();
+         for (String s : myWifiInfo.getStringArray()) {
+            builder.append(s).append(" ");
+            tv.setText(builder.toString());
+         }
+   } else {
+      Toast.makeText(SettingsActivity.this, "WifiString is NULL", Toast.LENGTH_SHORT).show();
+   }
       //Intent intent = new Intent(this, ServerPreferences.class);
       //startActivity(intent);
    }

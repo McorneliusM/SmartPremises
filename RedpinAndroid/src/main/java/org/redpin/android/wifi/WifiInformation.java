@@ -126,3 +126,5 @@ public class WifiInformation {
       return wifiString;
    }
 }
+
+
