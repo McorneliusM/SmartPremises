@@ -3,12 +3,12 @@ package org.redpin.android.wifi;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.widget.ArrayAdapter;
 import android.net.wifi.WifiManager;
 
 public class WifiScanReceiver extends BroadcastReceiver 
  {
-	WifiManager mainWifiObj;
+	//WifiManager mainWifiObj;
+	 public static WifiManager mainWifiObj;
 	Context myContext;
 	WifiInformation myWifiInfo;
 
