@@ -61,8 +61,8 @@
 	<string name="map_view_no_map_selected">No map selected</string>
 	<string name="map_view_title">Map View</string>
 	<string name="settings_view_credits">Credits:</string>
-	<string name="settings_view_credits_value">Luba Rogoleva\nPascal Brogle\nArno Fiva</string>
+	<string name="settings_view_credits_value">Ong Chin Kuan\nChong Woon Jiet\nTan Ewe Cheong\nLim Foong Foong\nEric Lim\nLim Zhi Wei</string>
 	<string name="settings_view_copyright">Copyright:</string>
-	<string name="settings_view_copyright_value">ETH Zürich 2010</string>
+	<string name="settings_view_copyright_value">BabyDroid 2016</string>
 	<string name="settings_view_server_preferences">Server preferences</string>
 </resources>
