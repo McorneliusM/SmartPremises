@@ -21,12 +21,17 @@
  */
 package org.redpin.android.ui;
 
-import org.redpin.android.R;
-
 import android.app.Activity;
 import android.content.Intent;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import org.redpin.android.R;
+import org.redpin.android.wifi.WifiInformation;
+import org.redpin.android.wifi.WifiScanReceiver;
 
 /**
  * Class represents an activity responsible for the changing settings.
@@ -36,37 +41,65 @@ import android.view.View;
  */
 public class SettingsActivity extends Activity {
 
-	/**
-	 * Called when the activity is starting inflating the activity's UI. This is
-	 * where most initialization should go.
-	 */
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
 
-		setContentView(R.layout.settings_view);
+   //String[] locDataCollection;
+   String locDataCollection;
+   //WifiInformation myWifiInfoDataCollection;
+   WifiInformation myWifiInfo= new WifiInformation();
+   //WifiManager mainWifiObj=new WifiManager();
+   WifiManager  mainWifiObj = WifiScanReceiver.mainWifiObj;
 
-	}
+   /**
+    * Called when the activity is starting inflating the activity's UI. This is
+    * where most initialization should go.
+    */
+   @Override
+   public void onCreate(Bundle savedInstanceState) {
+      super.onCreate(savedInstanceState);
+
+      setContentView(R.layout.settings_view);
+
+   }
 
 
-	/**
-	 * Starts the setting screen
-	 *
-	 * @param target {@link View} that called this method
-	 */
-	public void button_Mapview(View target) {
-		Intent intent = new Intent(this, MapViewActivity.class);
-		startActivity(intent);
-	}
+   /**
+    * Starts the setting screen
+    *
+    * @param target {@link View} that called this method
+    */
+   public void button_Mapview(View target) {
+      Toast.makeText(SettingsActivity.this, "You have selected Mapview", Toast.LENGTH_SHORT).show();
+      Intent intent = new Intent(this, MapViewActivity.class);
+      startActivity(intent);
+   }
 
-	/**
-	 * Start the server preferences activity
-	 *
-	 * @param target {@link View} that called this method
-	 */
-	public void button_ServerPreferences(View target) {
-		//Intent intent = new Intent(this, ServerPreferences.class);
-		//startActivity(intent);
-	}
+   /**
+    * Start the server preferences activity
+    *
+    * @param target {@link View} that called this method
+    */
+   public void button_ServerPreferences(View target) {
+      Toast.makeText(SettingsActivity.this, "You have selected Server Preferences", Toast.LENGTH_SHORT).show();
+      //Intent intent = new Intent(this, ServerPreferences.class);
+      //startActivity(intent);
+   }
 
+   public void button_DataCollection(View target) {
+      Toast.makeText(SettingsActivity.this, "You have selected Data Collection", Toast.LENGTH_SHORT).show();
+      TextView tv = (TextView)findViewById(R.id.textViewDataCollection);
+      //tv.setText("Data Collection");
+
+      myWifiInfo.updateInformation(mainWifiObj.getScanResults());
+
+
+      StringBuilder builder = new StringBuilder();
+
+      for (String s : myWifiInfo.getStringArray()) {
+         builder.append(s).append(" ");
+         tv.setText(builder.toString());
+      }
+
+      //Intent intent = new Intent(this, ServerPreferences.class);
+      //startActivity(intent);
+   }
 }
