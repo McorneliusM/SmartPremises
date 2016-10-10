@@ -286,9 +286,9 @@ public class ZoomAndScrollImageView extends View implements OnZoomListener,
 
 		currentX = Math.max(getWidth() - contentWidth, Math.min(0, currentX));
 
-		zoomedIn = !zoomedIn;
+		//zoomedIn = !zoomedIn;
 
-		changeZoom(zoomedIn ? 1 : -1, oldX, currentX, oldY, currentY);
+		//changeZoom(zoomedIn ? 1 : -1, oldX, currentX, oldY, currentY);
 
 		return true;
 	}
@@ -383,8 +383,8 @@ public class ZoomAndScrollImageView extends View implements OnZoomListener,
 	public void onZoom(boolean zoomIn) {
 		float toX = currentX;
 		float toY = currentY;
-		changeZoom(zoomIn ? ZOOM_STEP : -ZOOM_STEP, currentX, toX, currentY,
-				toY);
+		//changeZoom(zoomIn ? ZOOM_STEP : -ZOOM_STEP, currentX, toX, currentY,
+		//		toY);
 	}
 
 	public void changeZoom(float amount, float fromX, float toX, float fromY,
@@ -553,9 +553,9 @@ public class ZoomAndScrollImageView extends View implements OnZoomListener,
 			break;
 
 		case KeyEvent.KEYCODE_DPAD_CENTER:
-			zoomedIn = !zoomedIn;
-			changeZoom(zoomedIn ? 1 : -1, currentX, currentX, currentX,
-					currentY);
+			//zoomedIn = !zoomedIn;
+			//changeZoom(zoomedIn ? 1 : -1, currentX, currentX, currentX,
+			//		currentY);
 			handeled = true;
 			break;
 		default:
@@ -572,9 +572,9 @@ public class ZoomAndScrollImageView extends View implements OnZoomListener,
 
 		switch (e.getAction()) {
 		case MotionEvent.ACTION_DOWN:
-			zoomedIn = !zoomedIn;
-			changeZoom(zoomedIn ? 1 : -1, currentX, currentX, currentX,
-					currentY);
+			//zoomedIn = !zoomedIn;
+			//changeZoom(zoomedIn ? 1 : -1, currentX, currentX, currentX,
+			//		currentY);
 			handeled = true;
 			break;
 
@@ -700,7 +700,8 @@ public class ZoomAndScrollImageView extends View implements OnZoomListener,
 			currentX = fromX + (toX - fromX) * tInterpolatedTime;
 			currentY = fromY + (toY - fromY) * tInterpolatedTime;
 			//Log.v("wj","applyTransformation currentY = "+currentY);
-			setZoom(mFrom + (mTo - mFrom) * zInterpolatedTime, false);
+			setZoom(1.0f, false);
+			//setZoom(mFrom + (mTo - mFrom) * zInterpolatedTime, false);
 
 		}
 	}
@@ -714,8 +715,9 @@ public class ZoomAndScrollImageView extends View implements OnZoomListener,
 		float factor = detector.getScaleFactor();
 
 		scale *= factor;
-		setZoom(scale, true);
-		Log.i(TAG, "onScale, " + scale + "(factor: +" + factor + ")");
+		setZoom(1.0f, false);
+		//setZoom(scale, true);
+		//Log.i(TAG, "onScale, " + scale + "(factor: +" + factor + ")");
 
 		return true;
 	}
