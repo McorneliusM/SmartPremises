@@ -33,6 +33,8 @@ import org.redpin.android.R;
 import org.redpin.android.wifi.WifiInformation;
 import org.redpin.android.wifi.WifiScanReceiver;
 
+import java.io.IOException;
+
 /**
  * Class represents an activity responsible for the changing settings.
  *
@@ -84,13 +86,26 @@ public class SettingsActivity extends Activity {
       //startActivity(intent);
    }
 
-   public void button_DataCollection(View target) {
+   public void button_DataCollection(View target) throws IOException{
 
       //Toast.makeText(SettingsActivity.this, "You have selected Data Collection", Toast.LENGTH_SHORT).show();
       TextView tv = (TextView)findViewById(R.id.textViewDataCollection);
       //tv.setText("Data Collection");
 
       myWifiInfo.updateInformation(mainWifiObj.getScanResults());
+
+      /* ZhiWei changes for csv file got issue */
+      /*StringBuilder builder = new StringBuilder();
+      String FILENAME = "data_log.csv";
+      String entry = "red" + "\n";
+      try {
+         FileOutputStream out = openFileOutput(FILENAME,Context.MODE_APPEND);
+         out.write(entry.getBytes());
+         out.close();
+      } catch(FileNotFoundException e){
+         e.printStackTrace();
+      }*/
+
 
    if (myWifiInfo.getStringArray() != null) {
          StringBuilder builder = new StringBuilder();
