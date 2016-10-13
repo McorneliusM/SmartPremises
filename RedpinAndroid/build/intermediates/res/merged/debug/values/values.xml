@@ -11,7 +11,7 @@
     <dimen name="font_size_for_header_text">18dip</dimen>
     <dimen name="font_size_for_row">16dip</dimen>
     <dimen name="font_size_for_url">11dip</dimen>
-    <string name="app_name">Redpin</string>
+    <string name="app_name">iLocate</string>
     <string name="connection_offline">Redpin server is not reachable</string>
     <string name="connection_online">Connected to Redpin server</string>
     <string name="default_list_text">List</string>
@@ -52,9 +52,10 @@
     <string name="preferences_category">Server preferences</string>
     <string name="redpin_authority">org.redpin.android.provider</string>
     <string name="settings_view_copyright">Copyright:</string>
-    <string name="settings_view_copyright_value">ETH Zürich 2010</string>
+    <string name="settings_view_copyright_value">BabyDroid 2016</string>
     <string name="settings_view_credits">Credits:</string>
-    <string name="settings_view_credits_value">Luba Rogoleva\nPascal Brogle\nArno Fiva</string>
+    <string name="settings_view_credits_value">Ong Chin Kuan\nChong Woon Jiet\nTan Ewe Cheong\nLim Foong Foong\nEric Lim\nLim Zhi Wei</string>
+    <string name="settings_view_data_collection">Data Collection</string>
     <string name="settings_view_server_preferences">Server preferences</string>
     <string name="taking_measurement">Taking measurement.\nPlease wait...</string>
 </resources>

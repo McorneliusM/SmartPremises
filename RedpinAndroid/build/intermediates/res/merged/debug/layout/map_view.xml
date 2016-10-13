@@ -30,13 +30,6 @@
 			android:textSize="@dimen/font_size_for_header_text"
 			android:layout_toRightOf="@id/logo" android:layout_marginLeft="10dip" android:layout_width="match_parent" android:layout_marginRight="30dip" android:paddingRight="50dip"/>
 
-		<ImageButton android:src="@drawable/pin"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_marginLeft="10dip"
-			android:layout_marginTop="2dip"
-			android:layout_marginRight="5dip"
-			android:id="@+id/add_location_button" android:layout_alignParentRight="true"/>
 	</RelativeLayout>
 
 	<org.redpin.android.ui.mapview.MapView
@@ -47,6 +40,16 @@
 		android:layout_below="@+id/map_topbar">
 	</org.redpin.android.ui.mapview.MapView>
 	<ImageButton android:id="@+id/locate_button" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/menu_locate_me_black" android:layout_alignBottom="@+id/map_view_component"></ImageButton>
+
+	<Button
+		style="?android:attr/buttonStyleSmall"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="Scan"
+		android:id="@+id/scan_button"
+		android:layout_above="@+id/locate_button"
+		android:layout_alignParentLeft="true"
+		android:layout_marginBottom="23dp" />
 
 
 </RelativeLayout>

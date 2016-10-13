@@ -22,6 +22,7 @@
 package org.redpin.android.ui;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
@@ -33,7 +34,11 @@ import org.redpin.android.R;
 import org.redpin.android.wifi.WifiInformation;
 import org.redpin.android.wifi.WifiScanReceiver;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 
 /**
  * Class represents an activity responsible for the changing settings.
@@ -50,7 +55,7 @@ public class SettingsActivity extends Activity {
    WifiInformation myWifiInfo= new WifiInformation();
    //WifiManager mainWifiObj=new WifiManager();
    WifiManager  mainWifiObj = WifiScanReceiver.mainWifiObj;
-
+   public int i;
    /**
     * Called when the activity is starting inflating the activity's UI. This is
     * where most initialization should go.
@@ -60,6 +65,7 @@ public class SettingsActivity extends Activity {
       super.onCreate(savedInstanceState);
 
       setContentView(R.layout.settings_view);
+      i = 0;
 
    }
 
@@ -95,27 +101,48 @@ public class SettingsActivity extends Activity {
       myWifiInfo.updateInformation(mainWifiObj.getScanResults());
 
       /* ZhiWei changes for csv file got issue */
-      /*StringBuilder builder = new StringBuilder();
-      String FILENAME = "data_log.csv";
-      String entry = "red" + "\n";
+      File root = android.os.Environment.getExternalStorageDirectory();
+      File dir = new File(root.getAbsolutePath()+"/math");
+      dir.mkdirs();
+      File file = new File(dir,"data.csv");
+
+      StringBuilder builder = new StringBuilder();
+
       try {
-         FileOutputStream out = openFileOutput(FILENAME,Context.MODE_APPEND);
-         out.write(entry.getBytes());
-         out.close();
-      } catch(FileNotFoundException e){
-         e.printStackTrace();
-      }*/
+         FileOutputStream out = new FileOutputStream(file, true);
+         OutputStreamWriter writer = new OutputStreamWriter(out);
+
+         if (myWifiInfo.getStringArray() != null) {
+            //StringBuilder builder = new StringBuilder();
+            for (String s : myWifiInfo.getStringArray()) {
+
+               builder.append(i).append(",").append(s).append("\n");
+
+               tv.setText(builder.toString());
+               writer.append(i+"").append(",").append(s).append("\n");
 
 
-   if (myWifiInfo.getStringArray() != null) {
-         StringBuilder builder = new StringBuilder();
-         for (String s : myWifiInfo.getStringArray()) {
-            builder.append(s).append(" ");
-            tv.setText(builder.toString());
+               //openFileOutput(FILENAME, Context.MODE_APPEND);
+               //out.write(entry.getBytes());
+               //out.close();
+
+
+
+            }
+
+            i++;
+
+            writer.close();
+            out.close();
          }
-   } else {
-      Toast.makeText(SettingsActivity.this, "WifiString is NULL", Toast.LENGTH_SHORT).show();
-   }
+         else {
+            Toast.makeText(SettingsActivity.this, "WifiString is NULL", Toast.LENGTH_SHORT).show();
+         }
+   } catch(FileNotFoundException e){
+         e.printStackTrace();
+      }
+
+
       //Intent intent = new Intent(this, ServerPreferences.class);
       //startActivity(intent);
    }

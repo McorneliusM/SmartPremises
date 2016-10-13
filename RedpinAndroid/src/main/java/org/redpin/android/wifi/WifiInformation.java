@@ -97,9 +97,9 @@ public class WifiInformation {
                + ", SSID: " + currentScanList.get(i).SSID
                + ", level: " + currentScanList.get(i).level);
 
-         wifiString[i] = ("BSSID: "+currentScanList.get(i).BSSID
-               +"\nSSID: "+currentScanList.get(i).SSID
-               +"\nlevel: "+currentScanList.get(i).level);
+         wifiString[i] = (currentScanList.get(i).BSSID
+               +","+currentScanList.get(i).SSID
+               +","+currentScanList.get(i).level);
 
       }
 

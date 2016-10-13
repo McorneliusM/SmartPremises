@@ -1,5 +1,13 @@
 [
     {
+        "merged": "C:\\Users\\crh364\\AndroidStudioProjects\\wip_wj2\\RedpinAndroid\\build\\intermediates\\res\\merged\\debug\\menu\\context_menu_map_list.xml",
+        "source": "C:\\Users\\crh364\\AndroidStudioProjects\\wip_wj2\\RedpinAndroid\\src\\main\\res\\menu\\context_menu_map_list.xml"
+    },
+    {
+        "merged": "C:\\Users\\crh364\\AndroidStudioProjects\\wip_wj2\\RedpinAndroid\\build\\intermediates\\res\\merged\\debug\\menu\\options_menu.xml",
+        "source": "C:\\Users\\crh364\\AndroidStudioProjects\\wip_wj2\\RedpinAndroid\\src\\main\\res\\menu\\options_menu.xml"
+    },
+    {
         "merged": "C:\\Users\\tqjg84\\Desktop\\wip_wj2\\RedpinAndroid\\build\\intermediates\\res\\merged\\debug\\menu\\context_menu_map_list.xml",
         "source": "C:\\Users\\tqjg84\\Desktop\\wip_wj2\\RedpinAndroid\\src\\main\\res\\menu\\context_menu_map_list.xml"
     },
@@ -10,5 +18,9 @@
     {
         "merged": "C:\\Users\\tqjg84\\Desktop\\wip_wj2\\RedpinAndroid\\build\\intermediates\\res\\merged\\debug\\menu\\options_menu.xml",
         "source": "C:\\Users\\tqjg84\\Desktop\\wip_wj2\\RedpinAndroid\\src\\main\\res\\menu\\options_menu.xml"
+    },
+    {
+        "merged": "C:\\Users\\crh364\\AndroidStudioProjects\\wip_wj2\\RedpinAndroid\\build\\intermediates\\res\\merged\\debug\\menu\\context_menu_location_list.xml",
+        "source": "C:\\Users\\crh364\\AndroidStudioProjects\\wip_wj2\\RedpinAndroid\\src\\main\\res\\menu\\context_menu_location_list.xml"
     }
 ]

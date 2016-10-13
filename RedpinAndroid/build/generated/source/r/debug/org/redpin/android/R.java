@@ -50,7 +50,6 @@ public final class R {
     }
     public static final class id {
         public static final int TableLayout01=0x7f0a0019;
-        public static final int add_location_button=0x7f0a000b;
         public static final int addmap_map=0x7f0a0016;
         public static final int filter=0x7f0a0006;
         public static final int filter_layout=0x7f0a0005;
@@ -59,27 +58,29 @@ public final class R {
         public static final int list_topbar=0x7f0a0003;
         public static final int list_view=0x7f0a0002;
         public static final int list_view_topbar_text=0x7f0a0004;
-        public static final int locate_button=0x7f0a000d;
+        public static final int locate_button=0x7f0a000c;
         public static final int logo=0x7f0a0009;
         public static final int map_name=0x7f0a000a;
         public static final int map_topbar=0x7f0a0008;
         public static final int map_url=0x7f0a0015;
         public static final int map_view=0x7f0a0007;
-        public static final int map_view_component=0x7f0a000c;
-        public static final int menu_delete=0x7f0a0022;
-        public static final int menu_show_locations=0x7f0a0023;
+        public static final int map_view_component=0x7f0a000b;
+        public static final int menu_delete=0x7f0a0024;
+        public static final int menu_show_locations=0x7f0a0025;
         public static final int newmap_view=0x7f0a000e;
-        public static final int options_menu_add_map=0x7f0a0027;
-        public static final int options_menu_listview=0x7f0a0026;
-        public static final int options_menu_locate=0x7f0a0028;
-        public static final int options_menu_main=0x7f0a0025;
-        public static final int options_menu_search=0x7f0a0024;
+        public static final int options_menu_add_map=0x7f0a0029;
+        public static final int options_menu_listview=0x7f0a0028;
+        public static final int options_menu_locate=0x7f0a002a;
+        public static final int options_menu_main=0x7f0a0027;
+        public static final int options_menu_search=0x7f0a0026;
         public static final int pick_image_label=0x7f0a0011;
         public static final int pick_image_phone_button=0x7f0a0013;
         public static final int pick_image_url_button=0x7f0a0012;
         public static final int pick_map_choices=0x7f0a0010;
         public static final int pick_map_url_choice=0x7f0a0014;
         public static final int save_map_button=0x7f0a000f;
+        public static final int scan_button=0x7f0a000d;
+        public static final int settings_view_button_datacollection=0x7f0a0022;
         public static final int settings_view_button_serverpreferences=0x7f0a0021;
         public static final int settings_view_buttons=0x7f0a0020;
         public static final int settings_view_copyright_label=0x7f0a001e;
@@ -90,6 +91,7 @@ public final class R {
         public static final int settings_view_table=0x7f0a0018;
         public static final int settings_view_table_row_copyright=0x7f0a001d;
         public static final int settings_view_table_row_credits=0x7f0a001a;
+        public static final int textViewDataCollection=0x7f0a0023;
     }
     public static final class layout {
         public static final int list_row=0x7f030000;
@@ -150,8 +152,9 @@ public final class R {
         public static final int settings_view_copyright_value=0x7f080029;
         public static final int settings_view_credits=0x7f08002a;
         public static final int settings_view_credits_value=0x7f08002b;
-        public static final int settings_view_server_preferences=0x7f08002c;
-        public static final int taking_measurement=0x7f08002d;
+        public static final int settings_view_data_collection=0x7f08002c;
+        public static final int settings_view_server_preferences=0x7f08002d;
+        public static final int taking_measurement=0x7f08002e;
     }
     public static final class xml {
         public static final int preferences=0x7f040000;
