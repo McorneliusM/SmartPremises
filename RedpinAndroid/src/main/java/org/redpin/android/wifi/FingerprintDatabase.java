@@ -9,14 +9,20 @@ import android.util.Log;
 
 public class FingerprintDatabase {
 
-    String[][] wifiData3points = {
-            {"84:24:8d:3f:a2:e0",
-                    "6-004"},
-            {"84:24:8d:3f:7c:e0",
-                    "6-005"},
-            {"84:24:8d:3f:8a:d1",
-                    "6-010"}
-    };
+    public int numOfLocations;
+    public MeasurementPerLocation[] myMeasurementPerLocationArray;
+
+    public FingerprintDatabase(int inputNumOfLocations)
+    {
+        numOfLocations = inputNumOfLocations;
+        myMeasurementPerLocationArray = new MeasurementPerLocation[inputNumOfLocations];
+    }
+
+    public void fillUpEachMeasurementPerLocation(int index, String locationName, int inputNumOfWifiPoints)
+    {
+        myMeasurementPerLocationArray[index] = new MeasurementPerLocation(locationName, inputNumOfWifiPoints);
+    }
+
 
     public String getLocationByBSSID(String BSSID)
     {
@@ -24,11 +30,11 @@ public class FingerprintDatabase {
         String retVal = "";
         for (int i=0; i<3; i++)
         {
-            if (BSSID.equals(wifiData3points[i][0]))
-            {
-                found = true;
-                retVal = wifiData3points[i][1];
-            }
+//            if (BSSID.equals(wifiData3points[i][0]))
+//            {
+//                found = true;
+//                retVal = wifiData3points[i][1];
+//            }
         }
 
         if (found)

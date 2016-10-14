@@ -33,7 +33,7 @@ public class WifiInformation {
 
       numOfScans++;
 
-      FingerprintDatabase testDB = new FingerprintDatabase();
+      FingerprintDatabase testDB = new FingerprintDatabase(0);
 
       //---------------------------------------------------------------
       // Comparator
