@@ -14,37 +14,32 @@ public class FingerprintDatabase {
 
     public FingerprintDatabase(int inputNumOfLocations)
     {
+        //Giving how many locations stored in this database
         numOfLocations = inputNumOfLocations;
         myMeasurementPerLocationArray = new MeasurementPerLocation[inputNumOfLocations];
     }
 
     public void fillUpEachMeasurementPerLocation(int index, String locationName, int inputNumOfWifiPoints)
     {
+        // Giving name and how many wifi point in one location
         myMeasurementPerLocationArray[index] = new MeasurementPerLocation(locationName, inputNumOfWifiPoints);
+
     }
 
-
-    public String getLocationByBSSID(String BSSID)
+    //-- for debugging
+    public void printFingerprintDb()
     {
-        boolean found = false;
-        String retVal = "";
-        for (int i=0; i<3; i++)
-        {
-//            if (BSSID.equals(wifiData3points[i][0]))
-//            {
-//                found = true;
-//                retVal = wifiData3points[i][1];
-//            }
-        }
+        int i,j;
 
-        if (found)
+        for(i=0;i<numOfLocations;i++)
         {
-            Log.i("debug", "#######################" + BSSID + retVal);
-            return retVal;
-        }
-        else
-        {
-            return "notFound";
+            Log.i("wj","db -- measurement per location : "+myMeasurementPerLocationArray[i].name);
+            for(j=0;j<myMeasurementPerLocationArray[i].numOfWifiPoints;j++)
+            {
+                Log.i("wj","db -- measurement per location -- BSSID : " + myMeasurementPerLocationArray[i].myWifiInfoRowArray[j].BSSID);
+                Log.i("wj","db -- measurement per location -- BSSID : " + myMeasurementPerLocationArray[i].myWifiInfoRowArray[j].SSID);
+                Log.i("wj","db -- measurement per location -- BSSID : " + myMeasurementPerLocationArray[i].myWifiInfoRowArray[j].level);
+            }
         }
     }
 }

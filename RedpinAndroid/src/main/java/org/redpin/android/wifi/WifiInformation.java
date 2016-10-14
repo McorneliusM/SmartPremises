@@ -13,11 +13,15 @@ public class WifiInformation {
    private static long numOfScans = 0;
    String[] wifiString;
 
+   private FingerprintDatabase fingerprintDB;
+
    public WifiInformation()
    {
       currentScanList = null;
       wifiString=new String[1];
       wifiString[0]="Starting";
+
+      initializeFingerprintDb(fingerprintDB);
    }
 
    public void updateInformation(List<ScanResult> wifiScanList) {
@@ -25,100 +29,77 @@ public class WifiInformation {
       currentScanList = wifiScanList;
       int currentScanListSize = currentScanList.size();
       wifiString=new String[wifiScanList.size()];
-      int j = 0;
+      int i;
 
-      // Initialize values for comparator
-      int counterOfBSSIDWithStrongestRSSI = 0;
-      int compareA = currentScanList.get(counterOfBSSIDWithStrongestRSSI).level;
 
       numOfScans++;
 
-      FingerprintDatabase testDB = new FingerprintDatabase(0);
 
-      //---------------------------------------------------------------
-      // Comparator
-      //---------------------------------------------------------------
+      //----------------------------------------------------------------------------------------------------
+      //   Getting current wifi point and data into MeasurementPerLocation
+      //----------------------------------------------------------------------------------------------------
+      MeasurementPerLocation currentMeasurementPerLocation = new MeasurementPerLocation("current",currentScanList.size());
 
-      // Check if size must be at least 2 for a comparison
-      if (currentScanListSize >= 2) {
-
-         // Initialize values to be compared
-         // B is only available in this case, thus it is initialized here.
-         int compareB = currentScanList.get(1).level;
-
-         // Main loop for comparator
-         for (int i = 0; i < (currentScanListSize - 2); i++) {
-
-            // If A is less than or equal to B,
-            // copy value of B into A for next comparison.
-            // else remain the value of A, since it is bigger.
-            // Note: this code works with raw negative values of dB
-            if (compareA <= compareB) {
-               compareA = compareB;
-               counterOfBSSIDWithStrongestRSSI = i + 1;
-            }
-
-            // If there are more data,
-            // update values to be compared in B.
-            if ((i + 2) < currentScanListSize) {
-               compareB = currentScanList.get(i + 2).level;
-            }
-         }
+      for (i = 0; i < currentScanList.size(); i++) {
+         currentMeasurementPerLocation.fillUpEachWifiInfoRow(i, currentScanList.get(i).BSSID, currentScanList.get(i).SSID, Math.abs(currentScanList.get(i).level));
       }
 
+      // for logging , u can use --> currentMeasurementPerLocation.printWifiInfoRow();
 
-      //---------------------------------------------------------------
-      // Get location from database based on strongest RSSI
-      //---------------------------------------------------------------
-      String locationString = testDB.getLocationByBSSID(currentScanList.get(counterOfBSSIDWithStrongestRSSI).BSSID);
-      if (locationString.equals("6-004")) {
-         MapViewActivity.setMarkerLocation(306, 536);
-      }
-      else if (locationString.equals("6-005"))
-      {
-         MapViewActivity.setMarkerLocation(410, 346);
-      }
-      else if (locationString.equals("6-010"))
-      {
-         MapViewActivity.setMarkerLocation(880, 510);
-      }
-      else
-      {
-         //to prove that it not work
-         //MapViewActivity.setMarkerLocation(555, 222);
-      }
+      //-----------------------------------------------------------------------------------------------------
+
+
+
 
       //---------------------------------------------------------------
       // Log scan list
       //---------------------------------------------------------------
-      for (int i = 0; i < currentScanListSize; i++) {
+      for (i = 0; i < currentScanListSize; i++) {
          Log.i("wj", "numOfScans: " + numOfScans
-               + ", BSSID: " + currentScanList.get(i).BSSID
-               + ", SSID: " + currentScanList.get(i).SSID
-               + ", level: " + currentScanList.get(i).level);
+                 + ", BSSID: " + currentScanList.get(i).BSSID
+                 + ", SSID: " + currentScanList.get(i).SSID
+                 + ", level: " + currentScanList.get(i).level);
 
          wifiString[i] = (currentScanList.get(i).BSSID
-               +","+currentScanList.get(i).SSID
-               +","+currentScanList.get(i).level);
+                 +","+currentScanList.get(i).SSID
+                 +","+currentScanList.get(i).level);
 
       }
+   }
 
-        //Woonjiet comment
-      //If decided point
-      //{
-      //Set Location Marker to the point
+   public void initializeFingerprintDb(FingerprintDatabase db)
+   {
+      //---------------------------------------------------------------------------------------------
+      // Initialize fingerprint database , store all hard-coded database information during this function
+      //------------------------------------------------------------------------------------------------
 
-      // Here is the point of 6-004 = (x = 306,y = 536) in pixels
-      //MapViewActivity.setMarkerLocation(306, 536);
+      db = new FingerprintDatabase(3);
 
-      // Here is the point of 6-005 = (x = 410,y = 346) in pixels
-      //MapViewActivity.setMarkerLocation(410, 346);
+      db.fillUpEachMeasurementPerLocation(0,"A1",3);
+      db.fillUpEachMeasurementPerLocation(1,"B1",3);
+      db.fillUpEachMeasurementPerLocation(2,"C1",3);
 
-      // Here is the point of 6-010 = (x = 880,y = 510) in pixels
-        //MapViewActivity.setMarkerLocation(880, 510);
 
-      //}
+      Log.i("wj", "initializeFingerprintDb part 1 complete ");
 
+      db.myMeasurementPerLocationArray[0].fillUpEachWifiInfoRow(0,"asdasdasdas","M-guest", 56);
+      db.myMeasurementPerLocationArray[0].fillUpEachWifiInfoRow(1,"asdasdasdas","M-guest", 56);
+      db.myMeasurementPerLocationArray[0].fillUpEachWifiInfoRow(2,"asdasdasdas","M-guest", 56);
+
+      Log.i("wj", "initializeFingerprintDb part 2 complete ");
+
+      db.myMeasurementPerLocationArray[1].fillUpEachWifiInfoRow(0,"asdasdasdas","M-guest", 56);
+      db.myMeasurementPerLocationArray[1].fillUpEachWifiInfoRow(1,"asdasdasdas","M-guest", 56);
+      db.myMeasurementPerLocationArray[1].fillUpEachWifiInfoRow(2,"asdasdasdas","M-guest", 56);
+
+      Log.i("wj", "initializeFingerprintDb part 3 complete ");
+
+      db.myMeasurementPerLocationArray[2].fillUpEachWifiInfoRow(0,"asdasdasdas","M-guest", 56);
+      db.myMeasurementPerLocationArray[2].fillUpEachWifiInfoRow(1,"asdasdasdas","M-guest", 56);
+      db.myMeasurementPerLocationArray[2].fillUpEachWifiInfoRow(2,"asdasdasdas","M-guest", 56);
+
+
+      // for debugging , u can use --> db.printFingerprintDb();
    }
 
    public String[] getStringArray()
@@ -126,5 +107,3 @@ public class WifiInformation {
       return wifiString;
    }
 }
-
-
