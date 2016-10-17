@@ -53,8 +53,7 @@ import android.widget.ZoomButtonsController.OnZoomListener;
  * @author Pascal Brogle (broglep@student.ethz.ch)
  *
  */
-public class ZoomAndScrollImageView extends View implements OnZoomListener,
-		OnDoubleTapListener, OnGestureListener, OnScaleGestureListener {
+public class ZoomAndScrollImageView extends View implements OnGestureListener {
 
 	private static final String TAG = ZoomAndScrollImageView.class
 			.getSimpleName();
@@ -70,9 +69,7 @@ public class ZoomAndScrollImageView extends View implements OnZoomListener,
 
 	private Scroller scroller;
 	private GestureDetector gestureDetector;
-	private ScaleGestureDetector scaleGestureDetector;
 
-	private ZoomButtonsController zoomController;
 	private Matrix matrix;
 
 	private float currentX;
@@ -139,10 +136,6 @@ public class ZoomAndScrollImageView extends View implements OnZoomListener,
 		setFocusable(true);
 		scroller = new Scroller(context);
 		gestureDetector = new GestureDetector(context, this);
-		scaleGestureDetector = new ScaleGestureDetector(context, this);
-
-		zoomController = new ZoomButtonsController(this);
-		zoomController.setOnZoomListener(this);
 
 		matrix = new Matrix();
 		destination = new float[2];
@@ -274,44 +267,13 @@ public class ZoomAndScrollImageView extends View implements OnZoomListener,
 
 	private boolean zoomedIn = false;
 
-	@Override
-	public boolean onDoubleTap(MotionEvent e) {
 
-		float oldX, oldY;
-		oldX = currentX;
-		oldY = currentY;
-		currentX -= (e.getX() - getWidth() / 2) / scale;
-		currentY -= (e.getY() - getHeight() / 2) / scale;
-		//Log.v("wj","onDoubleTap currentY ="+currentY);
-
-		currentX = Math.max(getWidth() - contentWidth, Math.min(0, currentX));
-
-		//zoomedIn = !zoomedIn;
-
-		//changeZoom(zoomedIn ? 1 : -1, oldX, currentX, oldY, currentY);
-
-		return true;
-	}
-
-	@Override
-	public boolean onDoubleTapEvent(MotionEvent e) {
-		return false;
-	}
-
-	@Override
-	public boolean onSingleTapConfirmed(MotionEvent e) {
-		if (listener != null) {
-			listener.onSingleTab(e);
-		}
-		return true;
-	}
 
 	/*
 	 * {@link OnGestureListener}
 	 */
 	@Override
 	public boolean onDown(MotionEvent e) {
-		zoomController.setVisible(false);
 		return true;
 	}
 
@@ -333,7 +295,6 @@ public class ZoomAndScrollImageView extends View implements OnZoomListener,
 
 	@Override
 	public void onLongPress(MotionEvent e) {
-		zoomController.setVisible(true);
 	}
 
 	@Override
@@ -372,20 +333,6 @@ public class ZoomAndScrollImageView extends View implements OnZoomListener,
 		return false;
 	}
 
-	/*
-	 * {@link OnZoomListener}
-	 */
-	@Override
-	public void onVisibilityChanged(boolean visible) {
-	}
-
-	@Override
-	public void onZoom(boolean zoomIn) {
-		float toX = currentX;
-		float toY = currentY;
-		//changeZoom(zoomIn ? ZOOM_STEP : -ZOOM_STEP, currentX, toX, currentY,
-		//		toY);
-	}
 
 	public void changeZoom(float amount, float fromX, float toX, float fromY,
 			float toY) {
@@ -402,8 +349,6 @@ public class ZoomAndScrollImageView extends View implements OnZoomListener,
 			scale = Math.min(MAX_ZOOM, Math.max(MIN_ZOOM, scale));
 		}
 		Log.d(TAG, "After: " + scale);
-		zoomController.setZoomInEnabled(scale != MAX_ZOOM);
-		zoomController.setZoomOutEnabled(scale != MIN_ZOOM);
 		invalidate();
 	}
 
@@ -413,15 +358,13 @@ public class ZoomAndScrollImageView extends View implements OnZoomListener,
 	@Override
 	protected void onDetachedFromWindow() {
 		super.onDetachedFromWindow();
-		zoomController.setVisible(false);
 	}
 
 	@Override
 	public boolean onTouchEvent(MotionEvent ev) {
-		boolean h1 = scaleGestureDetector.onTouchEvent(ev);
 		boolean h2 = gestureDetector.onTouchEvent(ev);
 
-		return h1 || h2;
+		return h2;
 
 	}
 
@@ -707,50 +650,12 @@ public class ZoomAndScrollImageView extends View implements OnZoomListener,
 	}
 
 	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public boolean onScale(ScaleGestureDetector detector) {
-		// Log.i(TAG, "onScale, factor:" + detector.getScaleFactor());
-		float factor = detector.getScaleFactor();
-
-		scale *= factor;
-		setZoom(1.0f, false);
-		//setZoom(scale, true);
-		//Log.i(TAG, "onScale, " + scale + "(factor: +" + factor + ")");
-
-		return true;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public boolean onScaleBegin(ScaleGestureDetector detector) {
-		notifyScaleBegin();
-		Log.i(TAG, "onScale Begin");
-		return true;
-	}
-
-	/**
 	 * Notifies the beginning of the scaling to the listener
 	 */
 	private void notifyScaleBegin() {
 		if (listener != null) {
 			listener.onScaleBegin(this);
 		}
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void onScaleEnd(ScaleGestureDetector detector) {
-
-		notifyScaleEnd();
-		Log.i(TAG, "onScale End");
-		System.out.println("End scale: " + scale);
-
 	}
 
 	/**
