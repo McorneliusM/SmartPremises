@@ -80,10 +80,11 @@ public class MapViewActivity extends Activity {
 		}
 		myContext=getApplicationContext();
 		myWifiInfo=new WifiInformation();
+		myWifiInfo.tryWithDatabaseAndAlgorithm();
 
 		wifiReciever = new WifiScanReceiver(mainWifiObj,myContext,myWifiInfo);
 
-		mainWifiObj.startScan();
+
 
 		//***************important code Start registering and start wifi activities
 
@@ -138,6 +139,7 @@ public class MapViewActivity extends Activity {
 		restoreState();
 		show();
 
+		mainWifiObj.startScan();
 	}
 
 	protected void onPause() {
@@ -306,9 +308,15 @@ public class MapViewActivity extends Activity {
 		{
 			currentMarkerX = x;
 			currentMarkerY = y;
-			mapView.getCurrentActiveMarker().setMapXcord(currentMarkerX);
-			mapView.getCurrentActiveMarker().setMapYcord(currentMarkerY);
-			mapView.showLocation(mapView.getCurrentActiveMarker(), true);
+			if(mapView != null)
+			{
+				if(mapView.getCurrentActiveMarker() != null)
+				{
+					mapView.getCurrentActiveMarker().setMapXcord(currentMarkerX);
+					mapView.getCurrentActiveMarker().setMapYcord(currentMarkerY);
+					mapView.showLocation(mapView.getCurrentActiveMarker(), true);
+				}
+			}
 		}
 	}
 
