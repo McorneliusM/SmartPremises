@@ -19,10 +19,10 @@ public class FingerprintDatabase {
         myMeasurementPerLocationArray = new MeasurementPerLocation[inputNumOfLocations];
     }
 
-    public void fillUpEachMeasurementPerLocation(int index, String locationName, int inputNumOfWifiPoints)
+    public void fillUpEachMeasurementPerLocation(int index, String locationName, int inputNumOfWifiPoints, int x, int y)
     {
         // Giving name and how many wifi point in one location
-        myMeasurementPerLocationArray[index] = new MeasurementPerLocation(locationName, inputNumOfWifiPoints);
+        myMeasurementPerLocationArray[index] = new MeasurementPerLocation(locationName, inputNumOfWifiPoints, x, y);
 
     }
 

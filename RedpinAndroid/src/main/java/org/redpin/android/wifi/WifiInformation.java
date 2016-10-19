@@ -25,17 +25,20 @@ public class WifiInformation {
       wifiString=new String[1];
       wifiString[0]="Starting";
 
+      //----------------------------------------------------------------------------------------------------
+      //   TODO: remember to update the total number of location point for database
+      //----------------------------------------------------------------------------------------------------
+      fingerprintDB = new FingerprintDatabase(3);
       initializeFingerprintDb(fingerprintDB);
    }
 
    // Function to calculate signal strength accuracy per wifi reading
    private double signalContribution(double baseRssi, double measuredRssi) {
       //Possible RSSI range 0 to 100
-      double base = baseRssi;
       //Possible diff range 0 to 100
       double diff = Math.abs(baseRssi - measuredRssi);
       Log.i("#####FoongFoong#####",
-              "signalContribution(): base: " + base
+              "signalContribution(): base: " + baseRssi
                       + ", diff: " + diff);
 
       //Normalize to range of -1 to 1
@@ -52,7 +55,7 @@ public class WifiInformation {
    }
 
    // Function to calculate accuracy level per location
-   public int measurementAccuracyLevel(MeasurementPerLocation baseMeasurementPerLocation,
+   private int measurementAccuracyLevel(MeasurementPerLocation baseMeasurementPerLocation,
                                          MeasurementPerLocation currentMeasurementPerLocation) {
 
       double totalCredit = 0;
@@ -116,40 +119,6 @@ public class WifiInformation {
 
    public void updateInformation(List<ScanResult> wifiScanList) {
 
-      //----------------------------------------------------------------------------------------------------
-      //   TODO: move this code back to initializeFingerprintDb() later
-      //----------------------------------------------------------------------------------------------------
-      fingerprintDB = new FingerprintDatabase(3);
-
-      fingerprintDB.fillUpEachMeasurementPerLocation(0,"A1",3);
-      fingerprintDB.fillUpEachMeasurementPerLocation(1,"B1",3);
-      fingerprintDB.fillUpEachMeasurementPerLocation(2,"C1",3);
-
-
-      Log.i("wj", "initializeFingerprintDb part 1 complete ");
-
-      fingerprintDB.myMeasurementPerLocationArray[0].fillUpEachWifiInfoRow(0,"84:24:8d:40:84:00","M-Wireless", 45);
-      fingerprintDB.myMeasurementPerLocationArray[0].fillUpEachWifiInfoRow(1,"84:24:8d:40:4d:81","M-Guest", 63);
-      fingerprintDB.myMeasurementPerLocationArray[0].fillUpEachWifiInfoRow(2,"84:24:8d:40:68:91","M-Guest", 65);
-
-      Log.i("wj", "initializeFingerprintDb part 2 complete ");
-
-      fingerprintDB.myMeasurementPerLocationArray[1].fillUpEachWifiInfoRow(0,"84:24:8d:40:2f:11","M-Guest", 61);
-      fingerprintDB.myMeasurementPerLocationArray[1].fillUpEachWifiInfoRow(1,"84:24:8d:3f:be:b1","M-Guest", 59);
-      fingerprintDB.myMeasurementPerLocationArray[1].fillUpEachWifiInfoRow(2,"84:24:8d:3f:e2:51","M-Guest", 43);
-
-      Log.i("wj", "initializeFingerprintDb part 3 complete ");
-
-      fingerprintDB.myMeasurementPerLocationArray[2].fillUpEachWifiInfoRow(0,"84:24:8d:3f:d1:e0","M-Wireless", 74);
-      fingerprintDB.myMeasurementPerLocationArray[2].fillUpEachWifiInfoRow(1,"84:24:8d:40:f8:90","M-Wireless", 74);
-      fingerprintDB.myMeasurementPerLocationArray[2].fillUpEachWifiInfoRow(2,"84:24:8d:40:fe:c1","M-Guest", 60);
-      //----------------------------------------------------------------------------------------------------
-      //   END_OF_TODO: move this code back to initializeFingerprintDb() later
-      //----------------------------------------------------------------------------------------------------
-
-
-      // for debugging , u can use --> db.printFingerprintDb();
-
       currentScanList = wifiScanList;
       int currentScanListSize = currentScanList.size();
       wifiString=new String[wifiScanList.size()];
@@ -170,7 +139,7 @@ public class WifiInformation {
             count++;
          }
       }
-      MeasurementPerLocation currentMeasurementPerLocation = new MeasurementPerLocation("current",count);
+      MeasurementPerLocation currentMeasurementPerLocation = new MeasurementPerLocation("current",count, 0, 0);
       count = 0;
       for (i = 0; i < currentScanList.size(); i++) {
 
@@ -229,27 +198,24 @@ public class WifiInformation {
       Log.i("#####FoongFoong#####",
               "updateInformation(): Highest Accuracy Level: " + highestAccuracyLevel);
 
-      if (highAccuracyMeasurementPerLocation != null) {
+      //Only display if obj is not null and accuracy level more than half
+      if (highAccuracyMeasurementPerLocation != null && highestAccuracyLevel > 5000) {
          Log.i("#####FoongFoong#####",
                  "updateInformation(): Highest Accuracy Level Location Name: " + highAccuracyMeasurementPerLocation.name);
 
-         //---------------------------------------------------------------
-         // TODO: Show Location, temp, change later.
-         //---------------------------------------------------------------
+         MapViewActivity.setMarkerLocation(highAccuracyMeasurementPerLocation.xLocation, highAccuracyMeasurementPerLocation.yLocation);
+
          String locationString = highAccuracyMeasurementPerLocation.name;
          if (locationString.equals("A1")) {
-            MapViewActivity.setMarkerLocation(205*2, 8*2);
-            Log.i("#####FoongFoong#####", "updateInformation(): At A1: ");
+            Log.i("#####FoongFoong#####", "updateInformation(): At A1");
          } else if (locationString.equals("B1")) {
-            MapViewActivity.setMarkerLocation(297*2, 8*2);
-            Log.i("#####FoongFoong#####", "updateInformation(): At B1: ");
+            Log.i("#####FoongFoong#####", "updateInformation(): At B1");
          } else if (locationString.equals("C1")) {
-            MapViewActivity.setMarkerLocation(599*2, 50*2);
-            Log.i("#####FoongFoong#####", "updateInformation(): At C1: ");
+            Log.i("#####FoongFoong#####", "updateInformation(): At C1");
          } else {
             //to prove that it not work, point to E11
             MapViewActivity.setMarkerLocation(167*2, 412*2);
-            Log.i("#####FoongFoong#####", "updateInformation(): NOT MATCH... At E11: ");
+            Log.i("#####FoongFoong#####", "updateInformation(): NOT MATCH... At E11");
          }
          //---------------------------------------------------------------
          // END_OF_TODO: Show Location, temp, change later.
@@ -257,13 +223,32 @@ public class WifiInformation {
       }
    }
 
-   public void initializeFingerprintDb(FingerprintDatabase db)
+   public void initializeFingerprintDb(FingerprintDatabase fingerprintDB)
    {
       //---------------------------------------------------------------------------------------------
       // Initialize fingerprint database , store all hard-coded database information during this function
-      //------------------------------------------------------------------------------------------------
+      //-----------------------------------------------------------------------------------------------
+      fingerprintDB.fillUpEachMeasurementPerLocation(0,"A1",3, 205*2, 8*2);
+      fingerprintDB.fillUpEachMeasurementPerLocation(1,"B1",3, 297*2, 8*2);
+      fingerprintDB.fillUpEachMeasurementPerLocation(2,"C1",3, 599*2, 50*2);
 
+      Log.i("wj", "initializeFingerprintDb part 1 complete ");
 
+      fingerprintDB.myMeasurementPerLocationArray[0].fillUpEachWifiInfoRow(0,"84:24:8d:40:84:00","M-Wireless", 45);
+      fingerprintDB.myMeasurementPerLocationArray[0].fillUpEachWifiInfoRow(1,"84:24:8d:40:4d:81","M-Guest", 63);
+      fingerprintDB.myMeasurementPerLocationArray[0].fillUpEachWifiInfoRow(2,"84:24:8d:40:68:91","M-Guest", 65);
+
+      Log.i("wj", "initializeFingerprintDb part 2 complete ");
+
+      fingerprintDB.myMeasurementPerLocationArray[1].fillUpEachWifiInfoRow(0,"84:24:8d:40:2f:11","M-Guest", 61);
+      fingerprintDB.myMeasurementPerLocationArray[1].fillUpEachWifiInfoRow(1,"84:24:8d:3f:be:b1","M-Guest", 59);
+      fingerprintDB.myMeasurementPerLocationArray[1].fillUpEachWifiInfoRow(2,"84:24:8d:3f:e2:51","M-Guest", 43);
+
+      Log.i("wj", "initializeFingerprintDb part 3 complete ");
+
+      fingerprintDB.myMeasurementPerLocationArray[2].fillUpEachWifiInfoRow(0,"84:24:8d:3f:d1:e0","M-Wireless", 74);
+      fingerprintDB.myMeasurementPerLocationArray[2].fillUpEachWifiInfoRow(1,"84:24:8d:40:f8:90","M-Wireless", 74);
+      fingerprintDB.myMeasurementPerLocationArray[2].fillUpEachWifiInfoRow(2,"84:24:8d:40:fe:c1","M-Guest", 60);
    }
 
    public String[] getStringArray()

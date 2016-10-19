@@ -13,13 +13,18 @@ public class MeasurementPerLocation {
 
     public String name;
 
+    public int xLocation;
+    public int yLocation;
 
-    public MeasurementPerLocation(String inputName, int inputNumOfWifiPoints)
+
+    public MeasurementPerLocation(String inputName, int inputNumOfWifiPoints, int x, int y)
     {
         //Giving name of location, number of wifi access point scanned in this location
         name = inputName;
         numOfWifiPoints = inputNumOfWifiPoints;
         myWifiInfoRowArray = new WifiInfoRow[inputNumOfWifiPoints];
+        xLocation = x;
+        yLocation = y;
     }
 
     public void fillUpEachWifiInfoRow(int index,String inputBSSID,String inputSSID,int inputlevel)
