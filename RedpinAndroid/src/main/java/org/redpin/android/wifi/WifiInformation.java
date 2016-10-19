@@ -238,17 +238,17 @@ public class WifiInformation {
          //---------------------------------------------------------------
          String locationString = highAccuracyMeasurementPerLocation.name;
          if (locationString.equals("A1")) {
-            MapViewActivity.setMarkerLocation(205, 8);
+            MapViewActivity.setMarkerLocation(205*2, 8*2);
             Log.i("#####FoongFoong#####", "updateInformation(): At A1: ");
          } else if (locationString.equals("B1")) {
-            MapViewActivity.setMarkerLocation(297, 8);
+            MapViewActivity.setMarkerLocation(297*2, 8*2);
             Log.i("#####FoongFoong#####", "updateInformation(): At B1: ");
          } else if (locationString.equals("C1")) {
-            MapViewActivity.setMarkerLocation(599, 50);
+            MapViewActivity.setMarkerLocation(599*2, 50*2);
             Log.i("#####FoongFoong#####", "updateInformation(): At C1: ");
          } else {
             //to prove that it not work, point to E11
-            MapViewActivity.setMarkerLocation(167, 412);
+            MapViewActivity.setMarkerLocation(167*2, 412*2);
             Log.i("#####FoongFoong#####", "updateInformation(): NOT MATCH... At E11: ");
          }
          //---------------------------------------------------------------
