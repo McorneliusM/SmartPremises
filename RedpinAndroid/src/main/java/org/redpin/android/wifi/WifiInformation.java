@@ -28,7 +28,7 @@ public class WifiInformation {
       //----------------------------------------------------------------------------------------------------
       //   TODO: remember to update the total number of location point for database
       //----------------------------------------------------------------------------------------------------
-      fingerprintDB = new FingerprintDatabase(3);
+      fingerprintDB = new FingerprintDatabase(6);
       initializeFingerprintDb(fingerprintDB);
    }
 
@@ -199,7 +199,7 @@ public class WifiInformation {
               "updateInformation(): Highest Accuracy Level: " + highestAccuracyLevel);
 
       //Only display if obj is not null and accuracy level more than half
-      if (highAccuracyMeasurementPerLocation != null && highestAccuracyLevel > 5000) {
+      if (highAccuracyMeasurementPerLocation != null && highestAccuracyLevel > 6000) {
          Log.i("#####FoongFoong#####",
                  "updateInformation(): Highest Accuracy Level Location Name: " + highAccuracyMeasurementPerLocation.name);
 
@@ -231,6 +231,9 @@ public class WifiInformation {
       fingerprintDB.fillUpEachMeasurementPerLocation(0,"A1",3, 205*2, 8*2);
       fingerprintDB.fillUpEachMeasurementPerLocation(1,"B1",3, 297*2, 8*2);
       fingerprintDB.fillUpEachMeasurementPerLocation(2,"C1",3, 599*2, 50*2);
+      fingerprintDB.fillUpEachMeasurementPerLocation(3,"E7",6, 167*2, 265*2);
+      fingerprintDB.fillUpEachMeasurementPerLocation(4,"E9",6, 167*2, 339*2);
+      fingerprintDB.fillUpEachMeasurementPerLocation(5,"E11",6, 167*2, 412*2);
 
       Log.i("wj", "initializeFingerprintDb part 1 complete ");
 
@@ -249,6 +252,30 @@ public class WifiInformation {
       fingerprintDB.myMeasurementPerLocationArray[2].fillUpEachWifiInfoRow(0,"84:24:8d:3f:d1:e0","M-Wireless", 74);
       fingerprintDB.myMeasurementPerLocationArray[2].fillUpEachWifiInfoRow(1,"84:24:8d:40:f8:90","M-Wireless", 74);
       fingerprintDB.myMeasurementPerLocationArray[2].fillUpEachWifiInfoRow(2,"84:24:8d:40:fe:c1","M-Guest", 60);
+
+      // wifi info row for E7
+      fingerprintDB.myMeasurementPerLocationArray[3].fillUpEachWifiInfoRow(0,"84:24:8d:3f:d1:e0","M-Wireless", 62);
+      fingerprintDB.myMeasurementPerLocationArray[3].fillUpEachWifiInfoRow(1,"84:24:8d:40:d1:c0","M-Wireless", 50);
+      fingerprintDB.myMeasurementPerLocationArray[3].fillUpEachWifiInfoRow(2,"84:24:8d:40:d8:f0","M-Wireless", 64);
+      fingerprintDB.myMeasurementPerLocationArray[3].fillUpEachWifiInfoRow(3,"84:24:8d:3f:d1:e1","M-Guest", 62);
+      fingerprintDB.myMeasurementPerLocationArray[3].fillUpEachWifiInfoRow(4,"84:24:8d:40:d1:c1","M-Guest", 50);
+      fingerprintDB.myMeasurementPerLocationArray[3].fillUpEachWifiInfoRow(5,"84:24:8d:40:d8:f1","M-Guest", 64);
+
+      // wifi info row for E9
+      fingerprintDB.myMeasurementPerLocationArray[4].fillUpEachWifiInfoRow(0,"84:24:8d:3f:d1:e0","M-Wireless", 66);
+      fingerprintDB.myMeasurementPerLocationArray[4].fillUpEachWifiInfoRow(1,"84:24:8d:40:4d:80","M-Guest", 67);
+      fingerprintDB.myMeasurementPerLocationArray[4].fillUpEachWifiInfoRow(2,"84:24:8d:40:d8:f0","M-Guest", 59);
+      fingerprintDB.myMeasurementPerLocationArray[4].fillUpEachWifiInfoRow(3,"84:24:8d:3f:d1:e1","M-Wireless", 66);
+      fingerprintDB.myMeasurementPerLocationArray[4].fillUpEachWifiInfoRow(4,"84:24:8d:40:6a:21","M-Guest", 47);
+      fingerprintDB.myMeasurementPerLocationArray[4].fillUpEachWifiInfoRow(5,"84:24:8d:40:d1:c1","M-Guest", 40);
+
+      // wifi info row for E11
+      fingerprintDB.myMeasurementPerLocationArray[5].fillUpEachWifiInfoRow(0,"84:24:8d:3f:be:b0","M-Wireless", 72);
+      fingerprintDB.myMeasurementPerLocationArray[5].fillUpEachWifiInfoRow(1,"84:24:8d:40:4d:80","M-Wireless", 67);
+      fingerprintDB.myMeasurementPerLocationArray[5].fillUpEachWifiInfoRow(2,"84:24:8d:3f:dd:90","M-Wireless", 75);
+      fingerprintDB.myMeasurementPerLocationArray[5].fillUpEachWifiInfoRow(3,"84:24:8d:3f:be:b1","M-Guest", 71);
+      fingerprintDB.myMeasurementPerLocationArray[5].fillUpEachWifiInfoRow(4,"84:24:8d:40:4d:81","M-Guest", 68);
+      fingerprintDB.myMeasurementPerLocationArray[5].fillUpEachWifiInfoRow(5,"84:24:8d:40:6a:21","M-Guest", 52);
    }
 
    public String[] getStringArray()

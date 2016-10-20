@@ -150,6 +150,8 @@ public class MapViewActivity extends Activity {
 	}
 
 	protected void onResume() {
+		mapView.invalidate();
+
 		registerReceiver(wifiReciever, new IntentFilter(
 				WifiManager.SCAN_RESULTS_AVAILABLE_ACTION));
 
