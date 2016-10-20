@@ -80,11 +80,10 @@ public class MapViewActivity extends Activity {
 		}
 		myContext=getApplicationContext();
 		myWifiInfo=new WifiInformation();
-		myWifiInfo.tryWithDatabaseAndAlgorithm();
 
 		wifiReciever = new WifiScanReceiver(mainWifiObj,myContext,myWifiInfo);
 
-
+		mainWifiObj.startScan();
 
 		//***************important code Start registering and start wifi activities
 
@@ -138,8 +137,6 @@ public class MapViewActivity extends Activity {
 
 		restoreState();
 		show();
-
-		mainWifiObj.startScan();
 	}
 
 	protected void onPause() {
