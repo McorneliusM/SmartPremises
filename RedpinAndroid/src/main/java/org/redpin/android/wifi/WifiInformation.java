@@ -16,6 +16,7 @@ public class WifiInformation {
    private static double ID_POS_CONTRIBUTION = 1;
    private static double SIGNAL_CONTRIBUTION = 1;
    private static double FACTOR = 10000;
+   private String currentAP = "";
 
    private FingerprintDatabase fingerprintDB;
 
@@ -62,7 +63,7 @@ public class WifiInformation {
       double account = 0;
       Boolean matchBestBSSID = false;
 
-      if (currentMeasurementPerLocation.bestBSSID == baseMeasurementPerLocation.bestBSSID){
+      if (currentMeasurementPerLocation.bestBSSID.equals(baseMeasurementPerLocation.bestBSSID)){
          matchBestBSSID = true;
       }
 
@@ -104,6 +105,11 @@ public class WifiInformation {
          }
       }
 
+      Log.i("!!!!!!!!!!!!!!!!!!!",
+              "measurementAccuracyLevel(): currentMeasurementPerLocation.bestBSSID: " + currentMeasurementPerLocation.bestBSSID
+                      + ", baseMeasurementPerLocation.bestBSSID: " + baseMeasurementPerLocation.bestBSSID
+                      + ", account: " + account);
+
       totalCredit += baseMeasurementPerLocation.numOfWifiPoints * ID_POS_CONTRIBUTION;
       totalCredit += baseMeasurementPerLocation.numOfWifiPoints * SIGNAL_CONTRIBUTION;
 
@@ -144,7 +150,7 @@ public class WifiInformation {
       int bestMeasuredSignalStrength = 100; //assuming 100 is the worse signal strength that is impossible to get
       String bestMeasuredBSSID = "";
       for (i = 0; i < currentScanList.size(); i++) {
-         if (currentScanList.get(i).SSID.equals("M-Wireless")  || currentScanList.get(i).SSID.equals("M-Guest")) {
+         if (currentScanList.get(i).SSID.equals("M-Guest")) {
             count++;
             if (Math.abs(currentScanList.get(i).level) < bestMeasuredSignalStrength) {
                //lower the level, better the signal strength
@@ -156,8 +162,7 @@ public class WifiInformation {
       MeasurementPerLocation currentMeasurementPerLocation = new MeasurementPerLocation("current",count, 0, 0, bestMeasuredSignalStrength, bestMeasuredBSSID);
       count = 0;
       for (i = 0; i < currentScanList.size(); i++) {
-
-         if (currentScanList.get(i).SSID.equals("M-Wireless")  || currentScanList.get(i).SSID.equals("M-Guest")) {
+         if (currentScanList.get(i).SSID.equals("M-Guest")) {
             currentMeasurementPerLocation.fillUpEachWifiInfoRow(count, currentScanList.get(i).BSSID, currentScanList.get(i).SSID, Math.abs(currentScanList.get(i).level));
             count++;
             Log.i("#####FoongFoong#####",
@@ -234,9 +239,6 @@ public class WifiInformation {
             MapViewActivity.setMarkerLocation(167*2, 412*2);
             Log.i("#####FoongFoong#####", "updateInformation(): NOT MATCH... At E11");
          }
-         //---------------------------------------------------------------
-         // END_OF_TODO: Show Location, temp, change later.
-         //---------------------------------------------------------------
       }
    }
 
