@@ -56,43 +56,50 @@ public class WifiInformation {
 
    // Function to calculate accuracy level per location
    private int measurementAccuracyLevel(MeasurementPerLocation baseMeasurementPerLocation,
-                                         MeasurementPerLocation currentMeasurementPerLocation) {
+                                        MeasurementPerLocation currentMeasurementPerLocation) {
 
       double totalCredit = 0;
       double account = 0;
+      Boolean matchBestBSSID = false;
 
-      for (int i = 0; i < baseMeasurementPerLocation.numOfWifiPoints; i++) {
-         WifiInfoRow baseWifiRow = baseMeasurementPerLocation.myWifiInfoRowArray[i];
-         for (int j = 0; j < currentMeasurementPerLocation.numOfWifiPoints; j++) {
-            WifiInfoRow currentWifiRow = currentMeasurementPerLocation.myWifiInfoRowArray[j];
+      if (currentMeasurementPerLocation.bestBSSID == baseMeasurementPerLocation.bestBSSID){
+         matchBestBSSID = true;
+      }
 
-            Log.i("#####FoongFoong#####",
-                    "measurementAccuracyLevel(): baseWifiRow.BSSID: " + baseWifiRow.BSSID
-                            + ", baseWifiRow.SSID: " + baseWifiRow.SSID
-                            + ", baseWifiRow.level: " + baseWifiRow.level);
-            if (currentWifiRow != null) {
-               Log.i("#####FoongFoong#####",
-                       "measurementAccuracyLevel(): currentWifiRow.BSSID: " + currentWifiRow.BSSID
-                               + ", currentWifiRow.SSID: " + currentWifiRow.SSID
-                               + ", currentWifiRow.level: " + currentWifiRow.level);
-            } else {
-               Log.i("#####FoongFoong#####",
-                       "measurementAccuracyLevel(): currentWifiRow == NULL ");
-            }
+      if (matchBestBSSID) {
+         for (int i = 0; i < baseMeasurementPerLocation.numOfWifiPoints; i++) {
+            WifiInfoRow baseWifiRow = baseMeasurementPerLocation.myWifiInfoRowArray[i];
+            for (int j = 0; j < currentMeasurementPerLocation.numOfWifiPoints; j++) {
+               WifiInfoRow currentWifiRow = currentMeasurementPerLocation.myWifiInfoRowArray[j];
 
-            //bssid match: add ID contribution and signal strength
-            if (baseWifiRow != null && baseWifiRow.BSSID != null && currentWifiRow != null && currentWifiRow.BSSID != null
-                    && baseWifiRow.BSSID.equals(currentWifiRow.BSSID)) {
                Log.i("#####FoongFoong#####",
-                       "measurementAccuracyLevel(): MATCH baseWifiRow.BSSID: " + baseWifiRow.BSSID
+                       "measurementAccuracyLevel(): baseWifiRow.BSSID: " + baseWifiRow.BSSID
                                + ", baseWifiRow.SSID: " + baseWifiRow.SSID
                                + ", baseWifiRow.level: " + baseWifiRow.level);
-               Log.i("#####FoongFoong#####",
-                       "measurementAccuracyLevel(): MATCH currentWifiRow.BSSID: " + currentWifiRow.BSSID
-                               + ", currentWifiRow.SSID: " + currentWifiRow.SSID
-                               + ", currentWifiRow.level: " + currentWifiRow.level);
-               account += ID_POS_CONTRIBUTION;
-               account += signalContribution(baseWifiRow.level, currentWifiRow.level);
+               if (currentWifiRow != null) {
+                  Log.i("#####FoongFoong#####",
+                          "measurementAccuracyLevel(): currentWifiRow.BSSID: " + currentWifiRow.BSSID
+                                  + ", currentWifiRow.SSID: " + currentWifiRow.SSID
+                                  + ", currentWifiRow.level: " + currentWifiRow.level);
+               } else {
+                  Log.i("#####FoongFoong#####",
+                          "measurementAccuracyLevel(): currentWifiRow == NULL ");
+               }
+
+               //bssid match: add ID contribution and signal strength
+               if (baseWifiRow != null && baseWifiRow.BSSID != null && currentWifiRow != null && currentWifiRow.BSSID != null
+                       && baseWifiRow.BSSID.equals(currentWifiRow.BSSID)) {
+                  Log.i("#####FoongFoong#####",
+                          "measurementAccuracyLevel(): MATCH baseWifiRow.BSSID: " + baseWifiRow.BSSID
+                                  + ", baseWifiRow.SSID: " + baseWifiRow.SSID
+                                  + ", baseWifiRow.level: " + baseWifiRow.level);
+                  Log.i("#####FoongFoong#####",
+                          "measurementAccuracyLevel(): MATCH currentWifiRow.BSSID: " + currentWifiRow.BSSID
+                                  + ", currentWifiRow.SSID: " + currentWifiRow.SSID
+                                  + ", currentWifiRow.level: " + currentWifiRow.level);
+                  account += ID_POS_CONTRIBUTION;
+                  account += signalContribution(baseWifiRow.level, currentWifiRow.level);
+               }
             }
          }
       }
@@ -134,12 +141,19 @@ public class WifiInformation {
       //   Getting current wifi point and data into MeasurementPerLocation
       //----------------------------------------------------------------------------------------------------
       int count = 0;
+      int bestMeasuredSignalStrength = 100; //assuming 100 is the worse signal strength that is impossible to get
+      String bestMeasuredBSSID = "";
       for (i = 0; i < currentScanList.size(); i++) {
          if (currentScanList.get(i).SSID.equals("M-Wireless")  || currentScanList.get(i).SSID.equals("M-Guest")) {
             count++;
+            if (Math.abs(currentScanList.get(i).level) < bestMeasuredSignalStrength) {
+               //lower the level, better the signal strength
+               bestMeasuredSignalStrength = Math.abs(currentScanList.get(i).level);
+               bestMeasuredBSSID = currentScanList.get(i).BSSID;
+            }
          }
       }
-      MeasurementPerLocation currentMeasurementPerLocation = new MeasurementPerLocation("current",count, 0, 0);
+      MeasurementPerLocation currentMeasurementPerLocation = new MeasurementPerLocation("current",count, 0, 0, bestMeasuredSignalStrength, bestMeasuredBSSID);
       count = 0;
       for (i = 0; i < currentScanList.size(); i++) {
 
@@ -154,7 +168,9 @@ public class WifiInformation {
       }
       Log.i("#####FoongFoong#####",
               "updateInformation(): currentMeasurementPerLocation.numOfWifiPoints: " + currentMeasurementPerLocation.numOfWifiPoints
-               + " count: " + count);
+                      + " count: " + count
+                      + " bestMeasuredSignalStrength: " + bestMeasuredSignalStrength
+                      + " bestMeasuredBSSID: " + bestMeasuredBSSID);
 
       // for logging , u can use --> currentMeasurementPerLocation.printWifiInfoRow();
 
@@ -228,12 +244,12 @@ public class WifiInformation {
       //---------------------------------------------------------------------------------------------
       // Initialize fingerprint database , store all hard-coded database information during this function
       //-----------------------------------------------------------------------------------------------
-      fingerprintDB.fillUpEachMeasurementPerLocation(0,"A1",3, 205*2, 8*2);
-      fingerprintDB.fillUpEachMeasurementPerLocation(1,"B1",3, 297*2, 8*2);
-      fingerprintDB.fillUpEachMeasurementPerLocation(2,"C1",3, 599*2, 50*2);
-      fingerprintDB.fillUpEachMeasurementPerLocation(3,"E7",6, 167*2, 265*2);
-      fingerprintDB.fillUpEachMeasurementPerLocation(4,"E9",6, 167*2, 339*2);
-      fingerprintDB.fillUpEachMeasurementPerLocation(5,"E11",6, 167*2, 412*2);
+      fingerprintDB.fillUpEachMeasurementPerLocation(0,"A1",3, 205*2, 8*2, 45, "84:24:8d:40:84:00");
+      fingerprintDB.fillUpEachMeasurementPerLocation(1,"B1",3, 397*2, 8*2, 43, "84:24:8d:3f:e2:51");
+      fingerprintDB.fillUpEachMeasurementPerLocation(2,"C1",3, 599*2, 50*2, 60, "84:24:8d:40:fe:c1");
+      fingerprintDB.fillUpEachMeasurementPerLocation(3,"E7",6, 167*2, 265*2, 50, "84:24:8d:40:d1:c0");
+      fingerprintDB.fillUpEachMeasurementPerLocation(4,"E9",6, 167*2, 339*2, 47, "84:24:8d:40:6a:21");
+      fingerprintDB.fillUpEachMeasurementPerLocation(5,"E11",6, 167*2, 412*2, 52, "84:24:8d:40:6a:21");
 
       Log.i("wj", "initializeFingerprintDb part 1 complete ");
 
