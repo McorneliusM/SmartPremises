@@ -41,16 +41,6 @@
 	</org.redpin.android.ui.mapview.MapView>
 	<ImageButton android:id="@+id/locate_button" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/menu_locate_me_black" android:layout_alignBottom="@+id/map_view_component"></ImageButton>
 
-	<Button
-		style="?android:attr/buttonStyleSmall"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:text="Scan"
-		android:id="@+id/scan_button"
-		android:layout_above="@+id/locate_button"
-		android:layout_alignParentLeft="true"
-		android:layout_marginBottom="23dp" />
-
 
 </RelativeLayout>
 
