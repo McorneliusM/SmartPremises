@@ -247,29 +247,40 @@ public class WifiInformation {
       //---------------------------------------------------------------------------------------------
       // Initialize fingerprint database , store all hard-coded database information during this function
       //-----------------------------------------------------------------------------------------------
-      fingerprintDB.fillUpEachMeasurementPerLocation(0,"A1",3, 205*2, 8*2, 45, "84:24:8d:40:84:00");
-      fingerprintDB.fillUpEachMeasurementPerLocation(1,"B1",3, 397*2, 8*2, 43, "84:24:8d:3f:e2:51");
-      fingerprintDB.fillUpEachMeasurementPerLocation(2,"C1",3, 599*2, 50*2, 60, "84:24:8d:3f:e2:51");
-      fingerprintDB.fillUpEachMeasurementPerLocation(3,"E7",6, 167*2, 265*2, 50, "84:24:8d:40:d1:c1");
-      fingerprintDB.fillUpEachMeasurementPerLocation(4,"E9",6, 167*2, 339*2, 40, "84:24:8d:40:d1:c1");
-      fingerprintDB.fillUpEachMeasurementPerLocation(5,"E11",6, 167*2, 412*2, 52, "84:24:8d:40:6a:21");
+      fingerprintDB.fillUpEachMeasurementPerLocation(0, "A1", 3, 205 * 2, 8 * 2, 45, "84:24:8d:40:84:00");
+      fingerprintDB.fillUpEachMeasurementPerLocation(1, "B1", 3, 397 * 2, 8 * 2, 43, "84:24:8d:3f:e2:51");
+      fingerprintDB.fillUpEachMeasurementPerLocation(2, "C1", 3, 599 * 2, 50 * 2, 60, "84:24:8d:3f:e2:51");
+      fingerprintDB.fillUpEachMeasurementPerLocation(3, "E7", 6, 167 * 2, 265 * 2, 50, "84:24:8d:40:d1:c1");
+      fingerprintDB.fillUpEachMeasurementPerLocation(4, "E9", 6, 167 * 2, 339 * 2, 40, "84:24:8d:40:d1:c1");
+      fingerprintDB.fillUpEachMeasurementPerLocation(5, "E11", 6, 167 * 2, 412 * 2, 52, "84:24:8d:40:6a:21");
+
+      //zhiwei newly added hardcoded database
+      fingerprintDB.fillUpEachMeasurementPerLocation(6,"D1",2, 215*2, 389*2, 54, "84:24:8d:40:d1:c1");
+      fingerprintDB.fillUpEachMeasurementPerLocation(7,"D3",2, 311*2, 389*2, 63, "84:24:8d:40:d1:c1");
+      fingerprintDB.fillUpEachMeasurementPerLocation(8,"D5",3, 407*2, 389*2, 49, "84:24:8d:3f:dd:91");
+      fingerprintDB.fillUpEachMeasurementPerLocation(9,"D7",4, 503*2, 389*2, 55, "84:24:8d:3f:dd:91");
+      fingerprintDB.fillUpEachMeasurementPerLocation(10, "C1", 2, 599 * 2, 50 * 2, 65, "84:24:8d:3f:e2:51");
+      fingerprintDB.fillUpEachMeasurementPerLocation(11, "C3", 3, 599 * 2, 135 * 2, 58, "84:24:8d:40:fe:c1");
+      fingerprintDB.fillUpEachMeasurementPerLocation(12, "C5", 2, 599 * 2, 220 * 2, 61, "84:24:8d:40:fe:c1");
+      fingerprintDB.fillUpEachMeasurementPerLocation(13, "C7", 2, 599 * 2, 304 * 2, 65, "84:24:8d:3f:dd:91");
+
 
       Log.i("wj", "initializeFingerprintDb part 1 complete ");
 
-      fingerprintDB.myMeasurementPerLocationArray[0].fillUpEachWifiInfoRow(0,"84:24:8d:40:84:00","M-Wireless", 45);
-      fingerprintDB.myMeasurementPerLocationArray[0].fillUpEachWifiInfoRow(1,"84:24:8d:40:4d:81","M-Guest", 63);
+      fingerprintDB.myMeasurementPerLocationArray[0].fillUpEachWifiInfoRow(0, "84:24:8d:40:84:00", "M-Wireless", 45);
+      fingerprintDB.myMeasurementPerLocationArray[0].fillUpEachWifiInfoRow(1, "84:24:8d:40:4d:81", "M-Guest", 63);
       fingerprintDB.myMeasurementPerLocationArray[0].fillUpEachWifiInfoRow(2,"84:24:8d:40:68:91","M-Guest", 65);
 
       Log.i("wj", "initializeFingerprintDb part 2 complete ");
 
       fingerprintDB.myMeasurementPerLocationArray[1].fillUpEachWifiInfoRow(0,"84:24:8d:40:2f:11","M-Guest", 61);
-      fingerprintDB.myMeasurementPerLocationArray[1].fillUpEachWifiInfoRow(1,"84:24:8d:3f:be:b1","M-Guest", 59);
+      fingerprintDB.myMeasurementPerLocationArray[1].fillUpEachWifiInfoRow(1, "84:24:8d:3f:be:b1", "M-Guest", 59);
       fingerprintDB.myMeasurementPerLocationArray[1].fillUpEachWifiInfoRow(2,"84:24:8d:3f:e2:51","M-Guest", 43);
 
       Log.i("wj", "initializeFingerprintDb part 3 complete ");
 
       fingerprintDB.myMeasurementPerLocationArray[2].fillUpEachWifiInfoRow(0,"84:24:8d:3f:d1:e0","M-Wireless", 74);
-      fingerprintDB.myMeasurementPerLocationArray[2].fillUpEachWifiInfoRow(1,"84:24:8d:40:f8:90","M-Wireless", 74);
+      fingerprintDB.myMeasurementPerLocationArray[2].fillUpEachWifiInfoRow(1, "84:24:8d:40:f8:90", "M-Wireless", 74);
       fingerprintDB.myMeasurementPerLocationArray[2].fillUpEachWifiInfoRow(2,"84:24:8d:3f:e2:51","M-Guest", 60);
 
       // wifi info row for E7
@@ -291,10 +302,50 @@ public class WifiInformation {
       // wifi info row for E11
       fingerprintDB.myMeasurementPerLocationArray[5].fillUpEachWifiInfoRow(0,"84:24:8d:3f:be:b0","M-Wireless", 72);
       fingerprintDB.myMeasurementPerLocationArray[5].fillUpEachWifiInfoRow(1,"84:24:8d:40:4d:80","M-Wireless", 67);
-      fingerprintDB.myMeasurementPerLocationArray[5].fillUpEachWifiInfoRow(2,"84:24:8d:3f:dd:90","M-Wireless", 75);
-      fingerprintDB.myMeasurementPerLocationArray[5].fillUpEachWifiInfoRow(3,"84:24:8d:3f:be:b1","M-Guest", 71);
-      fingerprintDB.myMeasurementPerLocationArray[5].fillUpEachWifiInfoRow(4,"84:24:8d:40:4d:81","M-Guest", 68);
-      fingerprintDB.myMeasurementPerLocationArray[5].fillUpEachWifiInfoRow(5,"84:24:8d:40:6a:21","M-Guest", 52);
+      fingerprintDB.myMeasurementPerLocationArray[5].fillUpEachWifiInfoRow(2, "84:24:8d:3f:dd:90", "M-Wireless", 75);
+      fingerprintDB.myMeasurementPerLocationArray[5].fillUpEachWifiInfoRow(3, "84:24:8d:3f:be:b1", "M-Guest", 71);
+      fingerprintDB.myMeasurementPerLocationArray[5].fillUpEachWifiInfoRow(4, "84:24:8d:40:4d:81", "M-Guest", 68);
+      fingerprintDB.myMeasurementPerLocationArray[5].fillUpEachWifiInfoRow(5, "84:24:8d:40:6a:21", "M-Guest", 52);
+
+
+      // wifi info row for D1
+      fingerprintDB.myMeasurementPerLocationArray[6].fillUpEachWifiInfoRow(0, "84:24:8d:40:d1:c1", "M-Guest", 54);
+      fingerprintDB.myMeasurementPerLocationArray[6].fillUpEachWifiInfoRow(1, "84:24:8d:40:f8:91", "M-Guest", 0);
+
+      // wifi info row for D3
+      fingerprintDB.myMeasurementPerLocationArray[7].fillUpEachWifiInfoRow(0, "84:24:8d:40:d1:c1", "M-Guest", 63);
+      fingerprintDB.myMeasurementPerLocationArray[7].fillUpEachWifiInfoRow(1, "84:24:8d:40:f8:91", "M-Guest", 0);
+
+      // wifi info row for D5
+      fingerprintDB.myMeasurementPerLocationArray[8].fillUpEachWifiInfoRow(0, "84:24:8d:3f:be:b1", "M-Guest", 0);
+      fingerprintDB.myMeasurementPerLocationArray[8].fillUpEachWifiInfoRow(1, "84:24:8d:3f:dd:91", "M-Guest", 49);
+      fingerprintDB.myMeasurementPerLocationArray[8].fillUpEachWifiInfoRow(2, "84:24:8d:40:f8:91", "M-Guest", 0);
+
+      // wifi info row for D7
+      fingerprintDB.myMeasurementPerLocationArray[9].fillUpEachWifiInfoRow(0, "84:24:8d:3f:be:b1", "M-Guest", 0);
+      fingerprintDB.myMeasurementPerLocationArray[9].fillUpEachWifiInfoRow(1, "84:24:8d:3f:dd:91", "M-Guest", 55);
+      fingerprintDB.myMeasurementPerLocationArray[9].fillUpEachWifiInfoRow(2, "84:24:8d:40:d8:f1", "M-Guest", 0);
+      fingerprintDB.myMeasurementPerLocationArray[9].fillUpEachWifiInfoRow(3, "84:24:8d:40:f8:91", "M-Guest", 0);
+
+
+      // wifi info row for C1
+      fingerprintDB.myMeasurementPerLocationArray[10].fillUpEachWifiInfoRow(0, "84:24:8d:40:d1:c1", "M-Guest", 0);
+      fingerprintDB.myMeasurementPerLocationArray[10].fillUpEachWifiInfoRow(1, "84:24:8d:3f:e2:51", "M-Guest", 65);
+
+      // wifi info row for C3
+      fingerprintDB.myMeasurementPerLocationArray[11].fillUpEachWifiInfoRow(0, "84:24:8d:40:d1:c1", "M-Guest", 0);
+      fingerprintDB.myMeasurementPerLocationArray[11].fillUpEachWifiInfoRow(1, "84:24:8d:3f:be:b1", "M-Guest", 0);
+      fingerprintDB.myMeasurementPerLocationArray[11].fillUpEachWifiInfoRow(2, "84:24:8d:40:fe:c1", "M-Guest", 58);
+
+      // wifi info row for C5
+      fingerprintDB.myMeasurementPerLocationArray[12].fillUpEachWifiInfoRow(0, "84:24:8d:3f:be:b1", "M-Guest", 0);
+      fingerprintDB.myMeasurementPerLocationArray[12].fillUpEachWifiInfoRow(1, "84:24:8d:40:fe:c1", "M-Guest", 61);
+
+      // wifi info row for C7
+      fingerprintDB.myMeasurementPerLocationArray[13].fillUpEachWifiInfoRow(0, "84:24:8d:3f:be:b1", "M-Guest", 0);
+      fingerprintDB.myMeasurementPerLocationArray[13].fillUpEachWifiInfoRow(1, "84:24:8d:3f:dd:91", "M-Guest", 65);
+
+
    }
 
    public String[] getStringArray()
