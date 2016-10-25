@@ -29,7 +29,7 @@ public class WifiInformation {
       //----------------------------------------------------------------------------------------------------
       //   TODO: remember to update the total number of location point for database
       //----------------------------------------------------------------------------------------------------
-      fingerprintDB = new FingerprintDatabase(6);
+      fingerprintDB = new FingerprintDatabase(14);
       initializeFingerprintDb(fingerprintDB);
    }
 
