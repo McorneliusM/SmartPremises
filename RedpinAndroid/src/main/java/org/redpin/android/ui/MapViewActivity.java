@@ -110,6 +110,8 @@ public class MapViewActivity extends Activity {
 		mapView.showMap(null, getApplicationContext());
 		mapView.setModifiable(true);
 
+		final Intent starterIntent = getIntent();
+
 		locateButton = (ImageButton) findViewById(R.id.locate_button);
 		locateButton.setOnClickListener(new View.OnClickListener() {
 
@@ -119,6 +121,9 @@ public class MapViewActivity extends Activity {
 				int x = rand.nextInt(1000);
 				int y = rand.nextInt(1000);
 				MapViewActivity.setMarkerLocation(x, y);
+
+				finish();
+				startActivity(starterIntent);
 			}
 		});
 
