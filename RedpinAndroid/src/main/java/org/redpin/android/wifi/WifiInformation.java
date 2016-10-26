@@ -62,6 +62,8 @@ public class WifiInformation {
       double totalCredit = 0;
       double account = 0;
       Boolean matchBestBSSID = false;
+      Boolean zeroLevelBaseWifi = false;
+      Boolean matchZeroLevelBSSID = false;
 
       if (currentMeasurementPerLocation.bestBSSID.equals(baseMeasurementPerLocation.bestBSSID)){
          matchBestBSSID = true;
@@ -69,8 +71,16 @@ public class WifiInformation {
 
       if (matchBestBSSID) {
          for (int i = 0; i < baseMeasurementPerLocation.numOfWifiPoints; i++) {
+            //start of base's for loop
             WifiInfoRow baseWifiRow = baseMeasurementPerLocation.myWifiInfoRowArray[i];
+            if (baseWifiRow != null && baseWifiRow.level == 0) {
+               zeroLevelBaseWifi = true;
+            } else {
+               zeroLevelBaseWifi = false;
+            }
+            matchZeroLevelBSSID = false;
             for (int j = 0; j < currentMeasurementPerLocation.numOfWifiPoints; j++) {
+               //start of measured's for loop
                WifiInfoRow currentWifiRow = currentMeasurementPerLocation.myWifiInfoRowArray[j];
 
                Log.i("#####FoongFoong#####",
@@ -90,18 +100,36 @@ public class WifiInformation {
                //bssid match: add ID contribution and signal strength
                if (baseWifiRow != null && baseWifiRow.BSSID != null && currentWifiRow != null && currentWifiRow.BSSID != null
                        && baseWifiRow.BSSID.equals(currentWifiRow.BSSID)) {
-                  Log.i("#####FoongFoong#####",
-                          "measurementAccuracyLevel(): MATCH baseWifiRow.BSSID: " + baseWifiRow.BSSID
-                                  + ", baseWifiRow.SSID: " + baseWifiRow.SSID
-                                  + ", baseWifiRow.level: " + baseWifiRow.level);
-                  Log.i("#####FoongFoong#####",
-                          "measurementAccuracyLevel(): MATCH currentWifiRow.BSSID: " + currentWifiRow.BSSID
-                                  + ", currentWifiRow.SSID: " + currentWifiRow.SSID
-                                  + ", currentWifiRow.level: " + currentWifiRow.level);
-                  account += ID_POS_CONTRIBUTION;
-                  account += signalContribution(baseWifiRow.level, currentWifiRow.level);
+                  //bssid match:
+                  if (zeroLevelBaseWifi) {
+                     matchZeroLevelBSSID = true;
+                     //exit measured's for loop
+                     break;
+                  } else {
+                     Log.i("#####FoongFoong#####",
+                             "measurementAccuracyLevel(): MATCH baseWifiRow.BSSID: " + baseWifiRow.BSSID
+                                     + ", baseWifiRow.SSID: " + baseWifiRow.SSID
+                                     + ", baseWifiRow.level: " + baseWifiRow.level);
+                     Log.i("#####FoongFoong#####",
+                             "measurementAccuracyLevel(): MATCH currentWifiRow.BSSID: " + currentWifiRow.BSSID
+                                     + ", currentWifiRow.SSID: " + currentWifiRow.SSID
+                                     + ", currentWifiRow.level: " + currentWifiRow.level);
+                     account += ID_POS_CONTRIBUTION;
+                     account += signalContribution(baseWifiRow.level, currentWifiRow.level);
+                  }
+               }
+               //end of measured's for loop
+            }
+            //back to base's for loop
+            if (zeroLevelBaseWifi) {
+               if (!matchZeroLevelBSSID) {
+                  //there is zero level wifi in database, but not found the BSSID in measured data
+                  //reset account to 0, exit the entire for loop
+                  account = 0;
+                  break;
                }
             }
+            //end of base's for loop
          }
       }
 
