@@ -141,8 +141,9 @@ public class WifiInformation {
                       + ", baseMeasurementPerLocation.bestBSSID: " + baseMeasurementPerLocation.bestBSSID
                       + ", account: " + account);
 
-      totalCredit += baseMeasurementPerLocation.numOfWifiPoints * ID_POS_CONTRIBUTION;
-      totalCredit += baseMeasurementPerLocation.numOfWifiPoints * SIGNAL_CONTRIBUTION;
+      //totalCredit += baseMeasurementPerLocation.numOfWifiPoints * ID_POS_CONTRIBUTION;
+      //totalCredit += baseMeasurementPerLocation.numOfWifiPoints * SIGNAL_CONTRIBUTION;
+      totalCredit = 2;
 
       int accuracy = 0;
       if (account > 0) {
