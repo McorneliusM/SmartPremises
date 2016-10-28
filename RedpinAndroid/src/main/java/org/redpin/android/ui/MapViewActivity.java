@@ -59,8 +59,10 @@ public class MapViewActivity extends Activity {
 	Context myContext;
 	WifiInformation myWifiInfo;
 
-	private static int currentMarkerX = 0;
-	private static int currentMarkerY = 0;
+	public static int currentMarkerX = 0;
+	public static int currentMarkerY = 0;
+
+	private static boolean WifiIsOnShown = false;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -70,13 +72,25 @@ public class MapViewActivity extends Activity {
 		//startWifiSniffer();
 
 		mainWifiObj = (WifiManager) getSystemService(Context.WIFI_SERVICE);
+
+		//------------------------------------------
+		//         Try to turn on wifi
+		//------------------------------------------
 		boolean WifiOn = mainWifiObj.isWifiEnabled();
-		if (WifiOn){
-			Toast.makeText(MapViewActivity.this, "Wifi is On", Toast.LENGTH_SHORT).show();
-		} else {
+		if (WifiOn)
+		{
+			if (WifiIsOnShown == false)
+			{
+				Toast.makeText(MapViewActivity.this, "Wifi is On", Toast.LENGTH_SHORT).show();
+				WifiIsOnShown = true;
+			}
+		}
+		else
+		{
 			Toast.makeText(MapViewActivity.this, "Wifi turned On", Toast.LENGTH_SHORT).show();
 			mainWifiObj.setWifiEnabled(true);
 		}
+
 		myContext=getApplicationContext();
 		myWifiInfo=new WifiInformation();
 
@@ -110,20 +124,20 @@ public class MapViewActivity extends Activity {
 		mapView.showMap(null, getApplicationContext());
 		mapView.setModifiable(true);
 
-		final Intent starterIntent = getIntent();
+//		final Intent starterIntent = getIntent();
 
 		locateButton = (ImageButton) findViewById(R.id.locate_button);
 		locateButton.setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				Random rand = new Random();
-				int x = rand.nextInt(1000);
-				int y = rand.nextInt(1000);
-				MapViewActivity.setMarkerLocation(x, y);
+//				Random rand = new Random();
+//				int x = rand.nextInt(1000);
+//				int y = rand.nextInt(1000);
+				MapViewActivity.setMarkerLocation(currentMarkerX, currentMarkerY);
 
-				finish();
-				startActivity(starterIntent);
+//				finish();
+//				startActivity(starterIntent);
 			}
 		});
 
@@ -205,6 +219,15 @@ public class MapViewActivity extends Activity {
 			mapName.setText(m.getMapName());
 		}
 	}
+
+	/**
+	 * Refresh map and prevents white screen issue
+	 * it is called periodically by updateInformation
+	 */
+	public static void refreshMap() {
+		mapView.showImage("myMap");
+	}
+
 
 	/**
 	 * Displays the current location on the map

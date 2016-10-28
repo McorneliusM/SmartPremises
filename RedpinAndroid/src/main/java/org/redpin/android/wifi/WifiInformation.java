@@ -38,19 +38,15 @@ public class WifiInformation {
       //Possible RSSI range 0 to 100
       //Possible diff range 0 to 100
       double diff = Math.abs(baseRssi - measuredRssi);
-      Log.i("#####FoongFoong#####",
-              "signalContribution(): base: " + baseRssi
-                      + ", diff: " + diff);
+      //Log.i("#####FoongFoong#####", "signalContribution(): base: " + baseRssi + ", diff: " + diff);
 
       //Normalize to range of -1 to 1
       double normalize = (2*(diff/100))-1;
-      Log.i("#####FoongFoong#####",
-              "signalContribution(): normalize: " + normalize);
+      //Log.i("#####FoongFoong#####", "signalContribution(): normalize: " + normalize);
 
       //Inverse
       double finalNormalize = -normalize;
-      Log.i("#####FoongFoong#####",
-              "signalContribution(): finalNormalize: " + finalNormalize);
+      //Log.i("#####FoongFoong#####", "signalContribution(): finalNormalize: " + finalNormalize);
 
       return finalNormalize;
    }
@@ -67,8 +63,7 @@ public class WifiInformation {
 
       if (currentMeasurementPerLocation.bestBSSID.equals(baseMeasurementPerLocation.bestBSSID)){
          matchBestBSSID = true;
-         Log.i("xxxxxxxxxxxxxFoongFoong",
-                 "111111measurementAccuracyLevel(): matchBestBSSID!!!!!!!!!!!!!!!!!!! ");
+         //Log.i("xxxxxxxxxxxxxFoongFoong", "111111measurementAccuracyLevel(): matchBestBSSID!!!!!!!!!!!!!!!!!!! ");
       }
 
       if (matchBestBSSID) {
@@ -77,8 +72,7 @@ public class WifiInformation {
             WifiInfoRow baseWifiRow = baseMeasurementPerLocation.myWifiInfoRowArray[i];
             if (baseWifiRow != null && baseWifiRow.level == 0) {
                zeroLevelBaseWifi = true;
-               Log.i("xxxxxxxxxxxxxFoongFoong",
-                       "22222222measurementAccuracyLevel(): zeroLevelBaseWifi = true!!!!!!!!!!!!!!!!!!! ");
+               //Log.i("xxxxxxxxxxxxxFoongFoong", "22222222measurementAccuracyLevel(): zeroLevelBaseWifi = true!!!!!!!!!!!!!!!!!!! ");
             } else {
                zeroLevelBaseWifi = false;
             }
@@ -87,32 +81,32 @@ public class WifiInformation {
                //start of measured's for loop
                WifiInfoRow currentWifiRow = currentMeasurementPerLocation.myWifiInfoRowArray[j];
 
-               Log.i("#####FoongFoong#####",
-                       "measurementAccuracyLevel(): baseWifiRow.BSSID: " + baseWifiRow.BSSID
-                               + ", baseWifiRow.SSID: " + baseWifiRow.SSID
-                               + ", baseWifiRow.level: " + baseWifiRow.level);
+               //Log.i("#####FoongFoong#####",
+//                       "measurementAccuracyLevel(): baseWifiRow.BSSID: " + baseWifiRow.BSSID
+//                               + ", baseWifiRow.SSID: " + baseWifiRow.SSID
+//                               + ", baseWifiRow.level: " + baseWifiRow.level);
                if (currentWifiRow != null) {
-                  Log.i("#####FoongFoong#####",
-                          "measurementAccuracyLevel(): currentWifiRow.BSSID: " + currentWifiRow.BSSID
-                                  + ", currentWifiRow.SSID: " + currentWifiRow.SSID
-                                  + ", currentWifiRow.level: " + currentWifiRow.level);
+                  //Log.i("#####FoongFoong#####",
+//                          "measurementAccuracyLevel(): currentWifiRow.BSSID: " + currentWifiRow.BSSID
+//                                  + ", currentWifiRow.SSID: " + currentWifiRow.SSID
+//                                  + ", currentWifiRow.level: " + currentWifiRow.level);
                } else {
-                  Log.i("#####FoongFoong#####",
-                          "measurementAccuracyLevel(): currentWifiRow == NULL ");
+                  //Log.i("#####FoongFoong#####",
+//                          "measurementAccuracyLevel(): currentWifiRow == NULL ");
                }
 
                if (baseWifiRow != null && baseWifiRow.BSSID != null && currentWifiRow != null && currentWifiRow.BSSID != null
                        && baseWifiRow.BSSID.equals(currentWifiRow.BSSID)) {
                   //non zero level's bssid match: add ID contribution and signal strength
                   matchZeroLevelBSSID = true;
-                  Log.i("#####FoongFoong#####",
-                          "measurementAccuracyLevel(): MATCH baseWifiRow.BSSID: " + baseWifiRow.BSSID
-                                  + ", baseWifiRow.SSID: " + baseWifiRow.SSID
-                                  + ", baseWifiRow.level: " + baseWifiRow.level);
-                  Log.i("#####FoongFoong#####",
-                          "measurementAccuracyLevel(): MATCH currentWifiRow.BSSID: " + currentWifiRow.BSSID
-                                  + ", currentWifiRow.SSID: " + currentWifiRow.SSID
-                                  + ", currentWifiRow.level: " + currentWifiRow.level);
+                  //Log.i("#####FoongFoong#####",
+//                          "measurementAccuracyLevel(): MATCH baseWifiRow.BSSID: " + baseWifiRow.BSSID
+//                                  + ", baseWifiRow.SSID: " + baseWifiRow.SSID
+//                                  + ", baseWifiRow.level: " + baseWifiRow.level);
+                  //Log.i("#####FoongFoong#####",
+//                          "measurementAccuracyLevel(): MATCH currentWifiRow.BSSID: " + currentWifiRow.BSSID
+//                                  + ", currentWifiRow.SSID: " + currentWifiRow.SSID
+//                                  + ", currentWifiRow.level: " + currentWifiRow.level);
                   account += ID_POS_CONTRIBUTION;
                   account += signalContribution(baseWifiRow.level, currentWifiRow.level);
                   //exit measured's for loop
@@ -126,8 +120,8 @@ public class WifiInformation {
                   //there is zero level wifi in database, but not found the BSSID in measured data
                   //reset account to 0, exit the entire for loop
                   account = 0;
-                  Log.i("xxxxxxxxxxxxxFoongFoong",
-                          "44444444measurementAccuracyLevel(): account = 0000000000000000000 !!!!!!!!!!!!!!!!!!! ");
+                  //Log.i("xxxxxxxxxxxxxFoongFoong",
+//                          "44444444measurementAccuracyLevel(): account = 0000000000000000000 !!!!!!!!!!!!!!!!!!! ");
                   //exit base's for loop
                   break;
                }
@@ -136,10 +130,10 @@ public class WifiInformation {
          }
       }
 
-      Log.i("!!!!!!!!!!!!!!!!!!!",
-              "measurementAccuracyLevel(): currentMeasurementPerLocation.bestBSSID: " + currentMeasurementPerLocation.bestBSSID
-                      + ", baseMeasurementPerLocation.bestBSSID: " + baseMeasurementPerLocation.bestBSSID
-                      + ", account: " + account);
+      //Log.i("!!!!!!!!!!!!!!!!!!!",
+//              "measurementAccuracyLevel(): currentMeasurementPerLocation.bestBSSID: " + currentMeasurementPerLocation.bestBSSID
+//                      + ", baseMeasurementPerLocation.bestBSSID: " + baseMeasurementPerLocation.bestBSSID
+//                      + ", account: " + account);
 
       //totalCredit += baseMeasurementPerLocation.numOfWifiPoints * ID_POS_CONTRIBUTION;
       //totalCredit += baseMeasurementPerLocation.numOfWifiPoints * SIGNAL_CONTRIBUTION;
@@ -154,10 +148,10 @@ public class WifiInformation {
          accuracy = (int) Math.floor(a + 0.5d);
       }
 
-      Log.i("#####FoongFoong#####",
-              "measurementAccuracyLevel(): Account: " + account
-                      + ", Total Credit possible: " + totalCredit
-                      + ", Accuracy: " + accuracy);
+      //Log.i("#####FoongFoong#####",
+//              "measurementAccuracyLevel(): Account: " + account
+//                      + ", Total Credit possible: " + totalCredit
+//                      + ", Accuracy: " + accuracy);
 
       return accuracy;
    }
@@ -197,19 +191,19 @@ public class WifiInformation {
          if (currentScanList.get(i).SSID.equals("M-Guest")) {
             currentMeasurementPerLocation.fillUpEachWifiInfoRow(count, currentScanList.get(i).BSSID, currentScanList.get(i).SSID, Math.abs(currentScanList.get(i).level));
             count++;
-            Log.i("#####FoongFoong#####",
-                    "updateInformation(): MATCH currentScanList.get(i).BSSID: " + currentScanList.get(i).BSSID
-                            + " currentScanList.get(i).SSID: " + currentScanList.get(i).SSID
-                            + " currentScanList.get(i).level: " + currentScanList.get(i).level);
+            //Log.i("#####FoongFoong#####",
+//                    "updateInformation(): MATCH currentScanList.get(i).BSSID: " + currentScanList.get(i).BSSID
+//                            + " currentScanList.get(i).SSID: " + currentScanList.get(i).SSID
+//                            + " currentScanList.get(i).level: " + currentScanList.get(i).level);
          }
       }
-      Log.i("#####FoongFoong#####",
-              "updateInformation(): currentMeasurementPerLocation.numOfWifiPoints: " + currentMeasurementPerLocation.numOfWifiPoints
-                      + " count: " + count
-                      + " bestMeasuredSignalStrength: " + bestMeasuredSignalStrength
-                      + " bestMeasuredBSSID: " + bestMeasuredBSSID);
+      //Log.i("#####FoongFoong#####",
+//              "updateInformation(): currentMeasurementPerLocation.numOfWifiPoints: " + currentMeasurementPerLocation.numOfWifiPoints
+//                      + " count: " + count
+//                      + " bestMeasuredSignalStrength: " + bestMeasuredSignalStrength
+//                      + " bestMeasuredBSSID: " + bestMeasuredBSSID);
 
-      // for logging , u can use --> currentMeasurementPerLocation.printWifiInfoRow();
+      // for //Log.ing , u can use --> currentMeasurementPerLocation.printWifiInfoRow();
 
       //-----------------------------------------------------------------------------------------------------
 
@@ -217,10 +211,10 @@ public class WifiInformation {
       // Log scan list
       //---------------------------------------------------------------
       for (i = 0; i < currentScanListSize; i++) {
-         Log.i("wj", "numOfScans: " + numOfScans
-                 + ", BSSID: " + currentScanList.get(i).BSSID
-                 + ", SSID: " + currentScanList.get(i).SSID
-                 + ", level: " + currentScanList.get(i).level);
+         //Log.i("wj", "numOfScans: " + numOfScans
+//                 + ", BSSID: " + currentScanList.get(i).BSSID
+//                 + ", SSID: " + currentScanList.get(i).SSID
+//                 + ", level: " + currentScanList.get(i).level);
 
          wifiString[i] = (currentScanList.get(i).BSSID
                  +","+currentScanList.get(i).SSID
@@ -234,8 +228,8 @@ public class WifiInformation {
       //Compare measured data with each location's data in database
       for (int j = 0; fingerprintDB != null && j < fingerprintDB.numOfLocations; j++) {
          MeasurementPerLocation baseMeasurementPerLocation = fingerprintDB.myMeasurementPerLocationArray[j];
-         Log.i("#####FoongFoong#####",
-                 "updateInformation(): FOR LOOP baseMeasurementPerLocation.numOfWifiPoints: " + baseMeasurementPerLocation.numOfWifiPoints);
+         //Log.i("#####FoongFoong#####",
+//                 "updateInformation(): FOR LOOP baseMeasurementPerLocation.numOfWifiPoints: " + baseMeasurementPerLocation.numOfWifiPoints);
          int accuracyLevelPerLocation = 0;
          if (baseMeasurementPerLocation != null && currentMeasurementPerLocation != null) {
             accuracyLevelPerLocation = measurementAccuracyLevel(baseMeasurementPerLocation, currentMeasurementPerLocation);
@@ -248,16 +242,23 @@ public class WifiInformation {
          }
       }
 
-      Log.i("#####FoongFoong#####",
-              "updateInformation(): Highest Accuracy Level: " + highestAccuracyLevel);
+      //Log.i("#####FoongFoong#####",
+//              "updateInformation(): Highest Accuracy Level: " + highestAccuracyLevel);
+
+      // To refresh map every time wifi scanned to reduce white screen issue
+      MapViewActivity.refreshMap();
 
       //Only display if obj is not null and accuracy level more than half
       //if (highAccuracyMeasurementPerLocation != null && highestAccuracyLevel > 6000) {
       if (highAccuracyMeasurementPerLocation != null) {
-         Log.i("#####FoongFoong#####",
-                 "updateInformation(): Highest Accuracy Level Location Name: " + highAccuracyMeasurementPerLocation.name);
+         //Log.i("#####FoongFoong#####",
+//                 "updateInformation(): Highest Accuracy Level Location Name: " + highAccuracyMeasurementPerLocation.name);
 
          MapViewActivity.setMarkerLocation(highAccuracyMeasurementPerLocation.xLocation, highAccuracyMeasurementPerLocation.yLocation);
+      }
+      else
+      {
+         MapViewActivity.setMarkerLocation(MapViewActivity.currentMarkerX,MapViewActivity.currentMarkerY);
       }
    }
 
@@ -325,7 +326,7 @@ public class WifiInformation {
       fingerprintDB.myMeasurementPerLocationArray[9].fillUpEachWifiInfoRow(0, "84:24:8d:3f:be:b1", "M-Guest", 0);
       fingerprintDB.myMeasurementPerLocationArray[9].fillUpEachWifiInfoRow(1, "84:24:8d:3f:dd:91", "M-Guest", 65);
 
-      Log.i("wj", "initializeFingerprintDb complete ");
+      //Log.i("wj", "initializeFingerprintDb complete ");
    }
 
    public String[] getStringArray()

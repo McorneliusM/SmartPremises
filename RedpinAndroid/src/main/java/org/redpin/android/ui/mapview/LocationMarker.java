@@ -197,7 +197,7 @@ public class LocationMarker extends Button implements OnClickListener {
 		}
 
 		if (annotation != null) {
-			annotation.setEnabled(b);
+			annotation.setEnabled(false); //from b --> false
 		}
 
 	}
@@ -245,7 +245,7 @@ public class LocationMarker extends Button implements OnClickListener {
 
 			container.addView(annotation);
 		}
-		annotation.setEnabled(enabled);
+		annotation.setEnabled(false);//changed from enabled --> false
 		annotation.setVisibility(getVisibility());
 	}
 

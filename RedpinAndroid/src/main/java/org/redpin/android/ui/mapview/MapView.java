@@ -33,6 +33,7 @@ import org.redpin.android.db.EntityHomeFactory;
 //import org.redpin.android.net.DownloadImageTask;
 //import org.redpin.android.net.DownloadImageTask.DownloadImageTaskCallback;
 import org.redpin.android.provider.RedpinContract;
+import org.redpin.android.ui.MapViewActivity;
 import org.redpin.android.ui.mapview.ZoomAndScrollImageView.ZoomAndScrollViewListener;
 
 import android.app.AlertDialog;
@@ -251,7 +252,7 @@ public class MapView extends FrameLayout implements ZoomAndScrollViewListener {
 	 * @param url
 	 *            URL of the map image
 	 */
-	protected void showImage(String url) {
+	public void showImage(String url) {
 
 //		loadPending = true;
 //		loadingView.startAnimation(fadeIn());
@@ -414,6 +415,16 @@ public class MapView extends FrameLayout implements ZoomAndScrollViewListener {
 	 *            {@link Uri} of the {@link Map} or {@link Location}
 	 */
 	public void show(Uri uri) {
+
+		showImage("myMap");
+
+		if(getCurrentActiveMarker() != null)
+		{
+			getCurrentActiveMarker().setMapXcord(MapViewActivity.currentMarkerX);
+			getCurrentActiveMarker().setMapYcord(MapViewActivity.currentMarkerY);
+			showLocation(getCurrentActiveMarker(), true);
+		}
+
 		if (uri == null)
 			return;
 
@@ -468,7 +479,7 @@ public class MapView extends FrameLayout implements ZoomAndScrollViewListener {
 		marker.onScaleChanged(lastScale);
 		marker.showAnnotation();
 		marker.setVisibility(VISIBLE);
-		marker.beginEdit();
+		//marker.beginEdit();
 
 	}
 

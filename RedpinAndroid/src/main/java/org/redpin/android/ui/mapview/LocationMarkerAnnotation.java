@@ -43,8 +43,7 @@ import android.widget.TextView.OnEditorActionListener;
  * @author Pascal Brogle (broglep@student.ethz.ch)
  *
  */
-public class LocationMarkerAnnotation extends EditText implements
-		OnEditorActionListener {
+public class LocationMarkerAnnotation extends EditText{
 
 	private LocationMarker marker;
 	private FrameLayout.LayoutParams layout;
@@ -72,7 +71,7 @@ public class LocationMarkerAnnotation extends EditText implements
 		setText(marker.getLocation().getSymbolicID());
 		setEnabled(false);
 
-		setOnEditorActionListener(this);
+		//setOnEditorActionListener(this);
 		setImeOptions(EditorInfo.IME_ACTION_DONE);
 		setBackgroundResource(R.drawable.annotation);
 		setGravity(Gravity.CENTER_HORIZONTAL);
@@ -123,30 +122,30 @@ public class LocationMarkerAnnotation extends EditText implements
 
 	}
 
-	/**
-	 * Updates the symbolic id on the server if it was changed.
-	 *
-	 * {@inheritDoc}
-	 */
-	@Override
-	public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-
-		if (actionId == EditorInfo.IME_ACTION_DONE) {
-			// setCursorVisible(false);
-			clearFocus();
-
-			setSelected(false);
-
-			Location location = marker.getLocation();
-			String newSId = getText().toString();
-			if (!location.getSymbolicID().equals(newSId)) {
-				location.setSymbolicID(getText().toString());
-				//LocationRemoteHome.updateLocation(location);
-			}
-		}
-
-		return false;
-	}
+//	/**
+//	 * Updates the symbolic id on the server if it was changed.
+//	 *
+//	 * {@inheritDoc}
+//	 */
+//	@Override
+//	public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+//
+//		if (actionId == EditorInfo.IME_ACTION_DONE) {
+//			// setCursorVisible(false);
+//			clearFocus();
+//
+//			setSelected(false);
+//
+//			Location location = marker.getLocation();
+//			String newSId = getText().toString();
+//			if (!location.getSymbolicID().equals(newSId)) {
+//				location.setSymbolicID(getText().toString());
+//				//LocationRemoteHome.updateLocation(location);
+//			}
+//		}
+//
+//		return false;
+//	}
 
 	/**
 	 * {@inheritDoc}
