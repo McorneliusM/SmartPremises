@@ -29,7 +29,7 @@ public class WifiInformation {
       //----------------------------------------------------------------------------------------------------
       //   TODO: remember to update the total number of location point for database
       //----------------------------------------------------------------------------------------------------
-      fingerprintDB = new FingerprintDatabase(10);
+      fingerprintDB = new FingerprintDatabase(12);
       initializeFingerprintDb(fingerprintDB);
    }
 
@@ -279,7 +279,6 @@ public class WifiInformation {
       fingerprintDB.fillUpEachMeasurementPerLocation(9,"D7",4, 503*2, 389*2, 55, "84:24:8d:3f:dd:91");
       fingerprintDB.fillUpEachMeasurementPerLocation(10, "E2", 3, 167 * 2, 82 * 2, 48, "84:24:8d:40:d8:f1");
       fingerprintDB.fillUpEachMeasurementPerLocation(11, "E8", 2, 167 * 2, 302 * 2, 48, "84:24:8d:40:d1:c1");
-      fingerprintDB.fillUpEachMeasurementPerLocation(12, "YodaWaris", 2, 78 * 2, 360 * 2, 48, "84:24:8d:40:d1:c1");
 
       // wifi info row for A3
       fingerprintDB.myMeasurementPerLocationArray[0].fillUpEachWifiInfoRow(0,"84:24:8d:3f:e2:51","M-Guest", 52);
@@ -333,10 +332,6 @@ public class WifiInformation {
       // wifi info row for E8
       fingerprintDB.myMeasurementPerLocationArray[11].fillUpEachWifiInfoRow(0,"84:24:8d:40:d1:c1","M-Guest", 48);
       fingerprintDB.myMeasurementPerLocationArray[11].fillUpEachWifiInfoRow(1,"84:24:8d:40:f8:91","M-Guest", 0);
-
-      // wifi info row for YodaWaris
-      fingerprintDB.myMeasurementPerLocationArray[12].fillUpEachWifiInfoRow(0,"84:24:8d:40:d1:c1","M-Guest", 48);
-      fingerprintDB.myMeasurementPerLocationArray[12].fillUpEachWifiInfoRow(1,"84:24:8d:40:f8:91","M-Guest", 0);
 
       //Log.i("wj", "initializeFingerprintDb complete ");
    }
