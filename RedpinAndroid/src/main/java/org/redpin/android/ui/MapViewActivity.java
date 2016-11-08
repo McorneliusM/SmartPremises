@@ -23,6 +23,10 @@ import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 
 import org.redpin.android.ApplicationContext;
 import org.redpin.android.R;
@@ -63,6 +67,8 @@ public class MapViewActivity extends Activity {
 	public static int currentMarkerY = 0;
 
 	private static boolean WifiIsOnShown = false;
+	public static float lastNumOfSteps = 0, currentNumOfSteps = 0;
+	public static int first3Runs = 3;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -97,6 +103,22 @@ public class MapViewActivity extends Activity {
 		wifiReciever = new WifiScanReceiver(mainWifiObj,myContext,myWifiInfo);
 
 		mainWifiObj.startScan();
+
+		SensorManager sManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+		// Step Counter
+		sManager.registerListener(new SensorEventListener() {
+
+									  @Override
+									  public void onSensorChanged(SensorEvent event) {
+										  currentNumOfSteps = event.values[0];
+									  }
+
+									  @Override
+									  public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
+									  }
+								  }, sManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER),
+				SensorManager.SENSOR_DELAY_UI);
 
 		//***************important code Start registering and start wifi activities
 
@@ -318,21 +340,25 @@ public class MapViewActivity extends Activity {
 
 	public static void setMarkerLocation(String id , int x, int y)
 	{
-		if( (currentMarkerX != x) || (currentMarkerY != y) )
+		if(first3Runs!=0 || currentNumOfSteps-lastNumOfSteps>=2)
 		{
-			currentMarkerX = x;
-			currentMarkerY = y;
-			if(mapView != null)
+			first3Runs--;
+			lastNumOfSteps = currentNumOfSteps;
+
+			if( (currentMarkerX != x) || (currentMarkerY != y) )
 			{
-				if(mapView.getCurrentActiveMarker() != null)
+				currentMarkerX = x;
+				currentMarkerY = y;
+				if(mapView != null)
 				{
-					mapView.getCurrentActiveMarker().setMapXcord(currentMarkerX);
-					mapView.getCurrentActiveMarker().setMapYcord(currentMarkerY);
-					mapView.showLocation(mapView.getCurrentActiveMarker(), true);
+					if(mapView.getCurrentActiveMarker() != null)
+					{
+						mapView.getCurrentActiveMarker().setMapXcord(currentMarkerX);
+						mapView.getCurrentActiveMarker().setMapYcord(currentMarkerY);
+						mapView.showLocation(mapView.getCurrentActiveMarker(), true);
+					}
 				}
 			}
 		}
 	}
-
-
 }
