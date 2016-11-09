@@ -270,18 +270,18 @@ public class WifiInformation {
       //----------------------------------------------------------------------------------------------------
       //   Remember to update the total number of location point for database at the top of this file
       //----------------------------------------------------------------------------------------------------
-      fingerprintDB.fillUpEachMeasurementPerLocation(0, "A3", 2, 280 * 2, 8 * 2, 52, "84:24:8d:3f:e2:51");
+      fingerprintDB.fillUpEachMeasurementPerLocation(0, "A3", 2, 293 * 2, 25 * 2, 52, "84:24:8d:3f:e2:51");
       //fingerprintDB.fillUpEachMeasurementPerLocation(1, "B3", 2, 478 * 2, 8 * 2, 45, "84:24:8d:3f:e2:51");
-      fingerprintDB.fillUpEachMeasurementPerLocation(1, "C1", 2, 599 * 2, 8 * 2, 65, "84:24:8d:3f:e2:51");
-      fingerprintDB.fillUpEachMeasurementPerLocation(2, "C3", 3, 599 * 2, 135 * 2, 58, "84:24:8d:40:fe:c1");
-      fingerprintDB.fillUpEachMeasurementPerLocation(3, "C5", 2, 599 * 2, 220 * 2, 61, "84:24:8d:40:fe:c1");
-      fingerprintDB.fillUpEachMeasurementPerLocation(4, "C7", 2, 599 * 2, 304 * 2, 65, "84:24:8d:3f:dd:91");
+      fingerprintDB.fillUpEachMeasurementPerLocation(1, "C1", 2, 482 * 2, 22 * 2, 65, "84:24:8d:3f:e2:51");
+      fingerprintDB.fillUpEachMeasurementPerLocation(2, "C3", 3, 482 * 2, 108 * 2, 58, "84:24:8d:40:fe:c1");
+      fingerprintDB.fillUpEachMeasurementPerLocation(3, "C5", 2, 482 * 2, 163 * 2, 61, "84:24:8d:40:fe:c1");
+      fingerprintDB.fillUpEachMeasurementPerLocation(4, "C7", 2, 482 * 2, 218 * 2, 65, "84:24:8d:3f:dd:91");
       //fingerprintDB.fillUpEachMeasurementPerLocation(6,"D1",2, 215*2, 389*2, 54, "84:24:8d:40:d1:c1");
-      fingerprintDB.fillUpEachMeasurementPerLocation(5,"D3",2, 311*2, 389*2, 63, "84:24:8d:40:d1:c1");
-      fingerprintDB.fillUpEachMeasurementPerLocation(6,"D6",3, 455*2, 389*2, 49, "84:24:8d:3f:dd:91");
+      fingerprintDB.fillUpEachMeasurementPerLocation(5, "D3", 2, 319 * 2, 274 * 2, 63, "84:24:8d:40:d1:c1");
+      fingerprintDB.fillUpEachMeasurementPerLocation(6, "D6", 3, 418 * 2, 274 * 2, 49, "84:24:8d:3f:dd:91");
       //fingerprintDB.fillUpEachMeasurementPerLocation(7,"D7",4, 503*2, 389*2, 55, "84:24:8d:3f:dd:91");
-      fingerprintDB.fillUpEachMeasurementPerLocation(7, "E2", 3, 167 * 2, 82 * 2, 48, "84:24:8d:40:d8:f1");
-      fingerprintDB.fillUpEachMeasurementPerLocation(8, "E8", 2, 167 * 2, 302 * 2, 48, "84:24:8d:40:d1:c1");
+      fingerprintDB.fillUpEachMeasurementPerLocation(7, "E2", 3, 221 * 2, 59 * 2, 48, "84:24:8d:40:d8:f1");
+      fingerprintDB.fillUpEachMeasurementPerLocation(8, "E8", 2, 221 * 2, 211 * 2, 48, "84:24:8d:40:d1:c1");
 
       // wifi info row for A3
       fingerprintDB.myMeasurementPerLocationArray[0].fillUpEachWifiInfoRow(0,"84:24:8d:3f:e2:51","M-Guest", 52);
